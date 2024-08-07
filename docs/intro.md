@@ -1,11 +1,12 @@
-# Welcome to your Jupyter Book
+# GeoLab Documentation
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+GeoLab is a JupyterHub available for [SAGE/GAGE facility](https://www.earthscope.org/about/gage-sage-facilities/) community use operated by [EarthScope](earthscope.org) in partnership with [2i2c](https://2i2c.org/). 
 
-Check out the content pages bundled with this sample book to see more.
+You have reached the GeoLab documentation page.  To learn more about EarthScope's cloud migration, visit our [Cloud Data Systems page.](https://www.earthscope.org/data/cloud/)
 
-```{tableofcontents}
-```
+To enter the hub, [click here](https://earthscope.2i2c.cloud/hub/oauth_login?next=%2Fhub%2F) and log in using your EarthScope account.
+
+| [EarthScope](https://www.earthscope.org/data/cloud/) | [2i2c](2i2c.org) | [AWS](aws.com) |
+|---|---|---|
+|![ES-Cloud](https://github.com/2i2c-org/infrastructure/assets/7579677/589da909-86c2-4440-a42b-e3f1b59f49d5 "ES")|![2i2c](/static/2i2c.png "2i2c")|![AWS](/static/aws.png "AWS")|
+

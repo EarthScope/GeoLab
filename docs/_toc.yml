@@ -3,7 +3,18 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+parts:
+  - caption: Outside the GeoLab
+    numbered: False  # Only applies to chapters in Part 1.
+    chapters:
+    - file: Welcome_to_the_Hub
+    - file: Getting_Started
+  - caption: Inside the GeoLab
+    chapters:
+    - file: How_to_Notebook
+    - file: Contributor_Guide(in-progress)
+#chapters:
+#- file: Welcome_to_the_Hub
+#- file: Getting_Started
+#- file: How_to_Notebook
+
