@@ -1,4 +1,0 @@
-# following https://docs.gitlab.com/ee/user/project/codeowners/index.html#set-up-code-owners
-
-# Specify multiple Code Owners by using a tab or space:
-* @timdittmann @swilson @mcollins
