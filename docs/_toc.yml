@@ -4,12 +4,12 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Outside the GeoLab
+  - caption: About GeoLab
     numbered: False  # Only applies to chapters in Part 1.
     chapters:
     - file: Welcome_to_the_Hub
     - file: Getting_Started
-  - caption: Inside the GeoLab
+  - caption: Using GeoLab
     chapters:
     - file: How_to_Notebook
     - file: Contributor_Guide(in-progress)
