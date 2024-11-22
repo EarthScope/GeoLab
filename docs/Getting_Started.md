@@ -1,4 +1,4 @@
-# Getting Started: GeoLab
+# Getting Started: GeoLab - test build
 
 ![cloud_project](static/cloud_project_logo.svg) 
 
