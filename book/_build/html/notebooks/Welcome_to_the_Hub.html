@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Welcome to GeoLab &#8212; GeoLab Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Welcome_to_the_Hub';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cloud_logo_simple_small.png" class="logo__image only-light" alt="GeoLab Jupyter Book - Home"/>
+    <script>document.write(`<img src="../_static/cloud_logo_simple_small.png" class="logo__image only-dark" alt="GeoLab Jupyter Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to GeoLab!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Details</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../content/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/mission.html">Mission</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../content/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/code_of_conduct.html">GeoLab Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/citation.html">How to cite SAGE/GAGE data</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../content/register_es_user.html">Instructions for how to register EarthScope User account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/register_geolab_access.html">Instructions for how to request access to GeoLab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/hub_best_practices.html">Best practices when using GeoLab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Open Science Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ext/opensci_links.html">Geoscience Open Science Communities</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/EarthScope/GeoLab" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/Welcome_to_the_Hub.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Welcome to GeoLab</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome to GeoLab</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#about-geolab">About GeoLab</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-migrate">Why Migrate?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-notebooks">Why use notebooks?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geolab-code-of-conduct">GeoLab Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#about-our-partners">About Our Partners</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i2c">2i2c</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#amazon-web-services-aws">Amazon Web Services (AWS)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-hub">About the Hub</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-docker-containers">What Are Docker Containers?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-docker-images">What Are Docker Images?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#images-available-for-users">Images Available for Users</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-geolab-compute-instances">What are GeoLab Compute Instances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-notebooks">What are Notebooks?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#external-resources">External Resources</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-help-ask-questions">How to Get Help / Ask Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extras">Extras</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-geolab">
+<h1>Welcome to GeoLab<a class="headerlink" href="#welcome-to-geolab" title="Link to this heading">#</a></h1>
+<p><img alt="ES_cloud" src="../_images/ES_cloud.jpg" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="about-geolab">
+<h1>About GeoLab<a class="headerlink" href="#about-geolab" title="Link to this heading">#</a></h1>
+<p>The EarthScope-operated data systems of the NSF GAGE and SAGE Facilities are transitioning to cloud services, introducing new capabilities for users to leverage cloud computing for their projects. As part of this transition, the EarthScope GeoLab JupyterHub provides a powerful platform for accessing Jupyter Notebooks in a shared, cloud-based environment. GeoLab is a collaborative environment for students/researchers to work on data-intensive projects. Providing access to powerful computational resources, tools, and a community of experts.</p>
+<section id="why-migrate">
+<h2>Why Migrate?<a class="headerlink" href="#why-migrate" title="Link to this heading">#</a></h2>
+<p>The cloud migration enhances data reliability and scalability, enabling on-demand serverless elasticity and efficient data processing. Researchers will benefit from adjacent scalable cloud computing, particularly for machine learning projects. This shift aligns with broader movements toward more open and equitable science</p>
+</section>
+<section id="why-use-notebooks">
+<h2>Why use notebooks?<a class="headerlink" href="#why-use-notebooks" title="Link to this heading">#</a></h2>
+<p>Notebooks facilitate seamless collaboration by allowing multiple users to work in the same environment without setup, streamlining scientific workflows. They enhance reproducibility and transparency by documenting analysis methods in a ready-to-run package. Their flexibility allows them to be used as static web pages, embedded in web apps, or integrated with various systems, making them versatile for scientific research and data analysis tools.</p>
+</section>
+<section id="geolab-code-of-conduct">
+<h2>GeoLab Code of Conduct<a class="headerlink" href="#geolab-code-of-conduct" title="Link to this heading">#</a></h2>
+<p>EarthScope is committed to open-source software for collaboration, transparency, and better solutions. Security and resource management are top priorities; protect your login credentials, report vulnerabilities, and follow all security protocols. Use resources responsibly, comply with EarthScope’s policies, and respect legal and regulatory requirements.</p>
+<ul class="simple">
+<li><p><strong>EarthScope Code of Conduct</strong> Learn more <a class="reference external" href="https://www.earthscope.org/earthscope-code-of-conduct/">here</a>.</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="about-our-partners">
+<h1>About Our Partners<a class="headerlink" href="#about-our-partners" title="Link to this heading">#</a></h1>
+<section id="i2c">
+<h2>2i2c<a class="headerlink" href="#i2c" title="Link to this heading">#</a></h2>
+<p><img alt="2i2c" src="../_images/2i2c_banner.png" /></p>
+<p>GeoLab (JupyterHub) is powered by 2i2c (International Interactive Computing Collaboration), a non-profit organization that builds and operates cloud infrastructure for interactive computing.</p>
+<ul class="simple">
+<li><p><strong>2i2c</strong> Learn more <a class="reference external" href="https://2i2c.org/">here</a>.</p></li>
+</ul>
+</section>
+<section id="amazon-web-services-aws">
+<h2>Amazon Web Services (AWS)<a class="headerlink" href="#amazon-web-services-aws" title="Link to this heading">#</a></h2>
+<p><img alt="AWS" src="../_images/aws.png" /></p>
+<p>AWS services enable efficient data processing, storage, and analysis, supporting real-time analytics and machine-learning applications while ensuring data security and compliance with industry standards. This migration aims to enhance EarthScope’s capabilities in preserving, discovering, and delivering geophysical data.</p>
+<ul class="simple">
+<li><p><strong>AWS</strong> Learn more <a class="reference external" href="https://aws.amazon.com/what-is-cloud-computing/">here</a>.</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="about-the-hub">
+<h1>About the Hub<a class="headerlink" href="#about-the-hub" title="Link to this heading">#</a></h1>
+<p><img alt="ES_system" src="../_images/ES_system.jpg" /></p>
+<section id="what-are-docker-containers">
+<h2>What Are Docker Containers?<a class="headerlink" href="#what-are-docker-containers" title="Link to this heading">#</a></h2>
+<p>Docker containers are like storage boxes that hold all the parts needed to run a piece of software. Imagine you want to bake a cake, but you need all the ingredients, utensils, and the oven to be exactly the same every time you bake it, no matter where you are. Docker containers do this for software. Each container includes the software, all the files it needs, and even the tools to run it, all packed together. This way, the software will work exactly the same whether you run it on your laptop, a server at your company, or in the cloud. Docker containers are also quick to start and use less memory because they share parts of the operating system from the computer they run on. This makes developing, testing, and deploying software consistently across different environments easy.</p>
+</section>
+<section id="what-are-docker-images">
+<h2>What Are Docker Images?<a class="headerlink" href="#what-are-docker-images" title="Link to this heading">#</a></h2>
+<p>Docker images are like blueprints or recipes for creating Docker containers. Imagine you have a detailed recipe for baking a cake, which includes a list of ingredients and step-by-step instructions. A Docker image works similarly by specifying all the parts and instructions needed to create a Docker container. It includes the application code, libraries, dependencies, and other necessary files. Using a Docker image creates a container that runs exactly as described in the image. This ensures that every container created from the same image will be identical, providing consistency and reliability. Docker images can be shared and reused, making distributing and deploying software easy across different machines and environments.</p>
+<section id="images-available-for-users">
+<h3>Images Available for Users<a class="headerlink" href="#images-available-for-users" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>GeoLab</strong>: This image is designed for students and researchers. It includes pre-installed tools and libraries commonly used in geophysical studies.</p></li>
+<li><p><strong>MsPASS</strong>: This curated image is specifically prepared for the MsPASS short course.</p></li>
+<li><p><strong>Custom Images</strong>: Custom images can be created upon request. If you have specific requirements or need particular software setups, please reach out to the administration to discuss your needs and have a custom image prepared for you.</p></li>
+</ul>
+</section>
+<section id="what-are-geolab-compute-instances">
+<h3>What are GeoLab Compute Instances<a class="headerlink" href="#what-are-geolab-compute-instances" title="Link to this heading">#</a></h3>
+<p>Compute instances are like ovens that provide the necessary environment and resources to run your Docker containers. Just as different ovens can vary in size, power, and features, compute instances come in various configurations to match different computational needs.</p>
+<p>Imagine you want to bake multiple cakes simultaneously. A small oven might only fit one or two cakes at a time, while a larger, industrial oven can handle dozens. Similarly, a small compute instance might be sufficient for running a few lightweight applications. Still, a larger instance with more CPU power, memory, and storage is necessary for more demanding tasks or multiple applications.</p>
+<p>In cloud computing, compute instances are virtual machines provided by cloud service providers like AWS, Google Cloud, or Azure. These instances can be scaled up or down based on your needs, allowing you to allocate resources dynamically to handle workloads efficiently.</p>
+<p><strong>Key Features of Compute Instances:</strong>
+Scalability: You can quickly scale your compute resources up or down based on demand. This is like adjusting the size of your oven to bake more cakes during a busy season and fewer when demand is low.</p>
+<ul class="simple">
+<li><p><strong>Flexibility:</strong> Compute instances come in various sizes and configurations, allowing you to choose the right amount of CPU, memory, and storage for your applications. It’s like having the option to select an oven with different capacities and features depending on the complexity and volume of baking you need to do.</p></li>
+<li><p><strong>Reliability:</strong> Cloud providers offer high availability and fault tolerance, ensuring that your compute instances are reliable and your applications run smoothly. This is like having a well-maintained oven that consistently performs well, reducing the risk of baking failures.</p></li>
+</ul>
+</section>
+<section id="what-are-notebooks">
+<h3>What are Notebooks?<a class="headerlink" href="#what-are-notebooks" title="Link to this heading">#</a></h3>
+<p>Notebooks are interactive, web-based documents that combine code, text, and visualizations in a single, cohesive environment. In research and education, notebooks are invaluable for documenting experiments, teaching programming and data analysis, and presenting findings. They provide a hands-on learning experience where students and researchers can run code, see the output, and make adjustments on the fly. For data scientists and developers, notebooks are a powerful tool for prototyping, data exploration, and sharing insights with colleagues. They enable seamless collaboration, as the entire workflow—from data preprocessing to model training and visualization—can be documented and shared.</p>
+<p><strong>Key Features of Notebooks:</strong></p>
+<ul class="simple">
+<li><p><strong>Rich Text Support:</strong> Notebooks support markdown, including formatted text, images, and links alongside your code.</p></li>
+<li><p><strong>Visualizations:</strong> You can create and display plots, charts, and other visualizations directly within the notebook.</p></li>
+<li><p><strong>Reproducibility:</strong> Since notebooks can be shared and executed on different machines, they ensure that the same results can be achieved, provided the environment is consistent.</p></li>
+<li><p><strong>Interactive Widgets:</strong> Notebooks can include interactive elements such as sliders, buttons, and forms, allowing for dynamic and interactive data exploration.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="external-resources">
+<h1>External Resources<a class="headerlink" href="#external-resources" title="Link to this heading">#</a></h1>
+<section id="how-to-get-help-ask-questions">
+<h2>How to Get Help / Ask Questions<a class="headerlink" href="#how-to-get-help-ask-questions" title="Link to this heading">#</a></h2>
+<p>If you encounter any issues or have questions, there are several ways to get help:</p>
+<ul class="simple">
+<li><p><strong>Slack:</strong> Join our Slack channel [#geolab-support]</p></li>
+<li><p><strong>Data Help Desk</strong> <a class="reference external" href="https://support.center.earthscope.org/servicedesk/customer/portal/4/group/5?groupId=5">Need Help</a></p></li>
+</ul>
+</section>
+<section id="extras">
+<h2>Extras<a class="headerlink" href="#extras" title="Link to this heading">#</a></h2>
+<p>Here are some additional resources to help you get started:</p>
+<ul class="simple">
+<li><p><strong>Python:</strong> Learn Python programming <a class="reference external" href="https://www.python.org/doc/">here</a>.</p></li>
+<li><p><strong>Notebooks:</strong> Learn how to use Jupyter Notebooks <a class="reference external" href="https://jupyter.org/documentation">here</a>.</p></li>
+<li><p><strong>Cloud Computing:</strong> Understand cloud computing concepts <a class="reference external" href="https://aws.amazon.com/what-is-cloud-computing/">here</a>.</p></li>
+</ul>
+<p>We hope you have a productive experience with GeoLab. Happy computing!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome to GeoLab</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#about-geolab">About GeoLab</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-migrate">Why Migrate?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-notebooks">Why use notebooks?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geolab-code-of-conduct">GeoLab Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#about-our-partners">About Our Partners</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i2c">2i2c</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#amazon-web-services-aws">Amazon Web Services (AWS)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-hub">About the Hub</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-docker-containers">What Are Docker Containers?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-docker-images">What Are Docker Images?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#images-available-for-users">Images Available for Users</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-geolab-compute-instances">What are GeoLab Compute Instances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-notebooks">What are Notebooks?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#external-resources">External Resources</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-help-ask-questions">How to Get Help / Ask Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extras">Extras</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By EarthScope On-Ramp Project Group
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
