@@ -3,7 +3,7 @@
 
 title: GeoLab Jupyter Book
 author: EarthScope On-Ramp Project Group
-logo: img/cloud_logo_simple_small.png
+logo: content/img/cloud_logo_simple_small.png
 copyright: "2024" # Should go in the footer
 
 parse:
@@ -44,6 +44,8 @@ html:
   use_issues_button: false
   use_repository_button: true
 
+# Specify what to build
+only_build_toc_files: true
 exclude_patterns: [
   content/drafts/*,
   content/Community_Notebooks/*

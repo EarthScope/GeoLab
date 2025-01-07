@@ -12,4 +12,4 @@ To optimize and expand this cloud-based model, CryoCloud is a NASA-funded projec
 Our community cloud-based ecosystem is based on a partnership between organizers comprised of EarthScope staff members, the NSF GAGE/SAGE community, and the [International Interactive Computing Collaboration (2i2c) team](https://2i2c.org). Together, we foster communication around the development of cloud-based workflows, create content that guides users towards leveraging open-source tools and software, and builds infrastructure that is consistent with best practices and standards.
 
 
-![2i2c Service Model](../img/2i2c_service.png)
+![2i2c Service Model](img/2i2c_service.png)
