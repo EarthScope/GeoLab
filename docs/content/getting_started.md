@@ -49,11 +49,11 @@ In JupyterHub, selecting the appropriate image is crucial for ensuring you have 
 After selecting your appropriate image, you will be prompted with a loading screen. Please be aware that this process may take a few minutes.
 ![Loading](img/Loading.png)
 Once the loading process is complete, you will be prompted with a Jupyter Notebook interface. If you encounter any issues, double-check that you have selected the correct image. If problems persist, please contact an administrator for assistance.
-Run this code to check if you are in the right image:
+Open a Terminal and run this code to check if you are in the right image:
 
  **Check image:** 
-  ```python
-  !printenv | grep IMAGE
+  ```
+ printenv | grep IMAGE
   ```
 If on the wrong image skip to step 5 to restart and select the correct image 
 ## 5. Once in Hub
