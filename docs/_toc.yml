@@ -15,8 +15,8 @@ parts:
 - caption: Get Started
   chapters:
  # - file: notebooks/How_to_Notebook
-  - file: content/register_es_user
-  - file: content/register_geolab_access
+  - file: content/how_do_i/register_es_user
+  - file: content/how_do_i/register_geolab_access
   - file: content/hub_best_practices
 #- caption: Background and Training
 - caption: Open Science Resources
