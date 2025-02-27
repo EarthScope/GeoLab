@@ -25,3 +25,11 @@ parts:
 - caption: Open Science Resources
   chapters:
   - file: ext/opensci_links
+- caption: EarthScope Cloud Resources
+  chapters:
+  - url: https://docs.earthscope.org/
+    title: EarthScope Docs Home
+  - url: https://docs.earthscope.org/projects/SDK-beta/
+    title: SDK-beta
+  - url: https://docs.earthscope.org/projects/API/
+    title: EarthScope API
