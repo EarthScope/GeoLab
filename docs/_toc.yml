@@ -18,6 +18,9 @@ parts:
   - file: content/how_do_i/register_es_user
   - file: content/how_do_i/register_geolab_access
   - file: content/hub_best_practices
+- caption: Advanced Topics
+  chapters:
+  - file: content/contributor_guide
 #- caption: Background and Training
 - caption: Open Science Resources
   chapters:
