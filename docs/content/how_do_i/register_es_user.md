@@ -4,7 +4,7 @@ In order to gain access to GeoLab, you will first need to register for an EarthS
 
 To start the registration process, click the following link - https://earthscope.org/user
 
-And that should bring you to the screen below ![image](../content/img/ES_login_popup.png)
+And that should bring you to the screen below ![image](../img/ES_login_popup.png)
 
 At the bottom, you can register a new User account by clicking either "Continue with Google" or "Continue with Cilogon". If you do not have a Google account associated with the email that you will use to register, use the "Continue with Cilogon" option.
 
