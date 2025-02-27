@@ -43,7 +43,8 @@ Please keep personal storage in the home directory to <10 Gb. Your current stora
 If you find the need to install a Python package that is not included in the GeoLab base image, you can use either `pip` or `conda` to install the package yourself. Unfortunately, these packages will only be valid for the current session and will not persist from one session to another.
 
 >[!NOTE]
->Guidance for suggesting packages to add to the base image can be found in the [Contributor Guide](./Contributor_Guide(in-progress).md)
+>Guidance for suggesting packages to add to the base image can be found in the Contributor Guide.
+<!-- >Guidance for suggesting packages to add to the base image can be found in the [Contributor Guide](contributor_guide.ipynb) -->
 
 To use a package between sessions, we recommend either of the two following strategies:
 1. Install the package each time you need it either by typing the below in a Terminal window after logging in, or including it in the first cell of your Jupyter notebook
