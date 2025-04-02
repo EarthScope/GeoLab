@@ -1,41 +1,89 @@
-# GeoLab Code of Conduct
+# EarthScope Code of Conduct
 
-EarthScope Consortium is committed to providing a safe, productive, and welcoming environment for all participants in EarthScope-sponsored or EarthScope-supported activities, including those of the NSF GAGE and SAGE Facilities. All persons affiliated with or participating in activities are expected to adhere to the highest standards of conduct and to maintain personal and professional integrity as outlined in this Code of Conduct.
+*This Code of Conduct applies to all EarthScope-supported internships, virtual and in-person technical short courses, workshops, and educational programs.*
 
-This statement is meant to cover all programming of EarthScope Consortium and NSF SAGE and GAGE Facilities, including meetings and events, as well as those sponsored by organizations or entities other than EarthScope but held in conjunction with EarthScope events or involving EarthScope, NSF GAGE, or NSF SAGE support, in public or private facilities or online.
+## Purpose
 
-## Expected Behavior
+The EarthScope Consortium is committed to fostering a safe, productive, and welcoming environment for all participants. This Code of Conduct Addendum establishes expectations for professional, respectful, and academically honest behavior across all EarthScope-supported programming, whether online or in-person. This includes but is not limited to internships, field experiences, workshops, webinars, short courses, receptions, and Slack or other online communities.
 
-We intend to establish a culture for GeoLab that empowers people to conduct open science using cloud computing resources. Creating that culture requires an open exchange of diverse ideas that are bound by thoughtful guidelines. We seek to balance the openness and transparency of collaborative research that encourages our community to participate against the thoughtless or intentional harmful behaviors that will discourage researchers and cause them to withdraw.
+## General Expectations
 
-As we continue to find ways to make this a more welcoming space for our community, please consult the following non-exhaustive list of principles for guidance on expected behavior.
+- Participants must adhere to the EarthScope Consortium Code of Conduct.
+- All EarthScope activities, regardless of delivery mode, are considered professional learning environments.
+- Respectful, inclusive, and courteous communication is expected at all times.
+- Participants must refrain from disruptive, offensive, or inappropriate behavior.
+- Professionalism is expected in all forms of interaction, whether verbal, written, or digital.
 
-- Treat others with respect and consideration, value a diversity of views and opinions.
-- Be considerate, inclusive, respectful, and collaborative.
-- Be kind to others and avoid personal attacks.
-- Communicate openly with respect for others, critiquing ideas rather than individuals.
-- Be mindful of your surroundings and of your fellow participants.
-- Respect the rules and policies of meeting venues, hotels, contracted facilities, or any other venue.
-- All communication should be appropriate for a professional audience including people of many different backgrounds.
-- Do not insult or put down others.
+## Interactions with Instructors and Staff
+
+- Communications must be polite, constructive, and professional.
+- Slang, profanity, threats, or disrespectful language are prohibited.
+- Participants must use appropriate screen names, email addresses, and profile pictures. Instructors reserve the right to determine appropriateness and require updates to user profiles.
+
+## Interactions with Participants
+
+- All communications should be course-related or program-relevant.
+- Participants are encouraged to support one another constructively through shared challenges and questions, particularly in collaborative environments like Slack.
+- Unsolicited or non-relevant messaging to peers is prohibited.
+- Participants must engage respectfully, avoiding profanity, threats, or offensive content.
+
+## Use of Educational Tools and Online Platforms
+
+### Slack and Communication Tools
+
+- All communications and files shared in EarthScope-owned platforms (e.g., Slack, Google Classroom) are considered open records and may be inspected by EarthScope staff.
+- This includes all channels of communication, including direct messages between participants.
+
+### Moodle and Learning Platforms
+
+- Sharing login credentials or accessing another participant's account is prohibited.
+- All activites must comply with each platform's terms of service.
+
+## Copyright and Intellectual Property
+
+- All EarthScope workshop materials are copyrighted.
+- Reproduction, distribution, or transmission without explicit written permission is strictly prohibited.
+- Posting content or assignment answers online (e.g., Course Hero) is a violation.
+- Accessing or using another participant's work constitutes academic dishonesty.
+
+## Academic Integrity and Honesty
+
+Academic dishonesty applies to all assignments submitted for evaluation, whether online, electronic, or in-person, including those completed in Moodle or other learning environments. Academic dishonesty includes, but is not limited to:
+- Cheating – Using unauthorized materials or providing/receiving unauthorized assistance.
+- Plagiarism – Presenting another’s work or ideas as your own.
+- Fabrication – Falsifying data, citations, or information.
+- Unauthorized Collaboration – Working with others without instructor permission.
+- Misrepresentation – Misleading others about your work or credentials.
+- Gaining an Unfair Advantage – Accessing resources or information unavailable to others or interfering with another participant's work.
+
+Participants may not use or view another participant’s current or prior work, including accessing another student’s account or submitted assignments.
+
+Participants are responsible for understanding these policies and should consult instructors if unsure.
 
 ## Unacceptable Behavior
-- Harassment, intimidation, or discrimination in any form will not be tolerated.
-- Sexist, racist, homophobic, transphobic, or exclusionary jokes are not appropriate.
-- Physical, written, or verbal abuse of any participant or guest will not be tolerated.
-- Other examples of unacceptable behavior include, but are not limited to:
-  - comments related to gender, sexual orientation, disability, physical appearance, body size, race, religion, national origin
-  - inappropriate use of nudity and/or sexual images in public spaces or in presentations;
-  - threatening, stalking, or surreptitiously recording/photographing any participant or guest.
 
-### Consequences
-Anyone requested to stop unacceptable behavior or requested to leave by the senior EarthScope representative is expected to comply immediately.
+EarthScope does not tolerate:
+- Harassment, discrimination, or intimidation in any form.
+- Sexist, racist, homophobic, transphobic, or exclusionary jokes.
+- Physical or verbal abuse.
+- Inappropriate use of nudity, sexual imagery, or offensive language.
+- Threatening, stalking, or otherwise endangering other participants.
+- Disrespectful conduct in digital spaces (Slack, email, social media, etc.).
 
-Those who violate the standards of professional and respectful conduct may be asked to cease participation in any activity, including but not limited to, the return of loaned equipment and/or cessation of staff field support without warning.
+## Consequences and Disciplinary Action
 
-EarthScope Consortium reserves the right to prohibit attendance or participation at any future meeting, event, or activity.
+Violations of this Code of Conduct may result in:
+- Immediate request to cease inappropriate behavior.
+- Formal warnings.
+- Temporary suspension from activities.
+- Expulsion from the program.
+- Termination of agreements or future participation restrictions.
+- EarthScope instructors or staff will investigate reports of violations. The severity and frequency of violations will inform the disciplinary response.
 
-### Reporting and Witnessing Behavior
-If you experience or witness behavior that constitutes an immediate or serious threat to public safety, or a crime, call 911 immediately. Take actions necessary to maintain your own personal safety first.
+## Updates & Amendments
 
-If you are the subject of unacceptable behavior or have witnessed any such behavior, please report it to the EarthScope Consortium Chief Executive Officer (executive-staff (at) earthscope.org), Human Resources (humanresources (at) earthscope.org), or the on-site EarthScope point of contact.
+EarthScope reserves the right to update this Code of Conduct to reflect evolving best practices. Participants are responsible for reviewing and adhering to the latest version.
+
+## Acknowledgement
+
+By participating in any EarthScope-hosted or affiliated activity, you acknowledge that you have read, understood, and agreed to comply with this Code of Conduct.
