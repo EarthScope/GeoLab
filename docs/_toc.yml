@@ -4,21 +4,33 @@
 format: jb-book
 root: intro
 parts:
-- caption: Details
+- caption: Welcome to GeoLab
   chapters:
  # - file: notebooks/Welcome_to_the_Hub
   - file: content/about
   - file: content/mission
-  - file: content/getting_started
   - file: content/code_of_conduct
+  - file: content/geolab_AUP
   - file: content/citation
 - caption: Get Started
   chapters:
  # - file: notebooks/How_to_Notebook
-  - file: content/register_es_user
-  - file: content/register_geolab_access
+  - file: content/getting_started
+  - file: content/how_do_i/register_es_user
+  - file: content/how_do_i/register_geolab_access
   - file: content/hub_best_practices
+- caption: Advanced Topics
+  chapters:
+  - file: content/contributor_guide
 #- caption: Background and Training
 - caption: Open Science Resources
   chapters:
   - file: ext/opensci_links
+- caption: EarthScope Cloud Resources
+  chapters:
+  - url: https://docs.earthscope.org/
+    title: EarthScope Docs Home
+  - url: https://docs.earthscope.org/projects/SDK-beta/
+    title: SDK-beta
+  - url: https://api.earthscope.org
+    title: EarthScope API
