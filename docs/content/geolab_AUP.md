@@ -34,7 +34,7 @@ The GeoLab JupyterHub environment provided by EarthScope is a **shared computing
 
 ## Responsible Collaboration and Conduct
 
-- All users must adhere to the [EarthScope Code of Conduct](content/code_of_conduct.md), ensuring respectful and inclusive communication.
+- All users must adhere to the [EarthScope Code of Conduct](./code_of_conduct.md), ensuring respectful and inclusive communication.
 - When working in shared notebooks, users should:
   - Clearly attribute code and data sources.
   - Maintain readability and documentation for collaborative work.
