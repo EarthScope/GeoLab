@@ -2,25 +2,6 @@
 
 A few things to keep in mind as you develop a workflow based around GeoLab. Adopting these tips and strategies will help keep your logins clean while avoiding artifacts from previous sessions and save money by avoiding unutilized storage and compute resources.
 
-## Stopping Your Server and Logging Out
-
-In order to save money, it is important to release the resources that you have claimed during the session by shutting down your server instance and logging out of your EarthScope account once you're finished. This allows the hub to re-allocate those resources to other users and saves money by not charging for unused compute.
-
-The full shutdown sequence is as follows:
-
-1. Navigate to `File` --> `Hub Control Panel`
-  - This will create a separate browser tab
-1. In the new tab, push the big red button that looks like this ![image](./img/bigredbutton.png)
-1. Once the button disappears, your server instance will be stopped.
-
-> [!NOTE]
-> If you are using a "Shared Small" instance for your session, this will _not_ shutdown the server for other users.
-
-1. Next, click `Log Out`
-1. Finally, close all browser tabs for GeoLab before logging in again.
-
-If you follow these steps, you will avoid any errors that might appear if you try to start GeoLab from the same browser tab.
-
 ## Personal Storage Limits
 
 Every GeoLab user has a "home" directory where the files, scripts, notebooks, Git repos, and any other files associated with their work will persist from one session to the next. This directory will appear as `/home/jovyan/` when using the Terminal. This is also the top-most directory seen in the navigation pane.
