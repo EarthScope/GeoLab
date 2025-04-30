@@ -1,0 +1,1 @@
+# What the different panels of the hub look like and do

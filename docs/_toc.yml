@@ -4,7 +4,7 @@
 format: jb-book
 root: intro
 parts:
-- caption: Welcome to GeoLab
+- caption: Home
   chapters:
  # - file: notebooks/Welcome_to_the_Hub
   - file: content/about
@@ -12,18 +12,23 @@ parts:
   - file: content/code_of_conduct
   - file: content/geolab_AUP
   - file: content/citation
-- caption: Getting Started
+- caption: Start Here
   chapters:
  # - file: notebooks/How_to_Notebook
-  # - file: content/getting_started
+ # - file: content/getting_started
   - file: content/how_do_i/register_es_user
   - file: content/how_do_i/register_geolab_access
   - file: content/server_launch
+  - file: content/server_shutdown
   - file: content/hub_best_practices
+- caption: GeoLab User Guide
+  chapters:
+  - file: content/user
 - caption: Advanced Topics
   chapters:
   - file: content/contributor_guide
   - file: content/custom_images
+  - file: content/env_mgmt
 #- caption: Background and Training
 - caption: Open Science Resources
   chapters:

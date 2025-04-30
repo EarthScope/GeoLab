@@ -10,6 +10,12 @@ This JupyterBook website is meant to provide basic information about account reg
 
 Learn more about GeoLab, hosted by EarthScope, by visiting [this link](https://www.earthscope.org/data/geolab/) or by contacting us at: data-help (at) earthscope.org
 
+This text taken from getting_started.md that we probably want to get rid of:
+Welcome to GeoLab! The EarthScope-operated JupyterHub that provides a powerful platform for accessing Jupyter Notebooks in a shared, cloud-based environment. GeoLab is a collaborative environment for students, researchers, and other members of the geocentric scientific community to work on high-throughput, data-intensive workflows while having access to powerful computational resources, tools, and a community of experts.
+
+Most of our users will join GeoLab through one of the EarthScope Short Courses or other specific hosted workshops. However, if you have come across GeoLab through some other way and are part of the geophysics or other Earth science communities and want to join GeoLab, please follow the instructions below which will guide you through the onboarding process and gain access to GeoLab.
+--end text
+
 ```{admonition} Quick links
 :class: seealso
 * JupyterHub: {{ jupyterhub_url }}

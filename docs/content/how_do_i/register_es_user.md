@@ -16,4 +16,4 @@ Either option you choose will bring up a page that has several required fields t
 
 Our list of institutions is populated by the [Research Organization Registry](https://ror.org/) but if your institution if not included, just type the full name and click on the red 'Save...' button in the box. If you are *not* currently affiliated with a research or education institution, type "none" in this box and then click "Save".
 
-Finally, click "Register" and that should complete the process. You will then be taken to your User homepage at https://www.earthscope.org/user/info . See the following link for further discussion about what other resources are available from your User homepage.
+Finally, click "Register" and that should complete the process. You will then be taken to your User homepage at https://www.earthscope.org/user/info where you can see your account details and manage credentials for API access or real-time GNSS licenses.

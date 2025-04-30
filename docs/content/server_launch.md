@@ -1,14 +1,14 @@
 # Launching your Server
 
 ## Select an Instance Size
-The Choose Your Server option lets you select a computing environment tailored to your needs, ensuring you have the right resources for your projects. 
+The Server Options page lets you select a computing environment tailored to your needs, ensuring you have the right resources for your projects.
 ![Server](img/Server.png)
 When selecting a server for your JupyterHub environment, it's important to choose a server instance that meets your computational needs without overcommitting resources. Below are the available server options along with their specifications and recommended use cases.
 
-In order to keep oeprational costs low, we recommend that you start with the smallest server option available, and only move to a larger instance when you hit performance barriers. 
+In order to keep oeprational costs low, we recommend that you start with the smallest server option available, and only move to a larger instance when you hit performance barriers.
 
 ```{dropdown} Shared Small Server
-The Shared Small server is a multi-user environment where resources may be shared among up to four different users. This is the recommended option for most users, especially for those starting out or working on less intensive tasks. 
+The Shared Small server is a multi-user environment where resources may be shared among up to four different users. This is the recommended option for most users, especially for those starting out or working on less intensive tasks.
 Server Specifications:
 
 Use Cases:
@@ -31,13 +31,13 @@ Medium and Large servers are available by request, on a case-by-case basis. To r
 ```
 
 ## Select an Image
-Several pre-configured compute environments are available to choose from. Use the dropdowns below to select your initial configuration. Please see Envrionment Management[environment_management] for more details on customizing your ephemeral server instance after launch, or bringing your own custom image. 
+Several pre-configured compute environments are available to choose from. Use the dropdowns below to select your initial configuration. Please see Envrionment Management[environment_management] for more details on customizing your ephemeral server instance after launch, or bringing your own custom image.
 
-```{dropdown} GeoLab 
+```{dropdown} GeoLab
 The default GeoLab image contains a variety of python packages to enable a broad range of geophyiscal data analysis.
 This image inherits all software in pangeo/pytorch_notebook, and includes additional support for EarthScope SDK/CLI and other geophysics tools. For a complete list of packages included in this image, see [github software list].
 
-Note: If you believe we've missed a well-loved geophysical data analysis tool, please let us know by filling out the Geolab Feedback Form[geolab_feedback_form]! 
+Note: If you believe we've missed a well-loved geophysical data analysis tool, please let us know by filling out the Geolab Feedback Form[geolab_feedback_form]!
 ```
 
 ```{dropdown} R Studio
