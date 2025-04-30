@@ -1,3 +1,3 @@
-#Creating a custom image for GeoLab
+# Creating a custom image for GeoLab
 
 Placeholder
