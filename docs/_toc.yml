@@ -4,34 +4,36 @@
 format: jb-book
 root: intro
 parts:
-- caption: Home
+- caption: Welcome
   chapters:
  # - file: notebooks/Welcome_to_the_Hub
-  - file: content/about
-  - file: content/mission
-  - file: content/code_of_conduct
-  - file: content/geolab_AUP
-  - file: content/citation
-- caption: Start Here
+  - file: content/welcome/about
+  - file: content/welcome/mission
+  - file: content/welcome/geolab_CoC
+  - file: content/welcome/geolab_AUP
+  - file: content/welcome/citation
+  - file: content/welcome/glossary
+- caption: Getting Started
   chapters:
- # - file: notebooks/How_to_Notebook
- # - file: content/getting_started
-  - file: content/how_do_i/register_es_user
-  - file: content/how_do_i/register_geolab_access
-  - file: content/server_launch
-  - file: content/hub_best_practices
-- caption: GeoLab User Guide
+  - file: content/getting_started/register_es_user
+  - file: content/getting_started/register_geolab_access
+  - file: content/getting_started/server_launch
+  - file: content/getting_started/hub_best_practices
+- caption: Navigate GeoLab
   chapters:
-  - file: content/user
+  - file: content/navigate_geolab/basic_navigation
+  - file: content/navigate_geolab/geolab_terminal
+  - file: content/navigate_geolab/How_to_Notebook.ipynb
+  - file: content/navigate_geolab/upload_files
+  - file: content/navigate_geolab/using_git
 - caption: Advanced Topics
   chapters:
-  - file: content/contributor_guide
-  - file: content/custom_images
-  - file: content/env_mgmt
+  - file: content/advanced_topics/custom_images
+  - file: content/advanced_topics/env_mgmt
 #- caption: Background and Training
 - caption: Open Science Resources
   chapters:
-  - file: ext/opensci_links
+  - file: content/other/opensci_links
 - caption: EarthScope Cloud Resources
   chapters:
   - url: https://docs.earthscope.org/

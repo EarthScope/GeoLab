@@ -48,5 +48,5 @@ html:
 only_build_toc_files: true
 exclude_patterns: [
   content/drafts/*,
-  content/Community_Notebooks/*
+  content/science_tutorials/*
 ]
