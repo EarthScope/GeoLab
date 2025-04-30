@@ -19,7 +19,6 @@ parts:
   - file: content/how_do_i/register_es_user
   - file: content/how_do_i/register_geolab_access
   - file: content/server_launch
-  - file: content/server_shutdown
   - file: content/hub_best_practices
 - caption: GeoLab User Guide
   chapters:

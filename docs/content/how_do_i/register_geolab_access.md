@@ -22,6 +22,6 @@ Once you have been granted access to GeoLab, you can login to the hub either by 
 
 When the login screen appears, use either the email & password or "Continue with..." options that you registered for your EarthScope User account. Once your identity has been confirmed, you will be take to the Server Options screen to select the environment that will be created for you.
 
-A more detailed explanation of the various options available here can be found in the [Launching Your Server](./server_launch.md) doc, but for most use cases, the Small or Shared Small instance size with the base GeoLab image will suffice.
+A more detailed explanation of the various options available here can be found in the [Launching Your Server](../server_launch.md) doc, but for most use cases, the Small or Shared Small instance size with the base GeoLab image will suffice.
 
 NOTE: If you are registered for an EarthScope Short Course, there might be a custom image that you will use for the course, please refer to the course instructional sheet to see if there is guidance on what image you should use.
