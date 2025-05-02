@@ -25,4 +25,4 @@ With the [Right to Replicate](https://2i2c.org/right-to-replicate/) policy, 2i2c
 
 Together, we co-develop cloud-based workflows to guide our community towards open-source tools and software that drives innovative solutions to data-intensive geoscientific challenges.
 
-![2i2c Service Model](img/2i2c_service.png)
+![2i2c Service Model](../img/2i2c_service.png)

@@ -27,7 +27,7 @@ Once you get an Earthscope-approved profile, you can sign on through the [Jupyte
 ![Portal](img/Portal.png)
 ## 4. Launching your server
 The Choose Your Server option lets you select a computing environment tailored to your needs, ensuring you have the right resources for your projects.
-![Server](img/Server.png)
+![Server](../img/Server.png)
 When selecting a server for your JupyterHub environment, it's important to choose one that meets your computational needs without overcommitting resources. Below are the available server options along with their specifications and recommended use cases.
 
 
@@ -87,9 +87,9 @@ Once you are in the JupyterHub environment, take some time to familiarize yourse
 ## 6. When you finish
 When you have finished your work, it is important to properly shut down your server. This helps to conserve resources and maintain system efficiency. To shut down the server:
 ### Save all your work in the Jupyter Notebook
-![Save](img/Save.png)
+![Save](../img/Save.png)
 ### Navigate to the Control Panel
-![Control_Panel](img/Control_Panel.png)
+![Control_Panel](../img/Control_Panel.png)
 ### Click on the "Stop My Server" button
-![Stop_Server](img/Stop_Server.png)
+![Stop_Server](../img/Stop_Server.png)
 # Happy computing & Enjoy your time in GeoLab!
