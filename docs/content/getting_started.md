@@ -27,7 +27,7 @@ Once you get an Earthscope-approved profile, you can sign on through the [Jupyte
 ![Portal](img/Portal.png)
 ## 4. Launching your server
 The Choose Your Server option lets you select a computing environment tailored to your needs, ensuring you have the right resources for your projects.
-![Server](../img/Server.png)
+![Server](./img/Server.png)
 When selecting a server for your JupyterHub environment, it's important to choose one that meets your computational needs without overcommitting resources. Below are the available server options along with their specifications and recommended use cases.
 
 

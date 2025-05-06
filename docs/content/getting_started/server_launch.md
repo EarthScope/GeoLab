@@ -2,7 +2,7 @@
 
 ## Select an Instance Size
 The Server Options page lets you select a computing environment tailored to your needs, ensuring you have the right resources for your projects.
-![Server](img/Server.png)
+![Server](../img/Server.png)
 When selecting a server for your JupyterHub environment, it's important to choose a server instance that meets your computational needs without overcommitting resources. Below are the available server options along with their specifications and recommended use cases.
 
 In order to keep oeprational costs low, we recommend that you start with the smallest server option available, and only move to a larger instance when you hit performance barriers.
@@ -71,7 +71,7 @@ The full shutdown sequence is as follows:
 
 1. Navigate to `File` --> `Hub Control Panel`
   - This will create a separate browser tab
-1. In the new tab, push the big red button that looks like this ![image](./img/bigredbutton.png)
+1. In the new tab, push the big red button that looks like this ![image](../img/bigredbutton.png)
 1. Once the button disappears, your server instance will be stopped.
 
 > [!NOTE]
