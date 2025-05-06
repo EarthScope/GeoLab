@@ -14,7 +14,7 @@ The Launcher is home to all of GeoLab's connected apps. From here, you can open 
 You can always reach the launcher with the blue + icon in the top left, by navigating to File -> New Launcher, or opening a new tab in the main panel. 
 
 ## Sidebar
-The sidebar contains several tabs that will help you navigate the GeoLab environment.
+The sidebar contains several tabs that will help you navigate the GeoLab environment and its extensions. Some images may contain extensions that differ from the ones described here. 
 
 ### ![folder](../img/folder.png) File Browser:
 Your files are connected to your user account and will be loaded each time you log into GeoLab, no matter which server options you select at login.
@@ -38,18 +38,20 @@ Standard file operations (i.e., rename, delete, copy, paste, etc) are available 
 
 ### ![usage](../img/usage_monitor.png) Usage Browser:
 
-### ![gpu](../img/gpu_monitor.png) GPU Dashboard:
-
 ### ![dask](../img/dask_icon.png) Dask Dashboard:
+Dask is a powerful extension that orchestrates workflow parellilization. This panel allows you to manually configure dask workers and to explore performance metrics.See [Dask](../advanced_topics/dask.md) for more details.
 
 ### ![git](../img/git_icon.png) Git Dashboard:
+Git is a powerful tool for version control, collaboration, and sharing work in accordance with Open Science and Reproducibility values. 
+The git dashboard allows manual/visual control of git repositories. 
+See [Using Git](./using_git.md) for more details.
 
 ### ![toc](../img/toc_icon.png) Table of Contents:
-If the file in active tab contains headers and subsections (i.e., in a python notebook or markdown file), you can navigate to sections of the file using this panel.
-When developing notebooks longer than a couple of cells, it is recommended you add section headers and annotate your work to take advantage of this feature. 
+If the python notebook or markdown file in the active tab in the main panel contains headers and subsections, you can navigate to sections of the file using this panel.
+When developing notebooks longer than a couple of cells, it is recommended you add section headers and annotate your work to keep your work organized and take advantage of this feature. 
 
 ### ![jb](../img/jb_icon.png) JB - JupyterBook Navigation:
 If any of the cloned git repositories in your file system contain JupyterBook documentation, it can be navigated here. 
 
 ### ![extension](../img/extension_icon.png) JupyterLab Extension Manager:
-There are many community-developed extensions for JupyterLab that you may with to install in GeoLab. These can be managed here. 
+There are many community-developed extensions for JupyterLab that you may wish to install in GeoLab. These can be managed here. 

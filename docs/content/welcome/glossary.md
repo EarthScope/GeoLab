@@ -29,6 +29,8 @@ A Jupyter Notebook is a human-readable document that allows users to create and 
 **[Jupyter Book](https://jupyterbook.org/intro.html)**
 Jupyter Book is a command-line tool that allows users to create publication-quality PDFs or web-based interactive books from Markdown documents and Jupyter Notebooks.
 
+**kernel**
+
 **server**
 
 **[conda](https://docs.conda.io)**
@@ -42,3 +44,7 @@ A widely used version control system used by many open-source projects to manage
 
 **[GitHub](https://github.com)**
 A web-based platform that enables software developers to remotely collaborate on software development using the git command line tool. GitHub is a huge resource for open-source collaboration where users can store, manage, and contribute to not only their own projects, but any public-facing project on the platform.
+
+**CPU**
+**GPU**
+**Dask**
