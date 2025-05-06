@@ -31,7 +31,7 @@ Medium and Large servers are available by request, on a case-by-case basis. To r
 ```
 
 ## Select an Image
-Several pre-configured compute environments are available to choose from. Use the dropdowns below to select your initial configuration. Please see Envrionment Management[environment_management] for more details on customizing your ephemeral server instance after launch, or bringing your own custom image.
+Several pre-configured compute environments are available to choose from. Use the dropdowns below to select your initial configuration. Please see [Envrionment Management](../advanced_topics/env_mgmt.md) for more details on customizing your ephemeral server instance after launch, or bringing your own custom image.
 
 ```{dropdown} GeoLab
 The default GeoLab image contains a variety of python packages to enable a broad range of geophyiscal data analysis.
@@ -60,7 +60,7 @@ Custom images must be built docker containers that are available in a public ima
 
 Select 'Other' from the dropdown menu and specify the public URL of the container.
 
-See Environment Management[environment_management.md] for more details on building your own image.
+See [Environment Management](../advanced_topics/env_mgmt.md) for more details on building your own image.
 ```
 
 ## Stopping Your Server and Logging Out
