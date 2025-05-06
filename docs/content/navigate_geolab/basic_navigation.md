@@ -1,8 +1,4 @@
-# Navigating GeoLab and it's File System
-
-```{warning}
-DRAFT!
-```
+# Navigating GeoLab and its File System
 
 GeoLab is designed to look and feel like a familiar IDE. Here's a quick tour:
 
