@@ -1,4 +1,4 @@
-# Welcome to GeoLab!
+# Welcome to GeoLab by EarthScope Consortium!
 
 ```{Note}
 This [JupyterBook](https://jupyterbook.org/en/stable/intro.html) is in development as we launch the GeoLab project.
