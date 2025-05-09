@@ -2,14 +2,13 @@
 
 ## Select an Instance Size
 The Server Options page lets you select a computing environment tailored to your needs, ensuring you have the right resources for your projects.
-![Server](../img/Server.png)
-When selecting a server for your JupyterHub environment, it's important to choose a server instance that meets your computational needs without overcommitting resources. Below are the available server options along with their specifications and recommended use cases.
 
-In order to keep oeprational costs low, we recommend that you start with the smallest server option available, and only move to a larger instance when you hit performance barriers.
+![Server](../img/Server.png)
+
+When selecting a server for your JupyterHub environment, it's important to choose a server instance that meets your computational needs without overcommitting resources. In order to keep operational costs low, we recommend that you start with the smallest server option available, and only move to a larger instance when you hit performance barriers. Below are the available server options along with their specifications and recommended use cases.
 
 ```{dropdown} Shared Small Server
-The Shared Small server is a multi-user environment where resources may be shared among up to four different users. This is the recommended option for most users, especially for those starting out or working on less intensive tasks.
-Server Specifications:
+The Shared Small server is a multi-user environment where up to four different users may be using the same machine, with resource allocation depending on their respective workloads. This is the most efficient compute configuration and is the recommended option for most users, especially for those starting out or working on less intensive tasks. 
 
 Use Cases:
   - Initial development and testing
@@ -18,8 +17,8 @@ Use Cases:
 ```
 
 ```{dropdown} Small Server (Dedicated)
-The **Small server** is a dedicated environment just for you. This option is suitable for users who need more computational power and memory for their projects. It ensures that you have consistent access to the allocated resources without competition from other users.
-Server Specifications:
+The Small server is a dedicated machine just for you. This option is suitable for users who need more computational power and memory for their projects. It ensures that you have consistent access to the allocated resources without competition from other users.
+
 Use Cases:
   - More intensive data analysis and processing
   - Running medium-sized machine learning models
@@ -27,7 +26,7 @@ Use Cases:
 ```
 
 ```{dropdown} Medium and Large Servers
-Medium and Large servers are available by request, on a case-by-case basis. To request a larger server for your project, please email data-help@earthscope.org.
+Medium and Large servers for more intensive projects are available by request, on a case-by-case basis. To request a larger server for your project, please email data-help@earthscope.org.
 ```
 
 ## Select an Image
@@ -35,13 +34,13 @@ Several pre-configured compute environments are available to choose from. Use th
 
 ```{dropdown} GeoLab
 The default GeoLab image contains a variety of python packages to enable a broad range of geophyiscal data analysis.
-This image inherits all software in pangeo/pytorch_notebook, and includes additional support for EarthScope SDK/CLI and other geophysics tools. For a complete list of packages included in this image, see [github software list].
+This image inherits all software in pangeo/pytorch_notebook, and includes additional support for EarthScope SDK/CLI and other geophysics tools. For a complete list of packages included in this image, see the GeoLab [github](geolab_github_url).
 
-Note: If you believe we've missed a well-loved geophysical data analysis tool, please let us know by filling out the Geolab Feedback Form[geolab_feedback_form]!
+Note: If you believe we've missed a well-loved geophysical data analysis tool, please let us know by filling out the [Geolab Feedback Form](geolab_feedback_form)!
 ```
 
 ```{dropdown} R Studio
-The R image is a stock image provided by 2i2c. EarthScope does not currently provide support or geophysical packages for this image.
+The RStudio image is a stock image provided by 2i2c. EarthScope does not currently provide support or geophysical package extensions for this image. \
 ```
 
 ```{dropdown} Short Course Images
@@ -49,7 +48,9 @@ EarthScope supports several educational short courses and workshops hosted in Ge
 
 Short Course Images are available on a temporary basis only and contain software configurations specific to the course; they are not intended for public use and should not be used for ongoing research or external projects.
 
-To learn more about EarthScope's educational short course offerings, visit [link]
+In some cases, short courses may use a custom image that is not available in the dropdown. See Other - Bring Your Own Image, below.
+
+You can learn more about EarthScope's educational short course offerings [here.](https://www.earthscope.org/education/skill-building-learning/courses/)
 ```
 
 ```{dropdown} Other - Bring Your Own Image
@@ -65,17 +66,17 @@ See [Environment Management](../advanced_topics/env_mgmt.md) for more details on
 
 ## Stopping Your Server and Logging Out
 
-In order to save money, it is important to release the resources that you have claimed during the session by shutting down your server instance and logging out of your EarthScope account once you're finished. This allows the hub to re-allocate those resources to other users and saves money by not charging for unused compute.
+For improved cost and operational efficiency, it is important to release the resources that you have claimed during your session by shutting down your server instance and logging out of your EarthScope account once you're finished. This allows the hub to re-allocate those resources to other users and saves money by not charging for unused compute.
 
 The full shutdown sequence is as follows:
 
-1. Navigate to `File` --> `Hub Control Panel`
-  - This will create a separate browser tab
+1. Navigate to `File` --> `Hub Control Panel` (this will open in a new browser tab)
 1. In the new tab, push the big red button that looks like this ![image](../img/bigredbutton.png)
 1. Once the button disappears, your server instance will be stopped.
 
-> [!NOTE]
-> If you are using a "Shared Small" instance for your session, this will _not_ shutdown the server for other users.
+```{note}
+If you are using a "Shared Small" instance for your session, this will _not_ shutdown the server for other users.
+```
 
 1. Next, click `Log Out`
 1. Finally, close all browser tabs for GeoLab before logging in again.

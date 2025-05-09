@@ -11,9 +11,7 @@ parse:
     geolab_github_url: https://github.com/EarthScope/GeoLab
     jupyterhub_url: https://geolab.earthscope.cloud/hub/
     website_url: https://www.earthscope.org/data/geolab/
-
-
-
+    geolab_feedback_form: https://support.center.earthscope.org/servicedesk/customer/portal/4/group/31/create/210
 
 
 # Force re-execution of notebooks on each build.

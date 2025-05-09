@@ -2,13 +2,10 @@
 
 ## Access Request Form
 
-Once you have created an [EarthScope User](./register_es_user.md) account, you will be asked to fill out a short form to request access to the GeoLab platform.
+Once you have created an [EarthScope User](./register_es_user.md) account, you will need to fill out the [GeoLab Access Request form](https://support.center.earthscope.org/servicedesk/customer/portal/4/group/31/create/342)
 
-NOTE: If you are signed up for one of the EarthScope Short Courses or Workshops that are planning to use GeoLab for the course, this step is NOT necessary and access will be automatically granted.
-
-Please click on the link below to fill out a GeoLab Access Request form.
-
-[GeoLab Access Request form](https://support.center.earthscope.org/servicedesk/customer/portal/4/group/31/create/342)
+```{note} If you are signed up for one of the EarthScope Short Courses or Workshops that are using GeoLab for the course, this step is NOT necessary and access will be automatically granted.
+```
 
 Once the form has been submitted, you will immediately receive an automated response acknowledging receipt of your Access Request form.
 
@@ -20,8 +17,4 @@ We will reach out directly through email if clarification is needed on the inten
 
 Once you have been granted access to GeoLab, you can login to the hub either by directly navigating to [this link](https://geolab.earthscope.cloud/hub/spawn) or by accessing our [GeoLab Notebook Hub](https://www.earthscope.org/data/geolab/) webpage and click on the "Launch GeoLab" button.
 
-When the login screen appears, use either the email & password or "Continue with..." options that you registered for your EarthScope User account. Once your identity has been confirmed, you will be take to the Server Options screen to select the environment that will be created for you.
-
-A more detailed explanation of the various options available here can be found in the [Launching Your Server](../server_launch.md) doc, but for most use cases, the Small or Shared Small instance size with the base GeoLab image will suffice.
-
-NOTE: If you are registered for an EarthScope Short Course, there might be a custom image that you will use for the course, please refer to the course instructional sheet to see if there is guidance on what image you should use.
+When the login screen appears, use the same method that you used to register for your EarthScope User account (email & password, OR "Continue with..."). Once your identity has been confirmed, you will be take to the Server Options screen. 
