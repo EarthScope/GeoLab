@@ -18,18 +18,17 @@ parts:
   - file: content/getting_started/register_es_user
   - file: content/getting_started/register_geolab_access
   - file: content/getting_started/server_launch
-  - file: content/getting_started/hub_best_practices
+  # - file: content/getting_started/hub_best_practices
 - caption: Navigate GeoLab
   chapters:
   - file: content/navigate_geolab/basic_navigation
   - file: content/navigate_geolab/geolab_terminal
   - file: content/navigate_geolab/How_to_Notebook.ipynb
-  - file: content/navigate_geolab/upload_files
   - file: content/navigate_geolab/using_git
 - caption: Advanced Topics
   chapters:
-  - file: content/advanced_topics/custom_images
   - file: content/advanced_topics/env_mgmt
+  - file: content/advanced_topics/dask
 #- caption: Background and Training
 - caption: Open Science Resources
   chapters:
