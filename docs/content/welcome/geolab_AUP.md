@@ -6,7 +6,7 @@ The GeoLab JupyterHub environment provided by EarthScope is a **shared computing
 
 ## Acceptable Use and Resource Management
 
-- Users must use computational resources responsibly, ensuring fair access for all.
+- Users must use computational resources responsibly in order for EarthScope to ensure access for all.
 - Large computations should be scheduled appropriately; long-running jobs may be subject to termination if they impact system performance.
 - Idle sessions will be automatically terminated after a set period to free up resources.
 - The following activities are **strictly prohibited**:
@@ -34,7 +34,7 @@ The GeoLab JupyterHub environment provided by EarthScope is a **shared computing
 
 ## Responsible Collaboration and Conduct
 
-- All users must adhere to the [EarthScope Code of Conduct](geolab_CoC.md), ensuring respectful and inclusive communication.
+- All users must adhere to the [EarthScope Code of Conduct](geolab_CoC.md), ensuring respectful communication.
 - When working in shared notebooks, users should:
   - Clearly attribute code and data sources.
   - Maintain readability and documentation for collaborative work.

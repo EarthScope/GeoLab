@@ -10,7 +10,7 @@ The EarthScope Consortium is committed to fostering a safe, productive, and welc
 
 - Participants must adhere to the EarthScope Consortium Code of Conduct.
 - All EarthScope activities, regardless of delivery mode, are considered professional learning environments.
-- Respectful, inclusive, and courteous communication is expected at all times.
+- Respectful and courteous communication is expected at all times.
 - Participants must refrain from disruptive, offensive, or inappropriate behavior.
 - Professionalism is expected in all forms of interaction, whether verbal, written, or digital.
 
