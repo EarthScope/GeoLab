@@ -5,14 +5,25 @@ channels:
   - conda-forge
 
 dependencies:
-  # Packages required for image
-  # - jupyter_contrib_nbextensions
-
   # Packages required by ES
-  - pygmt
-  - obspy
   - tiledb
   - pip
   - pip:
-    - earthscope-sdk
-    - 'earthscopestraintools[mseed,tiledb,plotting]'
+    - awswrangler
+    - cvxpy
+    - dascore
+    - earthscope-sdk==1.0.0b1
+    - earthscope-cli==1.0.0b1
+    - earthscopestraintools
+    - hypoinvpy
+    - gnssrefl
+    - jupyter_contrib_nbextensions
+    - jupyterlab_jupyterbook_navigation
+    - jupyter-resource-usage
+    - obspy==1.4.1
+    - pygmt==0.14.2
+    - pynlloc
+    - pyocto
+    - pyrocko
+    - seisbench
+    - tensorflow
