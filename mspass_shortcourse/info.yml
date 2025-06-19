@@ -1,0 +1,5 @@
+description: "Earthscope MSPASS jupyter hub image"
+aboutText:
+  file: ./README.md
+usageText:
+  file: ./USAGE.md
