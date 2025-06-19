@@ -4,7 +4,6 @@ channels:
 - mspass
 
 dependencies:
-# - nodejs==15.*
 - nodejs
 - python==3.11.*
 - nbgitpuller=1.1.*
