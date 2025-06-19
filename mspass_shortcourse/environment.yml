@@ -1,0 +1,17 @@
+channels:
+- conda-forge
+# - cxwang #required for MSPASS?
+- mspass
+
+dependencies:
+# - nodejs==15.*
+# - nodejs
+- python==3.11.*
+# - python==3.10.*
+
+- jupyterlab
+- jupyterhub-singleuser>3.0,<4.0
+- nbgitpuller
+- ipympl
+- mspasspy 
+- pip

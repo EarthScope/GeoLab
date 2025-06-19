@@ -1,0 +1,49 @@
+# Environment we need *on top* of base PANGEO stack
+# Get list of pangeo packages from https://github.com/pangeo-data/pangeo-docker-images/blob/master/pangeo-notebook/packages.txt
+# BUT REMEMBER TO PICK THE HASH THAT CORRESPONDS TO OUR BASE IMAGE
+channels:
+  - conda-forge
+  - defaults
+  # - https://onyx.passcal.nmt.edu/legacy 
+
+
+dependencies:
+  # https://github.com/2i2c-org/hub-user-image-template/blob/main/environment.yml
+  # Packages required for image
+  - jupyterlab
+  - jupyterhub-singleuser>3.0,<4.0
+  # - notebook
+  # - jupyter_contrib_nbextensions==0.5.1
+  - nodejs
+  # Everyone wants to use nbgitpuller for everything, so let's do that
+  - nbgitpuller=1.1.*
+  - python=3.10
+  - gcc
+  - gfortran
+
+  # Packages required by ES
+  - git
+  - polars #required for API data access
+  - pygmt
+  - ipympl
+  - obspy
+  # - aurora>=0.4.2
+  - SimPEG
+  - mt-metadata>=0.3.9
+  - tiledb
+  - dill
+  - cmake
+  - ninja
+  - mkl-devel
+  - pkg-config
+  - pip
+  - pip:
+    - earthscope-sdk
+    - 'earthscopestraintools[mseed,tiledb,plotting]'
+    - aurora>=0.4.2
+    - mth5>=0.4.9
+    - mtpy-v2>=2.0.12
+    # - pymatsolver
+    # - jupyter-c-kernel
+    - pydiso
+    # - git+https://github.com/simpeg/pydiso.git
