@@ -4,14 +4,23 @@ channels:
 - mspass
 
 dependencies:
-# - nodejs==15.*
-# - nodejs
+- nodejs
 - python==3.11.*
-# - python==3.10.*
+- nbgitpuller=1.1.*
 
 - jupyterlab
 - jupyterhub-singleuser>3.0,<4.0
-- nbgitpuller
+- jupyter-server-proxy
+
 - ipympl
-- mspasspy 
+- pytest
+- mspasspy
+- pyarrow>14.0.1
 - pip
+- pip:
+  # - pymongo  #already included in mspass installation
+  - dask-labextension
+  - earthscope-sdk
+
+variables:
+  MSPASS_HOME: './srv/mpsass/'
