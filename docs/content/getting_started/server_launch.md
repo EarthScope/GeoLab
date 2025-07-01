@@ -1,34 +1,5 @@
 # Launching your Server
 
-## Select an Instance Size
-The Server Options page lets you select a computing environment tailored to your needs, ensuring you have the right resources for your projects.
-
-![Server](../img/Server.png)
-
-When selecting a server for your JupyterHub environment, it's important to choose a server instance that meets your computational needs without overcommitting resources. In order to keep operational costs low, we recommend that you start with the smallest server option available, and only move to a larger instance when you hit performance barriers. Below are the available server options along with their specifications and recommended use cases.
-
-```{dropdown} Shared Small Server
-The Shared Small server is a multi-user environment where up to four different users may be using the same machine, with resource allocation depending on their respective workloads. This is the most efficient compute configuration and is the recommended option for most users, especially for those starting out or working on less intensive tasks. 
-
-Use Cases:
-  - Initial development and testing
-  - Educational purposes
-  - Light to moderate data analysis
-```
-
-```{dropdown} Small Server (Dedicated)
-The Small server is a dedicated machine just for you. This option is suitable for users who need more computational power and memory for their projects. It ensures that you have consistent access to the allocated resources without competition from other users.
-
-Use Cases:
-  - More intensive data analysis and processing
-  - Running medium-sized machine learning models
-  - Projects requiring higher memory capacity
-```
-
-```{dropdown} Medium and Large Servers
-Medium and Large servers for more intensive projects are available by request, on a case-by-case basis. To request a larger server for your project, please email data-help@earthscope.org.
-```
-
 ## Select an Image
 Several pre-configured compute environments are available to choose from. Use the dropdowns below to select your initial configuration. Please see [Envrionment Management](../advanced_topics/env_mgmt.md) for more details on customizing your ephemeral server instance after launch, or bringing your own custom image.
 
@@ -63,6 +34,15 @@ Select 'Other' from the dropdown menu and specify the public URL of the containe
 
 See [Environment Management](../advanced_topics/env_mgmt.md) for more details on building your own image.
 ```
+
+
+## Select an Instance Size
+The Server Options page lets you allocate RAM and CPU tailored to your needs, ensuring you have the right resources for your projects.
+
+When selecting a server for your JupyterHub environment, it's important to choose a the minimum server size that meets your computational needs without overcommitting resources. In order to keep operational costs low, we recommend that you start with the smallest server option available, and only move to a larger instance when you hit performance barriers.
+
+Larger servers for more intensive projects are available by request, on a case-by-case basis. To request access to a larger server for your project, please email data-help@earthscope.org.
+
 
 ## Stopping Your Server and Logging Out
 
