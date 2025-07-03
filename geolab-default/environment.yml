@@ -12,7 +12,7 @@ dependencies:
     - awswrangler
     - cvxpy
     - dascore
-    - earthscope-sdk==1.0.0
+    - earthscope-sdk==1.1.0
     - earthscope-cli==1.0.0
     - earthscopestraintools
     - hypoinvpy
