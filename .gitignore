@@ -1,3 +1,8 @@
+# Local files from gitlab-ci-local runs
+.gitlab-ci-local
+*.env
+gitlab-ci
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
