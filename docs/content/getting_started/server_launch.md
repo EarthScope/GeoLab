@@ -56,7 +56,7 @@ The Server Options page lets you allocate RAM and CPU tailored to your needs, en
 When selecting a server for your JupyterHub environment, it is important to choose the minimum server size that meets your computational needs without overcommitting resources. In order to keep operational costs low, we recommend that you start with the smallest server option available, and only move to a larger instance when you hit performance barriers.
 
 ```{note}
-When [monitoring your resource usage](resource-monitor) you may see you are using more resources than what you requested in your server launch dropdown. This is not a mistake! The dropdown specifies the _minimum_ RAM and CPU that will be guaranteed to you. In many cases, you will be utilizing resources on a shared server. Depending on the workloads of other simultaneous users on the same server, extra available resources on that server may be allocated for your workload.
+ In many cases, you will be utilizing resources on a shared server. Depending on the workloads of other simultaneous users on the same server, resources may be allocated dynamically and you may experience variability in performance. 
 ```
 
 Larger servers for more intensive projects are available by request, on a case-by-case basis. To request access to a larger server for your project, please email data-help@earthscope.org.
