@@ -53,3 +53,10 @@ If any of the cloned git repositories in your file system contain JupyterBook do
 
 ### ![extension](../img/extension_icon.png) JupyterLab Extension Manager:
 There are many community-developed extensions for JupyterLab that you may wish to install in GeoLab. These can be managed here. 
+
+## Footer
+
+(resource-monitor)=
+### Resource Monitor
+Images with the jupyter-resource-usage extension installed allow you to view your resource utilization at the bottom status bar.
+![resource](../img/jupyter-resource-usage.png)
