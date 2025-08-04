@@ -21,7 +21,7 @@ COPY environment.yml /tmp/
 RUN mamba env update --name ${CONDA_ENV} -f /tmp/environment.yml \
     && pip cache purge \
     && mamba clean -afy
-RUN conda install awscli==2.27.0 jupyter-ai
+RUN conda install awscli==2.27.0
 RUN conda create -n passoft3 passoft -c https://onyx.passcal.nmt.edu/passcal -c conda-forge
 
 # Set up the start command 
