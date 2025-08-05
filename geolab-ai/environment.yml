@@ -26,5 +26,5 @@ dependencies:
     - pynlloc
     - pyocto
     - pyrocko
-    - seisbench==0.9.0
+    - seisbench
     - tensorflow
