@@ -1,3 +1,0 @@
-[submodule "srv/mspass"]
-	path = srv/mspass
-	url = https://github.com/mspass-team/mspass.git
