@@ -1,10 +1,14 @@
-# GeoLab Default Image 
 
-This repository specifies the user environment for the [EarthScope](https://www.earthscope.org/) [GeoLab hub](earthscope.2i2c.cloud) run in partnership with [2i2c](https://2i2c.org/).
+# EarthScope GeoLab Docker Images
 
-This repository also contains `/notebooks` to be run in GeoLab `/shared`.
+The images defined in this repository are reproducible computing environments developed for use by [EarthScope's Geolab JupyterHub](https://www.earthscope.org/data/geolab/). They build on top of the Ubuntu operating system and include [conda environments](https://conda.io/projects/conda) with a curated set of Python packages for geophysical data analysis. 
 
-TODO: We will add more text about use, environments and open-source contributions.
+More details can be found in [our documentation](https://docs.earthscope.org).
 
-This repo was inspired by [2i2c Coessing](https://github.com/2i2c-org/coessing-image/tree/main) project.
+Images are hosted on [AWS ECR](https://gallery.ecr.aws/earthscope-dev)
 
+| Image           | Description                                   |
+|-----------------|-----------------------------------------------|
+| geolab-default      | Foundational Dockerfile for builds. Includes earthscope authentication tools and foundational geophysics tools, inheriting base content from the [Pangeo Pytorch image](https://github.com/pangeo-data/pangeo-docker-images/tree/master)          |
+| mspass_shortcourse | Image containing the [MsPASS software](https://www.mspass.org/), built for the [MsPASS Technical ShortCourse](https://www.earthscope.org/event/using-mspass-for-data-processing-on-hpc-and-cloud-systems/)|
+| mt_shortcourse | Image developed for the [MagnetoTellurics ShortCourse](https://www.earthscope.org/event/2024-short-course-magnetotelluric-instrumentation-and-data-processing/) |
