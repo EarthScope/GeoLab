@@ -17,6 +17,7 @@ dependencies:
     - earthscopestraintools
     - hypoinvpy
     - gnssrefl
+    - jupyter-ai
     - jupyter_contrib_nbextensions
     - jupyterlab_jupyterbook_navigation
     - jupyter-resource-usage
@@ -25,5 +26,5 @@ dependencies:
     - pynlloc
     - pyocto
     - pyrocko
-    - seisbench
+    - seisbench==0.9.0
     - tensorflow
