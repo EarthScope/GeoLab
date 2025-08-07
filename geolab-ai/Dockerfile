@@ -2,9 +2,7 @@ FROM pangeo/pytorch-notebook:2025.01.24
 
 USER root
 ENV DEBIAN_FRONTEND=noninteractive
-ENV PATH ${NB_PYTHON_PREFIX}/bin:$PATH
-
-EXPOSE 8888
+ENV PATH=${NB_PYTHON_PREFIX}/bin:$PATH
 
 # Needed for apt-key to work, gcc compiler for 
 RUN apt-get update -qq --yes > /dev/null \
