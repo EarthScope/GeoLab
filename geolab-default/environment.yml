@@ -7,7 +7,7 @@ channels:
 dependencies:
   # Packages required by ES
   - tiledb
-  - pip
+  - pip==25.1.1
   - pip:
     - awswrangler
     - cvxpy
