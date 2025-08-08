@@ -1,4 +1,5 @@
-FROM pangeo/pytorch-notebook:2025.01.24
+# FROM pangeo/pytorch-notebook:2025.01.24
+FROM pangeo/pangeo-notebook:6f6de68
 
 USER root
 ENV DEBIAN_FRONTEND=noninteractive
@@ -21,8 +22,8 @@ COPY environment.yml /tmp/
 RUN mamba env update --name ${CONDA_ENV} -f /tmp/environment.yml \
     && pip cache purge \
     && mamba clean -afy
-RUN conda install awscli==2.27.0
-RUN conda create -n passoft3 passoft -c https://onyx.passcal.nmt.edu/passcal -c conda-forge
+# RUN conda install awscli==2.27.0
+# RUN conda create -n passoft3 passoft -c https://onyx.passcal.nmt.edu/passcal -c conda-forge
 
 # Set up the start command 
 USER ${NB_USER}
