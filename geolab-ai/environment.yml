@@ -9,6 +9,7 @@ dependencies:
   - tiledb
   - pip==25.1.1
   - pip:
+    - awscli==2.27.0
     - awswrangler
     - cvxpy
     - dascore
