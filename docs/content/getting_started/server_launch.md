@@ -53,13 +53,13 @@ See [Environment Management](../advanced_topics/env_mgmt.md) for more instructio
 ## Select your Resource Allocation
 The Server Options page lets you allocate RAM and CPU tailored to your needs, ensuring you have the right resources for your projects.
 
-When selecting a server for your JupyterHub environment, it is important to choose the minimum server size that meets your computational needs without overcommitting resources. In order to keep operational costs low, we recommend that you start with the smallest server option available, and only move to a larger instance when you hit performance barriers.
+When selecting a server for your JupyterHub environment, it is important to choose the minimum server instance size that meets your computational needs without overcommitting resources. In order to keep operational costs low, we recommend that you start with the smallest server option available, and only move to a larger instance when you encounter performance barriers.
 
 ```{note}
- In many cases, you will be utilizing resources on a shared server. Depending on the workloads of other simultaneous users on the same server, resources may be allocated dynamically and you may experience variability in performance. 
+ In many cases, you will be utilizing resources on a shared server to optimize cloud costs. You will be allocated, at minimum, the amount of RAM and CPU shown in black text. Depending on the workloads of other simultaneous users on the same server, additional CPU resources may be allocated to you automatically (up to the amount shown in gray text) and you may experience temporary boosts in performance. 
 ```
 
-Larger servers for more intensive projects are available by request, on a case-by-case basis. To request access to a larger server for your project, please email data-help@earthscope.org.
+Larger servers for more intensive projects, as well as servers offering GPU resources, are available on a case-by-case basis. To request access to a larger server for your project, please email data-help@earthscope.org.
 
 
 ## Stopping Your Server and Logging Out
