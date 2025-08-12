@@ -31,7 +31,7 @@ In some cases, short courses may use a custom image that is not available in the
 You can learn more about EarthScope's educational short course offerings [here.](https://www.earthscope.org/education/skill-building-learning/courses/)
 ```
 
-```{dropdown} Other - Custom Image
+```{dropdown} Other...
 
 GeoLab is compatible with many other custom compute environments that are configured to run in JupyterHub.
 
