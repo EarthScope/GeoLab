@@ -23,3 +23,4 @@ include:
 variables:
   CONTAINER_REGISTRY_PLATFORM: "AWS-PUB"
   DOCKERFILE_RELPATH_IS_IMAGE_NAME: "true"
+  GITLAB_HOSTED_RUNNER_SIZE: "saas-linux-medium-amd64"
