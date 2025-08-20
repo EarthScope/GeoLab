@@ -17,6 +17,7 @@ dependencies:
     - earthscopestraintools
     - hypoinvpy
     - gnssrefl
+    - jupyter-ai
     - jupyter_contrib_nbextensions
     - jupyterlab_jupyterbook_navigation
     - jupyter-resource-usage
