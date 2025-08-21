@@ -1,7 +1,7 @@
 # Launching your Server
 GeoLab offers several cloud server configurations. Use the menu options on this page to select your environment and resource configurations.
 
-![image](../img/server_options.png)
+![image](../img/Server_Options.png)
 
 ## Select an Environment
 Several pre-configured compute environments are available to choose from. Use the dropdowns below to select your initial configuration. Please see [Envrionment Management](../advanced_topics/env_mgmt.md) for more details on customizing your ephemeral server instance after launch, or bringing your own custom image.
@@ -10,7 +10,7 @@ Several pre-configured compute environments are available to choose from. Use th
 The default GeoLab image contains a variety of python packages to enable a broad range of geophyiscal data analysis.
 This image inherits all software in pangeo/pytorch_notebook, and includes additional support for EarthScope SDK/CLI and other geophysics tools. For a complete list of packages included in this image, see the GeoLab [github](https://github.com/EarthScope/GeoLab/tree/main/geolab-default).
 
-Note: If you believe we've missed a well-loved geophysical data analysis tool that should be included in this widely-used community image, please let us know by filling out the [Geolab Feedback Form]{{ geolab_feedback_form }}!
+Note: If you believe we've missed a well-loved geophysical data analysis tool that should be included in this widely-used community image, please let us know by filling out the [Geolab Feedback Form]{{ geolab_feedback_form }}!x
 ```
 
 ```{dropdown} Jupyter
