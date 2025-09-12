@@ -37,7 +37,9 @@ parts:
   chapters:
   - url: https://docs.earthscope.org/
     title: EarthScope Docs Home
-  # - url: https://docs.earthscope.org/projects/SDK-beta/
-  #   title: SDK-beta
-  - url: https://api.earthscope.org
+  - url: https://docs.earthscope.org/projects/API
     title: EarthScope API
+  - url: https://docs.earthscope.org/projects/CLI
+    title: EarthScope CLI
+  - url: https://docs.earthscope.org/projects/SDK
+    title: EarthScope SDK

@@ -4,7 +4,7 @@
 
 Once you have created an [EarthScope User](./register_es_user.md) account, you will need to fill out the [GeoLab Access Request form](https://support.center.earthscope.org/servicedesk/customer/portal/4/group/31/create/342)
 
-```{note} If you are signed up for one of the EarthScope Short Courses or Workshops that are using GeoLab for the course, this step is NOT necessary and access will be automatically granted.
+```{note} If you are registered for an EarthScope Short Course or Workshop that uses GeoLab, you _do_ need to create an EarthScope user account, but you _do not_ need to fill out the Access Request form.  Access will be automatically granted through the course enrollment.
 ```
 
 Once the form has been submitted, you will immediately receive an automated response acknowledging receipt of your Access Request form.
