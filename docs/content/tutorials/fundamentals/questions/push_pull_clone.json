@@ -1,0 +1,81 @@
+[
+    {
+               "question": "How do you copy a remote repository to work on it locally." ,
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "git clone https://github.com/anu/gnss_tools.git",
+                "correct": true,
+                "feedback": "Correct, clones a repository using the HTTPS protocol."
+            },
+            {
+                "answer": "git clone git@github.com:anu/gnss_tools.git",
+                "correct": true,
+                "feedback": "Correct, clones a repository using SSH protocol."
+            },
+            {
+                "answer": "git clone -b new_feature https://github.com/anu/gnss_tools.git",
+                "correct": true,
+                "feedback": "Correct, the -b flag clones a specific branch."
+            },
+            {
+                "answer": "git clone https://github.com/anu/gnss_tools",
+                "correct": false,
+                "feedback": "Incorrect, the URL is incomplete without a .git extension."                
+            },
+            {
+                "answer": "git clone https://github.com/anu/gnss_tools.git -b latest",
+                "correct": false,
+                "feedback": "Incorrect, command flags, -b, go before the URL."
+            }
+        ]
+    },
+    {
+        "question": "When you pull from a repository, what two actions happen?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "git fetch",
+                "correct": true,
+                "feedback": "Correct, pull fetches the files from the remote repository."
+            },
+            {
+                "answer": "git merge",
+                "correct": true,
+                "feedback": "Correct, files are merged into the local repository when fetched from the remote."
+            },
+            {
+                "answer": "git branch",
+                "correct": false,
+                "feedback": "Incorrect, a pull request remains in the same branch,"
+            },
+            {
+                "answer": "git commit",
+                "correct": false,
+                "feedback": "Incorrect, local files are only commited with the commit command."
+            },
+            {
+                "answer": "git add",
+                "correct": false,
+                "feedback": "Incorrect, local files are added only with the add command."
+            }
+
+        ]
+    },
+    {
+        "question": "git push -u origin main, makes code on a public repository available to others.",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "true",
+                "correct": true,
+                "feedback": "Correct, push copies commits from the local repository to the remote repository."
+            },
+            {
+                "answer": "false",
+                "correct": false,
+                "feedback": "Incorrect, code is available on public repository. "
+            }
+        ]
+    }
+]

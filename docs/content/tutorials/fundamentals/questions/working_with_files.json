@@ -1,0 +1,89 @@
+[
+    {
+        "question": "How many characters should be used to refer to a commit?" ,
+        "type": "numeric",
+        "answers": [
+            {
+                "type": "range",
+                "range": [8, 10],
+                "correct": true,
+                "feedback": "A minimum of the first 8 to 10 characters is sufficiently unique."
+            },
+            {
+                "type": "range",
+                "range": [1, 7],
+                "correct": false,
+                "feedback": "Too few characters to guarantee uniqueness."
+            },
+            {
+                "type": "range",
+                "range": [11, 100000000],
+                "correct": true,
+                "feedback": "This is will work but it is unnecessarily large."
+            }
+        ]
+
+    },
+    {
+        "question": "What happens when you commit?" ,
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "The project is saved at the point in time.",
+                "correct": true,
+                "feedback": "Correct."
+            },
+            {
+                "answer": "Code is added to the repository and tracked.",
+                "correct": false,
+                "feedback": "git add tracks files in the repository."
+            },
+            {
+                "answer": "The project is saved in GitHub.",
+                "correct": false,
+                "feedback": "git push saves a project to GitHub."
+            },
+            {
+                "answer": "Previous code is deleted.",
+                "correct": false,
+                "feedback": "Commits save code at a point in time, previous code is not deleted."                
+            },
+            {
+                "answer": "All deleted files are permanently removed from the repository.",
+                "correct": false,
+                "feedback": "Deleted files are retained in previous commits."
+            }
+        ]
+    },
+    {
+        "question": "After adding to the README file, you decide that the change was unnecessary. What do you do to return to the previous README?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "git revert add27a78368",
+                "correct": true,
+                "feedback": "git revert returns a file to previous commit."
+            },
+            {
+                "answer": "git rm README.md",
+                "correct": false,
+                "feedback": "This deletes the README file."
+            },
+            {
+                "answer": "Edit the README and git add and commit.",
+                "correct": true,
+                "feedback": "This is works but is inefficient."
+            },
+            {
+                "answer": "git fix add27a78368",
+                "correct": false,
+                "feedback": "git fix is not a command."                
+            },
+            {
+                "answer": "git reset add27a78368",
+                "correct": false,
+                "feedback": "git reset deletes commits after and including the commit "
+            }
+        ]
+    }
+]
