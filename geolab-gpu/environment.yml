@@ -1,0 +1,29 @@
+# Environment we need *on top* of base PANGEO stack
+# Get list of pangeo packages from https://github.com/pangeo-data/pangeo-docker-images/blob/master/pangeo-notebook/packages.txt
+# BUT REMEMBER TO PICK THE HASH THAT CORRESPONDS TO OUR BASE IMAGE
+channels:
+  - conda-forge
+
+dependencies:
+  # Packages required by ES
+  - tiledb
+  - pip
+  - pip:
+    - awswrangler
+    - cvxpy
+    - dascore
+    - earthscope-sdk==1.2.0b0
+    - earthscope-cli==1.0.1
+    - earthscopestraintools
+    - hypoinvpy
+    - gnssrefl
+    - jupyter_contrib_nbextensions
+    - jupyterlab_jupyterbook_navigation
+    - jupyter-resource-usage
+    - obspy==1.4.1
+    - pygmt==0.14.2
+    - pynlloc
+    - pyocto
+    - pyrocko
+    - seisbench
+    - tensorflow
