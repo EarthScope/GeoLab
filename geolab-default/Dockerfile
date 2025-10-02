@@ -1,4 +1,4 @@
-FROM pangeo/pytorch-notebook:2025.01.24
+FROM pangeo/base-notebook:2025.08.14
 
 USER root
 ENV DEBIAN_FRONTEND=noninteractive
