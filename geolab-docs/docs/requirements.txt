@@ -1,0 +1,4 @@
+jupyter-book
+matplotlib
+numpy
+sphinx == 6.2.1

@@ -16,7 +16,8 @@ include:
       - when: never
 
 .images_matrix:
-  - DOCKERFILE_RELPATH: "geolab-default"
+  - DOCKERFILE_RELPATH: "geolab-docs"
+  # - DOCKERFILE_RELPATH: "geolab-default"
   # - DOCKERFILE_RELPATH: "mspass_shortcourse"
   # - DOCKERFILE_RELPATH: "mt_shortcourse"
 
