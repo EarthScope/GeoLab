@@ -17,7 +17,7 @@ RUN apt-get update -qq --yes > /dev/null \
 USER ${NB_USER}
 
 COPY environment.yml /tmp/
-COPY docs /home/jovyan/
+COPY docs /home/jovyan/docs
 
 RUN mamba env update --name ${CONDA_ENV} -f /tmp/environment.yml \
     && pip cache purge \
