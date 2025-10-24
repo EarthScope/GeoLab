@@ -11,7 +11,7 @@ ENV DISPLAY=":1.0"
 # Setup Linux Desktop
 # RUN /opt/setup-scripts/setup-linux-desktop.bash
 ## Move everything from the setup scrip to this Dockerfile
-RUN set -exuo pipefail
+# RUN set -exuo pipefail
 # Requirements:
 # - Run as the root user
 
