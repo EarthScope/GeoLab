@@ -9,7 +9,7 @@ COPY setup-scripts /opt/setup-scripts/
 ENV DISPLAY=":1.0"
 
 # Setup Linux Desktop
-RUN /opt/setup-scripts/setup-linux-desktop.bash
+RUN sudo /opt/setup-scripts/setup-linux-desktop.bash
 
 COPY startup-scripts /usr/local/bin/start-notebook.d/
 
