@@ -1,4 +1,4 @@
-FROM quay.io/jupyter/minimal-notebook:2024-06-24
+FROM pangeo/base-notebook
 
 USER root
 
@@ -58,6 +58,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 RUN fix-permissions "${CONDA_DIR}"
 RUN fix-permissions "/home/${NB_USER}"
+
 
 COPY startup-scripts /usr/local/bin/start-notebook.d/
 
