@@ -21,11 +21,13 @@ dependencies:
     - jupyterlab_jupyterbook_navigation
     - jupyter-remote-desktop-proxy
     - jupyter-resource-usage
+    - jupyter-server-proxy
     # - jupyterhub<5.0.0
+    - nbgitpuller
     - obspy==1.4.1
     # - pydantic<2.0
     - pygmt==0.14.2
     - pynlloc
     - pyocto
     - pyrocko
-    
+    - websockify

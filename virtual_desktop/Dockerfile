@@ -51,17 +51,13 @@ RUN rm -rf /var/lib/apt/lists/*
 # websockify and jupyter-server-proxy available from conda-forge, but
 # jupyter-remote-desktop-proxy is not.
 # Temporarily install nbgitpuller too, while we work on getting it upstream
-RUN mamba install -c conda-forge --yes \
-      websockify \
-      jupyter-server-proxy \
-      nbgitpuller
+# RUN mamba install -c conda-forge --yes \
+#       websockify \
+#       jupyter-server-proxy \
+#       nbgitpuller
 
 RUN fix-permissions "${CONDA_DIR}"
 RUN fix-permissions "/home/${NB_USER}"
-
-
-
-
 
 COPY startup-scripts /usr/local/bin/start-notebook.d/
 
