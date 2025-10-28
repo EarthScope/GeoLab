@@ -2,7 +2,8 @@ FROM pangeo/base-notebook
 
 USER root
 
-COPY setup-scripts /opt/setup-scripts/
+COPY setup-scripts/setup-linux-desktop.bash /opt/setup-scripts/setup-linux-desktop.bash
+COPY setup-scripts/fix-permissions.bash /usr/local/bin/fix-permissions.bash
 
 # Set DISPLAY env variable, so processes know where to open GUI windows.
 # Allows python processes running in notebooks to open windows in the GUI.
@@ -10,6 +11,7 @@ ENV DISPLAY=":1.0"
 
 # Setup Linux Desktop
 RUN chmod a+x /opt/setup-scripts/setup-linux-desktop.bash
+RUN chmod a+x /usr/local/bin/fix-permissions.bash
 RUN /opt/setup-scripts/setup-linux-desktop.bash
 
 COPY startup-scripts /usr/local/bin/start-notebook.d/
