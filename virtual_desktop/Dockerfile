@@ -11,10 +11,10 @@ ENV DISPLAY=":1.0"
 
 # Setup Linux Desktop
 RUN chmod a+x /opt/setup-scripts/setup-linux-desktop.bash
-RUN chmod a+x /usr/local/bin/fix-permissions.bash
+RUN chmod a+rx /usr/local/bin/fix-permissions.bash
 RUN /opt/setup-scripts/setup-linux-desktop.bash
-RUN /usr/local/bin/fix-permissions.bash "${CONDA_DIR}"
-RUN /usr/local/bin/fix-permissions.bash "/home/${NB_USER}"
+# RUN /usr/local/bin/fix-permissions.bash "${CONDA_DIR}"
+# RUN /usr/local/bin/fix-permissions.bash "/home/${NB_USER}"
 
 COPY startup-scripts /usr/local/bin/start-notebook.d/
 
@@ -24,7 +24,7 @@ ENV DESKTOP_FILES_DIR /opt/desktop-files
 ENV MIME_FILES_DIR /opt/mime-files
 RUN mkdir -p ${DESKTOP_FILES_DIR} ${MIME_FILES_DIR}
 
-USER ${NB_UID}
+USER ${NB_USER}
 
 COPY environment.yml /tmp/
 
