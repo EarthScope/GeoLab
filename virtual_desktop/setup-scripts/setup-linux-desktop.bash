@@ -44,5 +44,5 @@ mamba install -c conda-forge --yes \
       jupyter-server-proxy \
       nbgitpuller
 
-fix-permissions "${CONDA_DIR}"
-fix-permissions "/home/${NB_USER}"
+/usr/local/bin/fix-permissions.bash "${CONDA_DIR}"
+/usr/local/bin/fix-permissions.bash "/home/${NB_USER}"

@@ -13,6 +13,8 @@ ENV DISPLAY=":1.0"
 RUN chmod a+x /opt/setup-scripts/setup-linux-desktop.bash
 RUN chmod a+x /usr/local/bin/fix-permissions.bash
 RUN /opt/setup-scripts/setup-linux-desktop.bash
+RUN /usr/local/bin/fix-permissions.bash "${CONDA_DIR}"
+RUN /usr/local/bin/fix-permissions.bash "/home/${NB_USER}"
 
 COPY startup-scripts /usr/local/bin/start-notebook.d/
 
