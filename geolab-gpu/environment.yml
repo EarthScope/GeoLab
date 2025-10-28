@@ -21,6 +21,7 @@ dependencies:
     - jupyterlab_jupyterbook_navigation
     - jupyter-resource-usage
     - obspy==1.4.1
+    - polars[gpu] --extra-index-url=https://pypi.nvidia.com
     - pygmt==0.14.2
     - pynlloc
     - pyocto
