@@ -17,6 +17,7 @@ include:
 
 .images_matrix:
   - DOCKERFILE_RELPATH: "geolab-default"
+  - DOCKERFILE_RELPATH: "geolab-gpu"
   # - DOCKERFILE_RELPATH: "mspass_shortcourse"
   # - DOCKERFILE_RELPATH: "mt_shortcourse"
 
@@ -24,3 +25,4 @@ variables:
   CONTAINER_REGISTRY_PLATFORM: "AWS-PUB"
   DOCKERFILE_RELPATH_IS_IMAGE_NAME: "true"
   GITLAB_HOSTED_RUNNER_SIZE: "saas-linux-medium-amd64"
+  USE_TIMESTAMP_VERSION: "true"
