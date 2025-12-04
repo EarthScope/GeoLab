@@ -28,6 +28,19 @@ ENV MIME_FILES_DIR=/opt/mime-files
 
 RUN mkdir -p ${DESKTOP_FILES_DIR} ${MIME_FILES_DIR}
 
+#install GMT
+RUN apt-get update -qq --yes > /dev/null \
+    && apt-get install --yes -qq gnupg2 > /dev/null \
+    && apt-get install gcc --yes \
+    && apt-get install gfortran --yes \
+    && apt-get install g++ --yes \
+    && apt-get install make \
+    && apt-get install ftp --yes \
+    # && apt-get install gmt gmt-dcw gmt-gshhg --yes\
+    # && apt-get install gedit --yes \
+    # && apt-get install man-db --yes \
+    && apt-get clean
+
 USER ${NB_UID}
 
 # Pin jupyterhub and pydantic to older version

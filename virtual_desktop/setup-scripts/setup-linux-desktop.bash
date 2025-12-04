@@ -4,7 +4,7 @@ set -exuo pipefail
 # - Run as the root user
 
 # Install baseline packages to get X and xfce working
-apt-get update -qq --yes > /dev/null
+apt-get update -qq --yes > /dev/null 
 apt-get install --yes --no-install-recommends -qq \
     xfce4 \
     xorg \
@@ -31,6 +31,12 @@ add-apt-repository ppa:mozillateam/ppa
 # Install Firefox from the PPA explicitly
 apt-get update -qq --yes > /dev/null
 apt-get install -qq --yes -t 'o=LP-PPA-mozillateam' --yes firefox
+
+#install GMT
+apt-get install gmt gmt-dcw gmt-gshhg --yes
+apt-get install gedit --yes
+apt-get install man-db --yes
+
 
 # Cleanup apt-get update side effects
 rm -rf /var/lib/apt/lists/*
