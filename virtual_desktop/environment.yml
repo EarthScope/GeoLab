@@ -18,7 +18,7 @@ dependencies:
     - hypoinvpy
     - gnssrefl
     - jupyter_contrib_nbextensions
-    - jupyterlab_jupyterbook_navigation
+    # - jupyterlab_jupyterbook_navigation
     - jupyter-remote-desktop-proxy
     - jupyter-resource-usage
     - jupyter-server-proxy
