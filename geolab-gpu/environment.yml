@@ -10,6 +10,7 @@ dependencies:
   - pip
   - pip:
     - awswrangler
+    - cvxpy
     - dascore
     - earthscope-sdk==1.2.0b1
     - earthscope-cli==1.0.1
@@ -20,8 +21,10 @@ dependencies:
     - jupyterlab_jupyterbook_navigation
     - jupyter-resource-usage
     - obspy==1.4.1
-    - polars
+    - polars[gpu] --extra-index-url=https://pypi.nvidia.com
     - pygmt==0.14.2
     - pynlloc
     - pyocto
     - pyrocko
+    - seisbench
+    - tensorflow
