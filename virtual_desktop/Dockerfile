@@ -1,4 +1,4 @@
-FROM public.ecr.aws/earthscope-dev/geolab/geolab-default:default_pytorch_split-f59cda68 AS stage 
+FROM public.ecr.aws/earthscope-dev/geolab/geolab-default:agu_wkshp-dc9cd124 AS stage 
 
 ENV NB_GID=1000
 
