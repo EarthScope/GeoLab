@@ -11,7 +11,7 @@ dependencies:
   - pip:
     - awswrangler
     - dascore
-    - earthscope-sdk==1.2.0b1
+    - earthscope-sdk[arrow]==1.2.0b1
     - earthscope-cli==1.0.1
     - earthscopestraintools
     - hypoinvpy
