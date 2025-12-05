@@ -1,4 +1,4 @@
-FROM pangeo/base-notebook:2025.08.14
+FROM pangeo/pangeo-notebook:2025.11.13
 
 USER root
 ENV DEBIAN_FRONTEND=noninteractive
