@@ -13,6 +13,10 @@ This image inherits all software in pangeo/pytorch_notebook, and includes additi
 Note: If you believe we've missed a well-loved geophysical data analysis tool that should be included in this widely-used community image, please let us know by filling out the [Geolab Feedback Form]{{ geolab_feedback_form }}!
 ```
 
+```{dropdown} SeaFloor Geodesy
+This image is specifically intended for users to process GNSS-A/Seafloor Geodesy data.  It is built on Ubuntu 20.04, and contains a set of software packages to support translation and processing of GNSS-A data collected on SV3 wavegliders.  These packages include PRIDE-PPPAR for kinematic positioning of the waveglider and GARPOS for computing seafloor positions.  It also contains an EarthScope python package es-sfgtools under development to streamline data and metadata access and drive the workflows needed to process these data.  For more information, see the es-sfgtools documentation [here.](https://es-sfgtools.readthedocs.io/en/latest/index.html)
+```
+
 ```{dropdown} Jupyter
 The Jupyter image is a minimalist default configuration available to all JupyterHubs. This Environment does not have geophysics-specific tools and offers limited scientific computing tools. This environment is appropriate for very introductory python learning modules, or as a 'clean' base to build from. 
 ```
