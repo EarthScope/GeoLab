@@ -39,6 +39,7 @@ RUN apt-get update -qq --yes > /dev/null \
     # && apt-get install gmt gmt-dcw gmt-gshhg --yes\
     # && apt-get install gedit --yes \
     # && apt-get install man-db --yes \
+    # && apt-get install taup \
     && apt-get clean
 
 USER ${NB_UID}

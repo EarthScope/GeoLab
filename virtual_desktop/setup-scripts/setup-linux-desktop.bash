@@ -37,6 +37,11 @@ apt-get install gmt gmt-dcw gmt-gshhg --yes
 apt-get install gedit --yes
 apt-get install man-db --yes
 
+#install java and taup
+apt-get install -y openjdk-11-jre-headless
+wget https://zenodo.org/records/16884103/files/TauP-3.1.0.zip
+unzip TauP-3.1.0.zip
+export PATH="$PATH:TauP-3.1.0/bin"
 
 # Cleanup apt-get update side effects
 rm -rf /var/lib/apt/lists/*
