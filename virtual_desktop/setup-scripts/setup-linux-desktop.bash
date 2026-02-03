@@ -55,6 +55,6 @@ mamba install -c conda-forge --yes \
 #install java and taup
 WORKDIR= /opt
 apt-get install -y openjdk-11-jre-headless
-wget https://zenodo.org/records/16884103/files/TauP-3.1.0.zip 
-unzip TauP-3.1.0.zip
-export PATH="$PATH:TauP-3.1.0/bin"
+wget -P /opt/TauP-3.1.0.zip https://zenodo.org/records/16884103/files/TauP-3.1.0.zip 
+unzip /opt/TauP-3.1.0.zip
+export PATH="$PATH:/opt/TauP-3.1.0/bin"
