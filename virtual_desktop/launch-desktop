@@ -1,0 +1,24 @@
+#!/bin/bash
+export USER=${USER:-jovyan}
+export HOME=${HOME:-/home/jovyan}
+
+echo "================================================"
+echo "Desktop Launcher"
+echo "================================================"
+
+if [ -S /tmp/.X11-unix/X1 ]; then
+    echo "✓ Desktop is already running"
+    echo ""
+    echo "Access at: /desktop/ in JupyterLab"
+else
+    echo "Starting desktop..."
+    /usr/local/bin/start-desktop.sh &
+    sleep 5
+    echo ""
+    echo "✓ Desktop started!"
+    echo ""
+    echo "Access methods:"
+    echo "  1. Click 'Desktop' icon in JupyterLab launcher"
+    echo "  2. Navigate to /desktop/ in your browser"
+fi
+echo "================================================"

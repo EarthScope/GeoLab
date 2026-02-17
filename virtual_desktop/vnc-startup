@@ -1,0 +1,17 @@
+#!/bin/bash
+export USER=${USER:-jovyan}
+export HOME=${HOME:-/home/jovyan}
+export DISPLAY=:1
+
+# Kill any existing VNC server
+vncserver -kill :1 2>/dev/null || true
+sleep 1
+
+# Start VNC server
+vncserver :1 -geometry 1920x1080 -depth 24 -localhost no
+
+# Wait for it to start
+sleep 3
+
+# Return success
+exit 0
