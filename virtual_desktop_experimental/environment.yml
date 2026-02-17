@@ -1,7 +1,0 @@
-channels:
-  - conda-forge
-dependencies:
-  - jupyter-server-proxy>=4.3.0
-  - jupyter-remote-desktop-proxy
-  - jupyterhub-singleuser
-  - pip

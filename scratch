@@ -1,0 +1,6 @@
+docker pull aws_account_id.dkr.ecr.us-west-2.amazonaws.com/amazonlinux:latest
+
+
+docker pull 599637926940.dkr.ecr.us-east-2.amazonaws.com/earthscope/geolab/geolab-default:2025-12-15-202605
+
+docker pull public.ecr.aws/earthscope/geolab/geolab-default:2025-12-15-202605

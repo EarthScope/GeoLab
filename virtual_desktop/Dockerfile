@@ -1,6 +1,4 @@
-# for local builds use geolab-default
-FROM geolab-local AS stage
-# FROM public.ecr.aws/earthscope-dev/geolab/geolab-default:agu_wkshp-dc9cd124 
+FROM public.ecr.aws/earthscope-dev/geolab/geolab-default:agu_wkshp-dc9cd124 
 
 ENV NB_GID=100
 USER root

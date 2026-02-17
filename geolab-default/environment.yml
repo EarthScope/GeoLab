@@ -8,6 +8,7 @@ dependencies:
   # Packages required by ES
   - tiledb
   - pip
+  - setuptools
   - pip:
     - awswrangler
     - dascore
@@ -21,7 +22,6 @@ dependencies:
     - jupyter-resource-usage
     - obspy==1.4.1
     - polars
-    - pygmt==0.14.2
     - pynlloc
     - pyocto
     - pyrocko
