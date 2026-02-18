@@ -18,6 +18,7 @@ parts:
   - file: content/getting_started/register_es_user
   - file: content/getting_started/register_geolab_access
   - file: content/getting_started/server_launch
+  - file: content/getting_started/user_storage
   # - file: content/getting_started/hub_best_practices
 - caption: Navigate GeoLab
   chapters:
