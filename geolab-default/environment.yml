@@ -21,7 +21,6 @@ dependencies:
     - jupyter-resource-usage
     - obspy==1.4.1
     - polars
-    - pygmt==0.14.2
     - pymseed
     - pynlloc
     - pyocto
