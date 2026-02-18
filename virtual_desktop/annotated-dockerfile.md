@@ -2,23 +2,6 @@
 
 This Dockerfile creates a JupyterLab environment with an embedded VNC desktop for scientific computing and visualization.
 
-The virtual desktop in JupyterLab is created through a stack of interconnected components working together. At the lowest level, Xvfb (X Virtual Framebuffer) acts as a virtual display server, creating an in-memory representation of a graphical screen without needing actual display hardware—essentially rendering pixels to RAM instead of a monitor.
-
-Running on top of this virtual display is XFCE4, a lightweight desktop environment that provides the window manager, panels, menus, and application launcher you'd expect from a graphical interface. 
-
-The TigerVNC server then connects to this virtual X display and captures everything being rendered, encoding it into the VNC protocol format and listening on port 5901 for client connections.
-
-To make this accessible through a web browser, noVNC acts as an HTML5 VNC client that can run entirely in JavaScript. Websockify serves as a protocol translator, converting between the TCP-based VNC protocol and WebSockets that browsers can communicate with.
-
-The JupyterLab integration happens through two Python extensions:
-
-- the jupyter-server-proxy creates HTTP endpoints that proxies requests to other services running in the container (like the VNC server). It tunnels the desktop traffic through JupyterLab's web server on port 8888,  
-- jupyter-remote-desktop-proxy specifically configures the proxy for VNC connections while adding the "Desktop" launcher button to the JupyterLab interface.
-
-When you click that launcher, your browser opens an iframe that loads noVNC. It establishes a WebSocket connection back through jupyter-server-proxy to websockify, which then connects to TigerVNC, which is capturing the XFCE4 desktop running on the Xvfb virtual display.
-
-This entire chain allows bidirectional communication—your mouse clicks and keyboard input flow from browser → noVNC → websockify → TigerVNC → Xvfb → XFCE4, while the visual output flows back in reverse, creating a fully interactive desktop experience within your browser tab.
-
 ## Stage 1: Base Image and Initial Setup
 
 ### Base Image
