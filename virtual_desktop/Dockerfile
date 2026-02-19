@@ -25,7 +25,7 @@ RUN conda install -c conda-forge --yes gmt pygmt
 WORKDIR /opt
 RUN wget -P /opt/ https://zenodo.org/records/16884103/files/TauP-3.1.0.zip \
     && unzip /opt/TauP-3.1.0.zip \
-    &&  echo 'export PATH=$PATH:/opt/TauP-3.1.0/bin'  >> ~/.bashrc \
+    &&  echo 'export PATH=$PATH:/opt/TauP-3.1.0/bin'  >> /etc/profile \
     && rm /opt/TauP-3.1.0.zip
 
 # Dockerfile for JupyterLab with Embedded VNC Desktop
