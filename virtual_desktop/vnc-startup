@@ -11,7 +11,7 @@ sleep 1
 vncserver :1 -geometry 1920x1080 -depth 24 -localhost no
 
 # Wait for it to start
-sleep 3
+sleep 5
 
 # Return success
 exit 0

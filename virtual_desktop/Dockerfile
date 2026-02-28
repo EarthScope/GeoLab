@@ -1,10 +1,10 @@
-FROM public.ecr.aws/earthscope-dev/geolab/geolab-default:agu_wkshp-dc9cd124 AS stage
+FROM pangeo/pangeo-notebook AS stage
 
 ENV NB_GID=100
 USER root
 
 # temporary fix
-RUN pip uninstall --yes pygmt 
+# RUN pip uninstall --yes pygmt 
 
 #install packages
 RUN apt-get update -qq --yes > /dev/null \
@@ -13,13 +13,14 @@ RUN apt-get update -qq --yes > /dev/null \
     && apt-get install man-db --yes \
     && apt-get install openjdk-11-jre-headless --yes \
     && apt-get install xdg-utils --yes \
+    && apt-get install libsqlite3-0 --yes \
     && apt-get clean
 
 # unminimize to install man-db
 RUN yes | unminimize
 
 #install gmt and pygmt from conda-forge
-RUN conda install -c conda-forge --yes gmt pygmt 
+RUN conda install -c conda-forge --yes gmt==6.6.0 pygmt 
 
 # install taup
 WORKDIR /opt
@@ -49,6 +50,22 @@ ENV DEBIAN_FRONTEND=noninteractive \
     DISPLAY=:1 \
     VNC_PORT=5901 \
     RESOLUTION=1920x1080
+
+# Install Firefox and its dependencies
+# https://support.mozilla.org/en-US/kb/install-firefox-linux
+# https://www.mozilla.org/en-US/firefox/117.0/system-requirements/
+RUN install -d -m 0755 /etc/apt/keyrings \
+    && wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null \
+    && gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nThe key fingerprint matches ("$0").\n"; else print "\nVerification failed: the fingerprint ("$0") does not match the expected one.\n"}' \
+    && echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null \
+    && echo 'Package: *\nPin: origin packages.mozilla.org\nPin-Priority: 1000' | tee /etc/apt/preferences.d/mozilla \
+    && apt-get update && apt-get install -y --no-install-recommends \
+        libpci-dev \
+        libcanberra-gtk3-module \
+        libgles2-mesa-dev \
+        dbus-x11 \
+        firefox \
+    && apt-get clean
 
 # Install system packages
 RUN apt-get update && apt-get install -y \
