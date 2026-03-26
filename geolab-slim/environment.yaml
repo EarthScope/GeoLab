@@ -1,0 +1,58 @@
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.13
+  # --- Cloud & storage ---
+  - awscli
+  - awswrangler
+  - boto3
+  - obstore
+  # --- Geospatial ---
+  - cartopy
+  - contextily
+  - folium
+  - gdal
+  # --- Array / data ---
+  - bottleneck
+  - flox
+  - numpy
+  - pandas
+  - pyarrow
+  - xarray
+  - xarrayutils
+  # --- Machine learning ---
+  - dask
+  # --- Visualization ---
+  - ipympl
+  - panel
+  - ghostscript
+  - ffmpeg
+  # --- Jupyter & dev tools ---
+  - gh
+  - gh-scoped-creds
+  - ipykernel
+  - jupyter_contrib_nbextensions
+  - jupyter-resource-usage
+  - jupyter-ruff
+  - jupyterlab-git
+  - jupyterlab-myst
+  - pytest
+  - ruff
+  # --- Geophysics ---
+  - cvxpy
+  - dascore
+  - obspy
+  - obsplus
+  - gmt
+  - pygmt
+  - pip
+  - pip:
+    - earthscope-sdk==1.1.0
+    - earthscope-cli==1.0.0
+    - earthscopestraintools
+    - gnssrefl
+    - hypoinvpy
+    - jupyterlab-jupyterbook_navigation
+    - pynlloc
+    - pyocto
