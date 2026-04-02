@@ -1,0 +1,127 @@
+[
+    {
+        "question": "How do you copy a remote repository to work on it locally." ,
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "git clone https://github.com/anu/gnss_tools.git",
+                "correct": true,
+                "feedback": "Correct, clones a repository using the HTTPS protocol."
+            },
+            {
+                "answer": "git clone git@github.com:anu/gnss_tools.git",
+                "correct": true,
+                "feedback": "Correct, clones a repository using SSH protocol."
+            },
+            {
+                "answer": "git clone -b new_feature https://github.com/anu/gnss_tools.git",
+                "correct": true,
+                "feedback": "Correct, the -b flag clones a specific branch."
+            },
+            {
+                "answer": "git clone https://github.com/anu/gnss_tools",
+                "correct": false,
+                "feedback": "Incorrect, the URL is incomplete without a .git extension."                
+            },
+            {
+                "answer": "git clone https://github.com/anu/gnss_tools.git -b latest",
+                "correct": false,
+                "feedback": "Incorrect, command flags, -b, go before the URL."
+            }
+        ]
+    },
+    {
+        "question": "What is the first thing to do when creating a repository?" ,
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "mkdir project_name",
+                "correct": true,
+                "feedback": "Correct."
+            },
+                        {
+                "answer": "git init",
+                "correct": false,
+                "feedback": "You must be in the project directory to create a repository."
+            },
+                        {
+                "answer": "git status",
+                "correct": false,
+                "feedback": "The repository has to be created before checking status."
+            },
+                        {
+                "answer": "git add .",
+                "correct": false,
+                "feedback": "The repository must be created before addin files."                
+            },
+                        {
+                "answer": "cd project_name",
+                "correct": false,
+                "feedback": "You must create the project directory first."
+            }
+        ]
+
+    },
+    {
+        "question": "Select the commands to add files to the repository.",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "git add .",
+                "correct": true,
+                "feedback": "Correct, you can add multiple files."
+            },
+            {
+                "answer": "git add file_name",
+                "correct": true,
+                "feedback": "Correct, you can add a single file."
+            },
+            {
+                "answer": "git put file_name",
+                "correct": false,
+                "feedback": "Incorrect, put is not a command."
+            },
+            {
+                "answer": "git install file_name",
+                "correct": false,
+                "feedback": "Incorrect, install is not a command."
+            },
+            {
+                "answer": "git put .",
+                "correct": false,
+                "feedback": "Incorrect, put is not a command."
+            }
+        ]
+    },
+    {
+        "question": "What does `git init` do? Select all that apply.",
+        "type" : "many_choice",
+        "answers": [
+            {
+                "answer": "Create a .git directory",
+                "correct": true,
+                "feedback": "Correct."
+            },
+            {
+                "answer": "Create files and directories for tracking project files.",
+                "correct": true,
+                "feedback": "Correct."
+            },
+            {
+                "answer": "Creates a remote repository on GitHub.",
+                "correct": false,
+                "feedback": "It creates a local repository on your computer."
+            },
+            {
+                "answer": "Configures your user name and email.",
+                "correct": false,
+                "feedback": "git config sets these parameters"
+            },
+            {
+                "answer": "Adds existing files to the repository.",
+                "correct": false,
+                "feedback": "git add is the command to add files to the repository."
+            }
+        ]
+    }
+]
