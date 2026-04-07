@@ -1,0 +1,69 @@
+[
+    {
+        "question": "What are the ways to get an authorization token?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Use the EarthScope CLI.",
+                "correct": true,
+                "feedback": "Correct, you can use the EarthScope CLI can request an authorization token."
+            },
+            {
+                "answer": "Programatically with the EarthScope SDK.",
+                "correct": true,
+                "feedback": "Correct, the Python package, earthscope-sdk, can request an authorization token."
+            },
+            {
+                "answer": "Email EarthScope to request an token.",
+                "correct": false,
+                "feedback": "Incorrect, EarthScope does not issue tokens by email."
+            },
+            {
+                "answer": "The token is optional.",
+                "correct": false,
+                "feedback": "Incorrect, an authorization token is needed to request data from EarthScope services."
+            },
+            {
+                "answer": "You can generate a token using programs, such as ssh-keygen.",
+                "correct": false,
+                "feedback": "Incorrect, the token must come from EarthScope and cannot be create locally."
+            }
+        ]
+    },
+    {
+        "question": "Where is the token stored in GeoLab?",
+        "type": "string",
+        "answers": [
+            {
+                "answer": "/home/jovyan/.earthscope/default",
+                "correct": true,
+                "feedback": "Correct. The token is stored in a hidden directory in the home directory.",
+                "match_case": true,
+                "fuzzy_threshold": 1.0
+            },
+            {
+                "answer": "$HOME/.earthscope/default",
+                "correct": true,
+                "feedback": "Correct. The token is stored in a hidden directory. You can use the HOME environment variable instead of the full path.",
+                "match_case": true,
+                "fuzzy_threshold": 1.0
+            }
+        ]
+    },
+    {
+        "question": "For all current and future EarthScope data services, an authorization token is necessary",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "True",
+                "correct": false,
+                "feedback": "Incorrect, the AWS Open Data program does not require a token."
+            },
+            {
+                "answer": "False",
+                "correct": true,
+                "feedback": "Correct, the AWS Open Data program does not require a token. "
+            }
+        ]
+    }
+]

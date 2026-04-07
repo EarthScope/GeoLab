@@ -1,0 +1,98 @@
+[
+    {
+        "question": "Select all the ways to create a new branch.",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "git branch new_feature",
+                "correct": true,
+                "feedback": "Correct, a new branch is created but you remain in the current branch."
+            },
+            {
+                "answer": "git checkout -b new_feature",
+                "correct": true,
+                "feedback": "Correct, creates an switches to a new branch."
+            },
+            {
+                "answer": "git branch --name new_feature",
+                "correct": false,
+                "feedback": "Incorrect, --name is not an option."
+            },
+            {
+                "answer": "git checkout new_feature",
+                "correct": false,
+                "feedback": "Incorrect, this switches to an existing branch."
+            },
+            {
+                "answer": "git branch main  ",
+                "correct": false,
+                "feedback": "Incorrect, the main branch is created after the first commit."
+            }
+        ]
+    },
+    {
+        "question": "This command, git branch -d new_feature, deletes an unmerged branch.",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "False",
+                "correct": false,
+                "feedback": "Incorrect, -d is a safe delete that works on a branch that has been merged."
+            },
+            {
+                "answer": "True",
+                "correct": true,
+                "feedback": "Correct, -d is a safe delete that works on a branch that has been merged."
+            }
+        ]
+    },
+    {
+        "question": "When merging the new_feature branch into main, which branch should you check out?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "main",
+                "correct": true,
+                "feedback": "Correct, git merges into the target branch which is main in this example."
+            },
+            {
+                "answer": "new_feature",
+                "correct": false,
+                "feedback": "Incorrect, git merges into the targe branch."
+            }
+        ]
+    },
+    {
+        "question": "How do you list all the branches in a project",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "git branch -a",
+                "correct": true,
+                "feedback": "Correct, -a is an optional flag for listing all branches."
+            },
+            {
+                "answer": "git branches -a",
+                "correct": false,
+                "feedback": "Incorrect, branches is not an option."
+            },
+            {
+                "answer": "git branches",
+                "correct": false,
+                "feedback": "Incorrect, branches is not an option."
+            },
+            {
+                "answer": "git branch",
+                "correct": true,
+                "feedback": "Correct, all branches are listed. "
+            },
+            {
+                "answer": "git list branch",
+                "correct": false,
+                "feedback": "Incorrect, list is not command."
+            }
+        ]
+    }
+
+
+]
