@@ -1,0 +1,79 @@
+# syntax=docker/dockerfile:1
+
+# ── Build stage: compile pyrocko and install conda env ───────────────────────
+FROM --platform=$BUILDPLATFORM quay.io/jupyter/base-notebook:latest AS builder
+
+USER root
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update --quiet && \
+    apt-get install --quiet --yes --no-install-recommends \
+        git \
+        python3-dev \
+        build-essential \
+        gcc \
+        gfortran \
+        g++ \
+        make && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*  && \
+    conda install -y -c conda-forge zstandard && \
+    conda clean -afy
+
+USER ${NB_UID}
+
+# RUN git clone https://git.pyrocko.org/pyrocko/pyrocko.git /tmp/pyrocko && \
+#     cd /tmp/pyrocko && \
+#     python install.py deps conda --yes && \
+#     python install.py user --y && \
+#     rm -rf /tmp/pyrocko
+
+COPY --chown=${NB_UID}:${NB_GID} environment.yaml /tmp/environment.yaml
+
+# RUN conda update --name notebook --file /tmp/environment.yaml && \
+#     # conda install -y -c conda-forge zstandard && \
+#     pip install gnss-lib-py --ignore-requires-python && \
+#     conda clean --all --yes && \
+#     find /opt/conda -name '__pycache__' -type d -exec rm -rf {} + 2>/dev/null || true && \
+#     find /opt/conda -name '*.pyc' -delete 2>/dev/null || true
+
+# Create a fresh named environment so conda respects python=3.13.13,
+# then register it as a Jupyter kernel and clean up.
+RUN conda env create --name notebook --file /tmp/environment.yaml && \
+    /opt/conda/envs/notebook/bin/pip install gnss-lib-py --ignore-requires-python && \
+    /opt/conda/envs/notebook/bin/python -m ipykernel install \
+        --prefix /opt/conda \
+        --name notebook \
+        --display-name "Python (notebook)" && \
+    conda clean --all --yes && \
+    find /opt/conda -name '__pycache__' -type d -exec rm -rf {} + 2>/dev/null || true && \
+    find /opt/conda -name '*.pyc' -delete 2>/dev/null || true
+
+
+# ── Runtime stage ─────────────────────────────────────────────────────────────
+FROM quay.io/jupyter/scipy-notebook:latest
+
+LABEL maintainer="earthscope <geolab@earthscope.org>"
+LABEL description="GeoLab JupyterLab environment"
+
+USER root
+
+RUN apt-get update --quiet && \
+    apt-get install --quiet --yes --no-install-recommends \
+        gmt-dcw gmt-gshhg \
+        libgfortran5 \
+        libgomp1 \
+        ftp && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /home/joyvan/work
+
+COPY --from=builder /opt/conda /opt/conda
+COPY --from=builder --chown=${NB_UID}:${NB_GID} /home/jovyan /home/jovyan
+COPY --chown=${NB_UID}:${NB_GID} test_suite.py /etc/tests/test_suite.py
+
+USER ${NB_UID}
+
+ENV JUPYTER_ENABLE_LAB=yes
+CMD ["start-notebook.py"]
