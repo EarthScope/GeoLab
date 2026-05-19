@@ -37,7 +37,7 @@ dependencies:
 
 ## Install pip packages
 
-To install packages for PyPI with pip, add the packages by editing the requirements.txt file. For example, to install gnss-lib-py edit the file to add it.
+To install packages from PyPI with pip, add the packages by editing the requirements.txt file. For example, to install gnss-lib-py edit the file to add it.
 
 ```txt
 # --- EarthScope ---
@@ -71,3 +71,32 @@ set -e
 
 jupyter lab--ip=0.0.0.0" "--no-browser" --notebook-dir=/path/to/your/work
 ```
+
+## Build and push to repository
+
+To build the image for amd64, note that Dockerfile4 builds this image and uses the environment.yml, apt.txt, requirements.txt and start file.
+
+```bash
+docker build  --no-cache -f Dockerfile4 \
+--platform linux/amd64 \
+-t username/geolab-slim:0.4.5-amd64  .
+```
+
+Push to Docker Hub, AWS ECR, or other image repository to make the image available to GeoLab.
+
+```bash
+docker push username/geolab-slim:0.4.5-amd64
+```
+
+## Run image in GeoLab
+
+1. Open GeoLab.
+2. Choose Environment > Other
+
+![Choose Environment](./images/choose_environment.png)
+
+3. Enter the image name from the repository, e.g., username/geolab-slim:0.4.5-amd64
+
+![Enter image name](./images/custom_image.png)
+
+4. Select Start
