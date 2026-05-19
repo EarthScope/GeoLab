@@ -1,0 +1,42 @@
+# syntax=docker/dockerfile:1
+
+FROM quay.io/jupyter/base-notebook:latest
+# FROM pangeo/base-notebook:d0ea2af
+
+LABEL maintainer="earthscope <geolab@earthscope.org>"
+LABEL description="GeoLab JupyterLab environment"
+
+USER root
+
+RUN apt-get update --quiet && \
+    apt-get install --quiet --yes --no-install-recommends \
+        git \
+        gmt-dcw \
+        gmt-gshhg \
+        libgfortran5 \
+        libgomp1 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY environment.yaml /tmp/environment.yaml
+
+# Create a fresh conda environment named 'notebook' with Python 3.13.13.
+# conda env create (not update) on a named env always honours the python= pin.
+# --force removes any pre-existing 'notebook' env from the base image.
+# python --version after create confirms the correct interpreter was installed.
+# Initialise conda for bash so 'conda activate' works in terminal sessions.
+
+RUN mamba env create --file /tmp/environment.yaml
+RUN /opt/conda/envs/geolab/bin/python -m ipykernel install \
+        --prefix /opt/conda \
+        --name geolab \
+        --display-name "Python (geolab)" && \
+    conda clean --all --yes
+
+
+# Prepend the notebook env so it is the default Python in the container.
+ENV PATH="/opt/conda/envs/geolab/bin:${PATH}"
+
+# Switch to jovyan so conda init writes to /home/jovyan/.bashrc, not /root/.bashrc.
+USER ${NB_UID}
+RUN conda init bash
