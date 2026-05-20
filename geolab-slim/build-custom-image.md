@@ -118,8 +118,6 @@ set -e
 jupyter lab --ip=0.0.0.0 --no-browser --notebook-dir=/path/to/your/work
 ```
 
-> **Note:** Fix the typo from the original example — `jupyter lab--ip` should be `jupyter lab --ip` (space before `--ip`).
-
 ---
 
 ## Building and Pushing the Image
@@ -128,15 +126,15 @@ Once your configuration files are ready, you build the image locally and push it
 
 **Step 1 — Build the image**
 
-The `--platform linux/amd64` flag ensures the image runs on standard cloud hardware regardless of whether you're building on an Apple Silicon Mac or an Intel machine. `Dockerfile4` is the GeoLab-specific Dockerfile that wires together your four config files.
+The `--platform linux/amd64` flag ensures the image runs on standard cloud hardware regardless of whether you're building on an Apple Silicon Mac or an Intel machine. The Dockerfile wires together your four config files. Name the image using your repository username, a descriptive name and tag to track versions, such as username/shortcourse:0.1.0
 
 ```bash
-docker build --no-cache -f Dockerfile4 \
+docker build --no-cache -f Dockerfile \
   --platform linux/amd64 \
-  -t username/geolab-slim:0.4.5-amd64 .
+  -t username/shortcourse:0.1.0 .
 ```
 
-Replace `username` with your Docker Hub username (or your registry path) and `0.4.5-amd64` with your version tag.
+Replace `username` with your Docker Hub username (or your registry path) and `0.1.0` with your version tag.
 
 > **What does `--no-cache` do?** It forces Docker to re-run every build step from scratch, ensuring your latest `apt.txt`, `environment.yml`, and `requirements.txt` changes are picked up rather than reused from a previous build.
 
@@ -145,7 +143,7 @@ Replace `username` with your Docker Hub username (or your registry path) and `0.
 Push the finished image to Docker Hub, AWS ECR, or another registry so GeoLab can pull it:
 
 ```bash
-docker push username/geolab-slim:0.4.5-amd64
+docker push username/shortcourse:0.1.0
 ```
 
 > **First time?** You'll need to log in first with `docker login` (Docker Hub) or the appropriate CLI for your registry.
@@ -160,9 +158,8 @@ docker push username/geolab-slim:0.4.5-amd64
    ![Choose Environment](./images/choose_environment.png)
 
 3. Enter the full image name from your registry, e.g.:
-   ```
-   username/geolab-slim:0.4.5-amd64
-   ```
+
+  **docker.io/username/shortcourse:0.1.0**
 
    ![Enter image name](./images/custom_image.png)
 
