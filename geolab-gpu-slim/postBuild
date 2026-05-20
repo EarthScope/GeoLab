@@ -1,0 +1,32 @@
+#!/bin/bash
+# postBuild — runs as the jovyan user after environment.yml install.
+# Use this for steps that must happen at build time but can't be expressed
+# in environment.yml (e.g. Jupyter extension enabling, kernel registration,
+# GMT data downloads, etc.)
+set -euo pipefail
+
+echo "=== postBuild: configuring EarthScope ML environment ==="
+
+# ── Jupyter extensions ────────────────────────────────────────────────────────
+# Enable classic notebook extensions installed via jupyter_contrib_nbextensions
+jupyter contrib nbextension install --user 2>/dev/null || true
+jupyter nbextension enable codefolding/main --user 2>/dev/null || true
+
+# Register the notebook kernel explicitly (ensures it appears in JupyterHub)
+python -m ipykernel install --user --name=notebook --display-name "Python (EarthScope ML)"
+
+# ── GPU sanity checks (non-fatal) ────────────────────────────────────────────
+echo "--- TensorFlow GPU devices ---"
+python -c "
+import tensorflow as tf
+gpus = tf.config.list_physical_devices('GPU')
+print(f'TensorFlow {tf.__version__}: {len(gpus)} GPU(s) visible')
+" || echo "TensorFlow GPU check skipped"
+
+echo "--- PyTorch CUDA ---"
+python -c "
+import torch
+print(f'PyTorch {torch.__version__}: CUDA available={torch.cuda.is_available()}')
+" || echo "PyTorch CUDA check skipped"
+
+echo "=== postBuild complete ==="

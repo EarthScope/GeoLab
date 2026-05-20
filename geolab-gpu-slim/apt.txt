@@ -1,0 +1,22 @@
+# System packages installed on top of pangeo/ml-notebook's Ubuntu base.
+#
+# Already present in the base image — do NOT re-add:
+#   git, build-essential, gcc, g++, make, gfortran, curl, wget, ca-certificates,
+#   libhdf5-dev, libnetcdf-dev, libgdal-dev, libproj-dev, libgeos-dev,
+#   libopenblas-dev, libblas-dev, liblapack-dev, libffi-dev, libssl-dev,
+#   libsqlite3-dev, libpng-dev, libjpeg-dev, zlib1g-dev, libbz2-dev,
+#   libreadline-dev, libexpat1-dev, libxslt1-dev, libxml2-dev
+
+# Fortran runtime (not the compiler) — required by hypoinvpy and pynlloc at runtime
+libgfortran5
+
+# OpenGL client libs — headless OpenGL dependency chain
+libgl1
+
+# FFTW — seisbench and seismic processing routines link against it at runtime
+libfftw3-bin
+
+# GMT data packages — DCW (political boundaries) and GSHHG (coastlines/rivers)
+# Required by pygmt for map rendering; GMT binary comes from conda-forge
+gmt-dcw
+gmt-gshhg

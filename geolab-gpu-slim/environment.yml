@@ -1,0 +1,59 @@
+# Packages added on top of pangeo/ml-notebook.
+#
+# Base already provides (do NOT re-add):
+#   conda: numpy, scipy, pandas, xarray, matplotlib, geopandas, shapely,
+#          pyproj, gdal, rasterio, cartopy, folium, contextily, pyarrow,
+#          polars, dask, dask-gateway, distributed, boto3, awscli, s3fs,
+#          gcsfs, obstore, adlfs, fsspec, zarr, icechunk, kerchunk,
+#          h3, lonboard, tensorflow, keras, jax, flax, scikit-learn,
+#          xgboost, jupyterlab, nbdime, ipywidgets, jupyter-resource-usage,
+#          cuda-12, cudnn, nccl, pytorch, etc.
+#   pip:  (none relevant)
+#
+# Reference: https://github.com/pangeo-data/pangeo-docker-images/blob/master/ml-notebook/packages.txt
+channels:
+  - conda-forge
+
+dependencies:
+  # ── Conda packages not in base ─────────────────────────────────────────────
+  - tiledb              # sparse/dense array storage (EarthScope data access)
+  - altair              # declarative statistical visualisation
+  - plotly              # interactive plotting
+  - vegafusion          # server-side Vega-Altair rendering acceleration
+  - vl-convert-python>=1.9.0  # Vega-Lite → PNG/SVG converter (needed by altair save)
+
+  - pip
+  - pip:
+    # ── EarthScope SDK & tools ─────────────────────────────────────────────
+    - earthscope-sdk[arrow]==1.4.1
+    - earthscope-cli==1.2.0
+    - earthscopestraintools
+
+    # ── Seismic / GNSS processing ──────────────────────────────────────────
+    - cvxpy                   # convex optimisation (used by several ES workflows)
+    - dascore                 # distributed array seismic processing
+    - gnssrefl                # GNSS reflectometry
+    - hypoinvpy               # Python port of Hypoinverse-2000
+    - obspy==1.4.1            # seismology toolkit (pinned; base does not include it)
+    - pynlloc                 # NonLinLoc Python wrapper
+
+    # ── ML / waveform learning ─────────────────────────────────────────────
+    # PyTorch comes from the base image (GPU-enabled); seisbench uses it directly.
+    # Note: SeisBench also ships a PhaseNet implementation — both are included
+    # here to support workflows that reference either API.
+    - seisbench               # deep learning for seismology
+    - phasenet                # original Zhu et al. PhaseNet picker (standalone)
+    # tensorflow and keras are already in the base — do not re-add
+
+    # ── Polars GPU extras ──────────────────────────────────────────────────
+    # Base has polars==1.32.3 (CPU). Re-install with GPU extras via NVIDIA index.
+    - polars[gpu]
+    --extra-index-url https://pypi.nvidia.com
+
+    # ── Visualisation / mapping ────────────────────────────────────────────
+    - pygmt==0.14.2           # GMT Python bindings (GMT conda pkg already in base)
+
+    # ── Jupyter add-ons not in base ────────────────────────────────────────
+    - awswrangler                         # AWS data wrangling (pandas ↔ S3/Athena)
+    - jupyter_contrib_nbextensions        # classic notebook extensions
+    - jupyterlab_jupyterbook_navigation   # JupyterBook nav panel
