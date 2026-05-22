@@ -1,0 +1,72 @@
+# environment.yml — packages installed into pangeo's "notebook" env
+# Picked up automatically by pangeo/base-image's ONBUILD step.
+channels:
+  - conda-forge
+dependencies:
+  # ── Jupyter server + extensions ──────────────────────────────
+  - jupyterhub
+  - jupyter_server
+  - jupyterlab
+  - ipykernel
+  - jupyter-resource-usage
+  - jupyter-ruff
+  - jupyter-server-proxy
+  - jupyterlab-git
+  - jupyterlab-myst
+  - jupyterlab_code_formatter
+  - jupyterlab_pygments
+  - nbdime
+  # --- Cloud & storage ---
+  - awscli
+  - awswrangler
+  - boto3
+  - obstore
+  # --- Geospatial ---
+  - cartopy
+  - contextily
+  - fiona
+  - folium
+  - gdal
+  - pyproj
+  - shapely
+  # --- Visualization ---
+  - altair
+  - plotly
+  - vegafusion
+  - vl-convert-python>=1.9.0
+  # ── Core scientific stack ──────────────────────────────────
+  - numpy
+  - scipy
+  - pandas
+  - geopandas
+  - matplotlib
+  - xarray
+  - netcdf4
+  - h5py
+  - pyarrow
+  - polars
+  # ── Geophysics ──────────────────────────────────────
+  - dascore
+  - gmt
+  - obspy
+  - pygmt
+  # ── Utilities ─────────────────────────────────────────────
+  - tqdm
+  - requests
+  - pyyaml
+  - pip
+  # --- Dev tools ---
+  - gh
+  - gh-scoped-creds
+  - pytest
+  - ruff
+  - pip:
+    # --- EarthScope ---
+    - earthscope-sdk==1.4.1
+    - earthscope-cli==1.2.0
+    - earthscopestraintools
+    - hypoinvpy
+    # --- Jupyter add-ons ---
+    - jupyterlab_jupyterbook_navigation
+    # --- Visualization & data frames ---
+
