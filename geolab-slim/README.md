@@ -1,4 +1,4 @@
-# Building Custom GeoLab Images
+# Building GeoLab Images
 
 GeoLab environments run inside **Docker containers** — self-contained packages that bundle an operating system, software libraries, and Python packages together. This guide walks you through customizing a GeoLab image by editing a few plain-text configuration files, then building and deploying the result.
 
