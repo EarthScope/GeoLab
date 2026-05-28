@@ -118,8 +118,6 @@ set -e
 jupyter lab --ip=0.0.0.0 --no-browser --notebook-dir=/path/to/your/work
 ```
 
-> **Note:** Fix the typo from the original example — `jupyter lab--ip` should be `jupyter lab --ip` (space before `--ip`).
-
 ---
 
 ## Building and Pushing the Image
