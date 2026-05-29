@@ -57,10 +57,10 @@ The `--platform linux/amd64` flag ensures the image runs on standard cloud hardw
 ```bash
 docker build --no-cache -f Dockerfile \
   --platform linux/amd64 \
-  -t username/geolab-slim:0.4.5-amd64 .
+  -t username/geolab-slim:latest-amd64 .
 ```
 
-Replace `username` with your Docker Hub username (or your registry path) and `0.4.5-amd64` with your version tag.
+Replace `username` with your Docker Hub username (or your registry path) and `latest-amd64` with your version tag of choice.
 
 > **What does `--no-cache` do?** It forces Docker to re-run every build step from scratch, ensuring your latest `apt.txt`, `environment.yml`, and `requirements.txt` changes are picked up rather than reused from a previous build.
 
@@ -69,7 +69,7 @@ Replace `username` with your Docker Hub username (or your registry path) and `0.
 Push the finished image to Docker Hub, AWS ECR, or another registry so GeoLab can pull it:
 
 ```bash
-docker push username/geolab-slim:0.4.5-amd64
+docker push username/geolab-slim:latest-amd64
 ```
 
 > **First time?** You'll need to log in first with `docker login` (Docker Hub) or the appropriate CLI for your registry.
@@ -85,7 +85,7 @@ docker push username/geolab-slim:0.4.5-amd64
 
 3. Enter the full image name from your registry, e.g.:
    ```
-   username/geolab-slim:0.4.5-amd64
+   username/geolab-slim:latest-amd64
    ```
 
    ![Enter image name](./images/custom_image.png)
@@ -98,3 +98,22 @@ GeoLab will pull and launch your custom environment. The first launch may take a
 
 If the image works as desired create a PR against the `main` branch for review by the ownership team.
 Once accepted the production image will be built and deployed automatically in the EarthScope AWS container registry.
+
+## Local build and test
+
+An image built for your machine can be created using:
+
+```bash
+docker build --no-cache -f Dockerfile -t geolab-slim:test .
+```
+
+> **Not for GeoLab!** Without the guarantee of `--platform linux/amd64` this image is not for GeoLab
+
+Run a container using this image with:
+
+```bash
+docker run --rm -p 8888:8888 geolab-slim:test
+```
+
+Then use a web browser to connect to: `http://127.0.0.1:8888/lab`,
+open `smoke_tests.ipynb` and run all cells.
