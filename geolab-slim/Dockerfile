@@ -15,6 +15,11 @@ FROM pangeo/base-image:latest
 LABEL org.opencontainers.image.title="geolab-slim" \
       org.opencontainers.image.authors="sophia.parafina@earthscope.org"
 
+# PROJ/GDAL resource directories.
+ENV PROJ_DATA=/srv/conda/envs/notebook/share/proj \
+    PROJ_LIB=/srv/conda/envs/notebook/share/proj \
+    GDAL_DATA=/srv/conda/envs/notebook/share/gdal
+
 # Default command for standalone use. JupyterHub spawning passes
 # its own command (jupyterhub-singleuser), which start respects.
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser"]
