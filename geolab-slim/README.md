@@ -1,37 +1,23 @@
-# Building GeoLab Images
+# Building the GeoLab "slim" image
 
-GeoLab environments run inside **Docker containers** — self-contained packages that bundle an operating system, software libraries, and Python packages together. This guide walks you through customizing a GeoLab image by editing a few plain-text configuration files, then building and deploying the result.
+The GeoLab slim image is a base image containing minimal software for working in the platform.
 
-> **What is a Docker image?** Think of it as a snapshot of a complete computing environment. When GeoLab launches, it starts a container from that image — like booting from a pre-configured disk.
+GeoLab environments run as **containers** based on **images** — self-contained packages that include an operating system, software libraries, and Python packages together. This guide documents the steps using Docker to create the geolab-slim image.
 
-GeoLab uses `pangeo/base-notebook` as its starting point. You customize it by editing four files before building:
+GeoLab images use the `pangeo/base-notebook` image as the starting point. This base image contains the fundamentals needed for an environment in JupyterHub. You customize it by editing four files before building:
 
 | File | What it controls |
-|------|-----------------|
+| :--- | :--------------- |
 | `apt.txt` | System-level software (installed via `apt`) |
 | `environment.yml` | Conda packages and channels |
 | `requirements.txt` | Python packages from PyPI (installed via `pip`) |
-| `postBuild` | Commands to run after the build completes |
-| `start.sh` | The command that launches when the container starts |
+| `start` | The command that launches when the container starts |
 
 ---
 
 ## Installing System Software with apt
 
 `apt` is the Ubuntu package manager — it installs system-level tools like compilers, runtime libraries, and command-line utilities. Add any packages you need, one per line, to `apt.txt`.
-
-**Example:** Adding Node.js and npm:
-
-```txt
-git
-build-essential
-gfortran
-make
-gmt-dcw
-gmt-gshhg
-nodejs
-npm
-```
 
 > **Tip:** Only add packages here that aren't available through conda. Most scientific Python libraries are better managed in `environment.yml`.
 
@@ -41,22 +27,6 @@ npm
 
 Conda manages Python (and non-Python) packages within isolated environments. Edit `environment.yml` to add packages by name under the appropriate section. Always use the `conda-forge` channel for the broadest package availability.
 
-**Example:** Adding ObsPy Plus (`obsplus`) to the Geophysics section:
-
-```yml
-channels:
-  - conda-forge
-dependencies:
-  ...
-  # ── Geophysics ──────────────────────────────────────
-  - dascore
-  - gmt
-  - obspy
-  - pygmt
-  - obsplus
-  ...
-```
-
 > **Tip:** Prefer conda packages over pip when a package is available in both. Conda resolves environment-wide dependencies more reliably.
 
 ---
@@ -65,58 +35,14 @@ dependencies:
 
 Some packages are only available on PyPI (Python's package index) and must be installed with `pip`. Add them to `requirements.txt`, one per line. You can pin a specific version with `==` to ensure reproducibility.
 
-**Example:** Adding `gnss-lib-py`:
-
-```txt
-# --- EarthScope ---
-earthscope-sdk==1.4.1
-earthscope-cli==1.2.0
-earthscopestraintools
-gnssrefl
-hypoinvpy
-gnss-lib-py
-```
-
 > **Tip:** Pin versions for packages critical to your workflow (e.g., `earthscope-sdk==1.4.1`). This prevents silent breakage when upstream packages release updates.
-
----
-
-## Running a postBuild Script
-
-The `postBuild` script runs automatically after all packages are installed. Use it for one-time setup steps that can't be expressed as package installs — for example, configuring tools, downloading data files, or logging build metadata.
-
-**Example:** Recording the build timestamp:
-
-```bash
-#!/bin/bash
-echo "--- Running post-build triggers ---"
-
-# Record when this image was built
-date > /etc/build_timestamp
-echo "Build stage completed successfully."
-```
-
-Make sure the script is executable before building:
-
-```bash
-chmod +x postBuild
-```
 
 ---
 
 ## Start Script
 
-`start.sh` runs when a user launches a container. Its job is to start the main process — typically JupyterLab. The `--notebook-dir` parameter sets the default working directory shown in JupyterLab's file browser.
-
-**Example:** Starting JupyterLab at a specific directory:
-
-```bash
-#!/bin/sh
-# Exit immediately if any command fails
-set -e
-
-jupyter lab --ip=0.0.0.0 --no-browser --notebook-dir=/path/to/your/work
-```
+`start` runs when a user launches a container. Its job is to start the main process — typically JupyterLab.
+For this image the contents simply executes the command provided by the Hub.
 
 ---
 
@@ -126,10 +52,10 @@ Once your configuration files are ready, you build the image locally and push it
 
 **Step 1 — Build the image**
 
-The `--platform linux/amd64` flag ensures the image runs on standard cloud hardware regardless of whether you're building on an Apple Silicon Mac or an Intel machine. `Dockerfile4` is the GeoLab-specific Dockerfile that wires together your four config files.
+The `--platform linux/amd64` flag ensures the image runs on standard cloud hardware regardless of whether you're building on an Apple Silicon or an Intel machine. `Dockerfile` is the GeoLab-specific Dockerfile that wires together your four config files.
 
 ```bash
-docker build --no-cache -f Dockerfile4 \
+docker build --no-cache -f Dockerfile \
   --platform linux/amd64 \
   -t username/geolab-slim:0.4.5-amd64 .
 ```
@@ -167,3 +93,8 @@ docker push username/geolab-slim:0.4.5-amd64
 4. Select **Start**.
 
 GeoLab will pull and launch your custom environment. The first launch may take a minute while the image downloads.
+
+## Final steps
+
+If the image works as desired create a PR against the `main` branch for review by the ownership team.
+Once accepted the production image will be built and deployed automatically in the EarthScope AWS container registry.
