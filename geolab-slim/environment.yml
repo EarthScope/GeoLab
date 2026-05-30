@@ -1,21 +1,8 @@
-# environment.yml — packages installed into pangeo's "notebook" env
-# Picked up automatically by pangeo/base-image's ONBUILD step.
 channels:
   - conda-forge
+  - nodefaults
 dependencies:
-  # ── Jupyter server + extensions ──────────────────────────────
-  - jupyterhub
-  - jupyter_server
-  - jupyterlab
-  - ipykernel
-  - jupyter-resource-usage
-  - jupyter-ruff
-  - jupyter-server-proxy
-  - jupyterlab-git
-  - jupyterlab-myst
-  - jupyterlab_code_formatter
-  - jupyterlab_pygments
-  - nbdime
+  - python=3.13
   # --- Cloud & storage ---
   - awscli
   - awswrangler
@@ -24,49 +11,48 @@ dependencies:
   # --- Geospatial ---
   - cartopy
   - contextily
-  - fiona
   - folium
   - gdal
-  - pyproj
-  - shapely
-  # --- Visualization ---
-  - altair
-  - plotly
-  - vegafusion
-  - vl-convert-python>=1.9.0
-  # ── Core scientific stack ──────────────────────────────────
+  # --- Array / data ---
+  - bottleneck
+  - flox
   - numpy
-  - scipy
   - pandas
-  - geopandas
-  - matplotlib
-  - xarray
-  - netcdf4
-  - h5py
   - pyarrow
-  - polars
-  # ── Geophysics ──────────────────────────────────────
-  - dascore
-  - gmt
-  - obspy
-  - pygmt
-  # ── Utilities ─────────────────────────────────────────────
-  - tqdm
-  - requests
-  - pyyaml
-  - pip
-  # --- Dev tools ---
+  - xarray
+  - xarrayutils
+  # --- Machine learning ---
+  - dask
+  # --- Visualization ---
+  - ipympl
+  - panel
+  - ghostscript
+  - ffmpeg
+  # --- Jupyter & dev tools ---
   - gh
   - gh-scoped-creds
+  - ipykernel
+  - jupyter_contrib_nbextensions
+  - jupyter-resource-usage
+  - jupyter-ruff
+  - jupyterlab-git
+  - jupyterlab-myst
   - pytest
   - ruff
+  # --- Geophysics ---
+  - cvxpy
+  - dascore
+  - obspy
+  - obsplus
+  - gmt
+  - pygmt
+  - pip
   - pip:
-    # --- EarthScope ---
-    - earthscope-sdk==1.4.1
+    - earthscope-sdk[arrow]==1.4.1
     - earthscope-cli==1.2.0
     - earthscopestraintools
+    - gnssrefl
     - hypoinvpy
-    # --- Jupyter add-ons ---
-    - jupyterlab_jupyterbook_navigation
-    # --- Visualization & data frames ---
-
+    - jupyterlab-jupyterbook_navigation
+    - pynlloc
+    - pyocto
