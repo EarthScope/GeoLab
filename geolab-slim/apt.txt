@@ -1,0 +1,6 @@
+git
+build-essential
+gfortran
+make
+gmt-dcw
+gmt-gshhg

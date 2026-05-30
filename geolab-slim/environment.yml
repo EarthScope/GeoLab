@@ -48,7 +48,7 @@ dependencies:
   - pygmt
   - pip
   - pip:
-    - earthscope-sdk[arrow]==1.4.0
+    - earthscope-sdk[arrow]==1.4.1
     - earthscope-cli==1.2.0
     - earthscopestraintools
     - gnssrefl

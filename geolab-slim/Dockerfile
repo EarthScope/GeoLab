@@ -1,62 +1,25 @@
 # syntax=docker/dockerfile:1
+# ──────────────────────────────────────────────────────────────
+# geolab-slim — built on pangeo/base-image.
+#
+# Files picked up automatically by the parent's ONBUILD machinery:
+#   environment.yml  → conda env "notebook" installed from this
+#   conda-lock.yml   → (optional, preferred) no-solve install
+#   start            → entrypoint script (becomes /srv/start)
+#
+# Build:
+#   docker build --platform linux/amd64 -t geolab-slim .
+# ──────────────────────────────────────────────────────────────
+FROM pangeo/base-image:latest
 
-# ── Build stage: compile pyrocko and install conda env ───────────────────────
-FROM quay.io/jupyter/base-notebook:latest AS builder
+LABEL org.opencontainers.image.title="geolab-slim" \
+      org.opencontainers.image.authors="sophia.parafina@earthscope.org"
 
-USER root
+# PROJ/GDAL resource directories.
+ENV PROJ_DATA=/srv/conda/envs/notebook/share/proj \
+    PROJ_LIB=/srv/conda/envs/notebook/share/proj \
+    GDAL_DATA=/srv/conda/envs/notebook/share/gdal
 
-RUN apt-get update --quiet && \
-    apt-get install --quiet --yes --no-install-recommends \
-        git \
-        python3-dev \
-        build-essential \
-        gcc \
-        gfortran \
-        g++ \
-        make && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-USER ${NB_UID}
-
-RUN git clone https://git.pyrocko.org/pyrocko/pyrocko.git /tmp/pyrocko && \
-    cd /tmp/pyrocko && \
-    python install.py deps conda --yes && \
-    python install.py user --y && \
-    rm -rf /tmp/pyrocko
-
-COPY --chown=${NB_UID}:${NB_GID} environment.yaml /tmp/environment.yaml
-
-RUN mamba env update --name base --file /tmp/environment.yaml && \
-    pip install gnss-lib-py --ignore-requires-python && \
-    mamba clean --all --yes && \
-    find /opt/conda -name '__pycache__' -type d -exec rm -rf {} + 2>/dev/null || true && \
-    find /opt/conda -name '*.pyc' -delete 2>/dev/null || true
-
-# ── Runtime stage ─────────────────────────────────────────────────────────────
-FROM quay.io/jupyter/base-notebook:latest
-
-LABEL maintainer="your-name <your@email.com>"
-LABEL description="Geoscience JupyterLab environment"
-
-USER root
-
-RUN apt-get update --quiet && \
-    apt-get install --quiet --yes --no-install-recommends \
-        git \
-        gmt-dcw gmt-gshhg \
-        libgfortran5 \
-        libgomp1 \
-        ftp && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /home/joyvan/work
-
-COPY --from=builder /opt/conda /opt/conda
-COPY --from=builder --chown=${NB_UID}:${NB_GID} /home/jovyan /home/jovyan
-COPY --chown=${NB_UID}:${NB_GID} test_suite.py /etc/tests/test_suite.py
-
-USER ${NB_UID}
-
-ENV JUPYTER_ENABLE_LAB=yes
-CMD ["start-notebook.py"]
+# Default command for standalone use. JupyterHub spawning passes
+# its own command (jupyterhub-singleuser), which start respects.
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser"]
