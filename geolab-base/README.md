@@ -22,10 +22,8 @@ Steps:
   - [Publishing the platform image](#publishing-the-platform-image)
 - [Running your published image in GeoLab](#running-your-published-image-in-geolab)
 
-
-
-
-> **NOTE** These instructions are written for macOS, Linux and similar systems. While the same steps can be executed in Windows the details will vary.
+> [!NOTE]
+> These instructions are written for macOS, Linux and similar systems. While the same steps can be executed in Windows the details will vary.
 
 ---
 
@@ -33,11 +31,13 @@ Steps:
 
 Docker Desktop is the recommended option to build and run images on your computer and to publish them for access by others (and GeoLab itself). Follow the [instructions](https://docs.docker.com/get-started/introduction/) to install it. If you are new to Docker, images, and containers, we recommend working through the [getting-started modules](https://docs.docker.com/get-started/introduction/#modules) to learn how to build, run, and publish images.
 
-*Tip: Alternatively, Docker Engine (with build plugins) can be used; this is what is often installed on Linux systems.*
+> [!TIP]
+> Alternatively, Docker Engine (with build plugins) can be used; this is what is often installed on Linux systems.
 
 After starting Docker Desktop, log into Docker, creating an account if needed. This enables pushing (aka publishing) an image to Docker Hub, Docker’s image repository where it is available to others.
 
-*Tip: Docker Hub is just one of many repositories for images, many others exist and can be used, but Docker Hub is easiest because it is the default repository for components in the ecosystem, including in GeoLab.*
+> [!TIP]
+> Docker Hub is just one of many repositories for images, many others exist and can be used, but Docker Hub is easiest because it is the default repository for components in the ecosystem, including in GeoLab.
 
 ---
 
@@ -53,14 +53,14 @@ The `geolab-base` directory in the GeoLab repository contains all the files need
 
 ```shell
 cd ~
-git clone [https://github.com/EarthScope/GeoLab.git](https://github.com/EarthScope/GeoLab.git)
+git clone --depth 1 https://github.com/EarthScope/GeoLab.git
 cp -R GeoLab/geolab-base ~/my-geolab-image
 ```
 
 This set of commands does the following:
 
 1. Change from the current directory to your home directory.
-2. Use git to copy the GeoLab repository.
+2. Use git to copy the GeoLab repository, only getting the current state (`--depth 1`)
 3. Copy the geolab-base directory to a new directory in your home directory.
 
 Your my-geolab-image directory should have the following files:
@@ -73,31 +73,32 @@ Your my-geolab-image directory should have the following files:
 ├── environment.yml
 ├── requirements.txt
 └── start
+└── ...
 ```
 
 ---
 
 ## **Configuring a custom image**
 
-A Docker image is a snapshot of a complete computing environment. When GeoLab launches, it starts a container from such an image.
+A container image is a snapshot of a complete computing environment. When GeoLab launches, it starts a container from such an image.  The `geolab-base` image is based on a Pangeo image (`pangeo/base-image`) as its starting point.  A custom image can be created by exi
 
-GeoLab uses `pangeo/base-notebook` as its starting point. The `Dockerfile` specifies how the image is built. To create a custom image, edit the configuration files before building:
+The `Dockerfile` specifies how the image is built. To create a custom image, edit the configuration files before building:
 
 
-| File               | What it controls                                    |
-| ------------------ | --------------------------------------------------- |
-| `apt.txt`          | System-level software (installed via `apt`)         |
-| `environment.yml`  | Python from Conda packages and channels             |
-| `requirements.txt` | Python packages from PyPI (installed via `pip`)     |
-| `postBuild`        | Commands to run after the build completes           |
-| `start`            | The command that launches when the container starts |
+| File               | What it controls                                             |
+| ------------------ | ------------------------------------------------------------ |
+| `apt.txt`          | System-level software (installed via `apt`)                  |
+| `environment.yml`  | Python from Conda packages and channels                      |
+| `requirements.txt` | Python packages from PyPI (installed via `pip`)              |
+| `postBuild`        | Commands to run after the build completes (create if needed) |
+| `start`            | The command that launches when the container starts          |
 
 
 ### **Installing system software with apt**
 
 `apt` is the Ubuntu package manager — it installs system-level tools like compilers, runtime libraries, and command-line utilities. Add any packages you need, one per line, to apt.txt. Best practice is to list packages in alphabetical order, which makes it easier to find a specific package.
 
-**Example:** Adding Node.js and npm:
+**Example:** Adding Node.js (nodjs) and npm:
 
 ```shell
 build-essential
@@ -110,7 +111,8 @@ nodejs  <-- NEW
 npm     <-- NEW
 ```
 
-*Tip: Only add packages here that aren't available through conda. Most scientific Python libraries are better managed in environment.yml.*
+> [!TIP]
+> Only add packages here that aren't available through conda. Most scientific Python libraries are better managed in environment.yml.
 
 ### **Installing Conda Packages**
 
@@ -121,7 +123,7 @@ Conda manages Python (and non-Python) packages within isolated environments. Edi
 ```yaml
 ...
 dependencies:
- ...
+  ...
  # ── Geophysics ──────────────────────────────────────
   - dascore
   - obspy
@@ -132,7 +134,8 @@ dependencies:
  ...
 ```
 
-*Tip: Prefer conda packages over pip when a package is available in both. Conda resolves environment-wide dependencies more reliably.*
+> [!TIP]
+> Prefer conda packages over pip when a package is available in both. Conda resolves environment-wide dependencies more reliably.
 
 ### **Installing pip packages**
 
@@ -148,16 +151,17 @@ earthscopestraintools
 gnss-lib-py  <-- NEW
 ```
 
-*Tip: Pin versions for packages critical to your workflow (e.g., `earthscope-sdk==1.4.1`). This prevents silent breakage when upstream packages release updates if you rebuild the image.*
+> [!TIP]
+> Pin versions for packages critical to your workflow (e.g., `earthscope-sdk==1.4.1`). This prevents silent breakage when upstream packages release updates if you rebuild the image.
 
 ### **Creating a postBuild script**
 
 A postBuild script runs automatically after all packages are installed. Use it for one-time setup steps that can't be expressed as package installs — for example, configuring tools, downloading data files, or logging build metadata.
 
-**Example:** Create a `postbuild` file to record the build timestamp:
+**Example:** Create a `postBuild` file to record the build timestamp:
 
 ```shell
-#!/bash
+#!/bin/bash
 echo "--- Running post-build triggers ---"
 
 # Record when this image was built
@@ -178,7 +182,7 @@ chmod +x postBuild
 Example: Starting JupyterLab at a specific directory:
 
 ```shell
-#!/sh
+#!/bin/sh
 # Exit immediately if any command fails
 set -e
 
@@ -199,7 +203,8 @@ docker build --no-cache -f Dockerfile --tag my-geolab-image:0.1.0 .
 
 You may omit the `:0.1.0` part of the tag if you wish.
 
-*Tip: do not publish and try to run this image in GeoLab, it may not be the correct platform.  See the next section for instructions to build the platform image*
+> [!TIP]
+> Do not publish and try to run this image in GeoLab, it may not be the correct platform.  See the next section for instructions to build the platform image
 
 ### **Running the local testing image**
 
@@ -209,11 +214,12 @@ Use Docker to run the image with this command:
 docker run --rm -p 8888:8888 my-geolab-image:0.1.0
 ```
 
-Then use a web browser to connect to: `http://127.0.0.1:8888/lab`
+Copy the URL from the log that looks like: `http://127.0.0.1:8888/lab?token...` (with the token value) and connect to the container with a web browser.
 
 What is the docker run command doing?  The `--rm` command will delete the container created from the image after the run completes, keeping repeated commands from creating a new container on each run.  The `-p 8888:8888` maps the network port for service in the container so the local computer can reach it.
 
-*Tip: this image is not running in the GeoLab platform, so any features such only available in GeoLAb will not work from this local environment.*
+> [!TIP]
+> This image is not running in the GeoLab platform, so any features such only available in GeoLab will not work from this local environment.
 
 ### **Verifying the installed packages**
 
@@ -229,7 +235,8 @@ pytest test_packages.py -v
 
 **Option 2 — `test_notebook.ipynb` (interactive).**  Start the container as shown above, open `http://127.0.0.1:8888/lab`, open `test_notebook.ipynb`, and run all cells (Run → Run All Cells). The notebook performs the same import-and-exercise checks and ends with a summary table listing the status (and version) of each package, with failures highlighted in red.
 
-*Tip: a failure here points at the package, not your notebook code — usually a missing system dependency (add it to `apt.txt`) or a version conflict between conda and pip packages. If you add or remove a package in `environment.yml` or `requirements.txt`, update the tests to match.*
+> [!TIP]
+> A failure here points at the package, not your notebook code — usually a missing system dependency (add it to `apt.txt`) or a version conflict between conda and pip packages. If you add or remove a package in `environment.yml` or `requirements.txt`, update the tests to match.
 
 ---
 
@@ -261,15 +268,21 @@ docker push username/my-geolab-image:0.1.0
 
 Replace the details to match the --tag value in the build command.
 
+> [!TIP]
+> If the push results in an error, make sure you are logged into Docker Hub using `docker login` if needed.
+
 Many other image repositories exist.  If you use AWS ECR, follow these [instructions](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html).
 
 ---
 
 ## **Running your published image in GeoLab**
 
-1. Open [GeoLab](https://geolab.earthscope.cloud/) and login.
-2. Choose **Environment → Other**.
-3. Enter the full image name from your registry, e.g.: **[docker.io/username/my-geolab-image:0.1.0](http://docker.io/username/my-geolab-image:0.1.0)**.
-4. Select **Start**.
+1. Open [GeoLab's Hub Control Panel](https://geolab.earthscope.cloud/hub/home/)
+  * Login with your [EarthScope account](https://www.earthscope.org/user/login)
+  * If "Stop My Server" button is visible, select it to stop your current server
+  * Select "Start My Server" button
+2. Choose **Environment → Other**
+3. Enter the full image name from your registry, e.g.: **[docker.io/username/my-geolab-image:0.1.0](http://docker.io/username/my-geolab-image:0.1.0)**
+4. Select **Start**
 
 GeoLab will pull and launch your custom environment. The first launch may take a bit longer while the image is transferred from the repository.

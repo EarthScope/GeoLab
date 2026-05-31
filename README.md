@@ -9,4 +9,4 @@ Images are hosted on [AWS ECR](https://gallery.ecr.aws/earthscope-dev)
 
 | Image           | Description                                   |
 |-----------------|-----------------------------------------------|
-| geolab-base     | Base image for GeoLab. Includes EarthScope tools and common geophysics tools, based on the Pangeo base image |
+| geolab-base     | Base image for GeoLab. Includes EarthScope tools and common geophysics tools, based on the Pangeo base image.  See the [Instructions](https://github.com/EarthScope/GeoLab/blob/main/geolab-base/README.md) for using this as a template to build custom images.|
