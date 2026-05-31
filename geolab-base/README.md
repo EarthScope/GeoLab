@@ -251,6 +251,9 @@ Replace `username` with your Docker Hub username (or your registry path), `my-ge
 
 What does `--no-cache` do? It forces Docker to rerun build steps from scratch, ensuring a clean build when publishing.
 
+> [!NOTE]
+> Images will be cached by different systems, including the image repository and GeoLab.  If you are using a version (e.g. `0.1.0`) you should increment it for each build to avoid inadvertently using cached copies.
+
 ### Publishing the platform image
 
 Push the image to Docker Hub, AWS ECR, or another registry so GeoLab can access it. If you have logged into your Docker account, you can push the image to Docker Hub with this command:
