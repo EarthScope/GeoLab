@@ -150,7 +150,7 @@ def test_geopandas():
     assert gdf.crs.to_epsg() == 4326
 
 
-def test_matplotlib():
+def test_matplotlib_base():
     import matplotlib
 
     matplotlib.use("Agg")

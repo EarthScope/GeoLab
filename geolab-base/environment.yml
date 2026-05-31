@@ -29,7 +29,7 @@ dependencies:
   - scipy
   - pandas
   - geopandas
-  - matplotlib
+  - matplotlib-base
   - netcdf4
   - h5py
   - pyarrow
