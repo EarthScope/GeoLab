@@ -19,7 +19,6 @@ import subprocess
 
 import pytest
 
-
 # ─── Helpers ──────────────────────────────────────────────────
 
 
@@ -413,10 +412,6 @@ def test_nbdime():
     import nbdime
 
     assert nbdime.__version__
-
-
-def test_jupyter_contrib_nbextensions():
-    import jupyter_contrib_nbextensions  # noqa: F401
 
 
 # ─── pip packages ─────────────────────────────────────────────

@@ -53,7 +53,8 @@ The `geolab-base` directory in the GeoLab repository contains all the files need
 ```shell
 cd ~
 git clone --depth 1 https://github.com/EarthScope/GeoLab.git
-cp -R GeoLab/geolab-base ~/my-geolab-image
+cp -R GeoLab/geolab-base my-geolab-image
+cd my-geolab-image
 ```
 
 This set of commands does the following:
@@ -61,6 +62,7 @@ This set of commands does the following:
 1. Change from the current directory to your home directory.
 2. Use git to copy the GeoLab repository, only getting the current state (`--depth 1`)
 3. Copy the geolab-base directory to a new directory in your home directory.
+4. Change into the newly created directory with a copy of the image template files.
 
 Your `my-geolab-image` directory should have the following files:
 
@@ -100,9 +102,9 @@ The `Dockerfile` specifies how the image is built. To create a custom image, edi
 
 ### Installing system software with apt
 
-`apt` is the Ubuntu package manager — it installs system-level tools like compilers, runtime libraries, and command-line utilities. Add any packages you need, one per line, to apt.txt. Best practice is to list packages in alphabetical order, which makes it easier to find a specific package.
+`apt` is the Ubuntu package manager — it installs system-level tools like compilers, runtime libraries, and command-line utilities. Edit `apt.txt` to add any packages you need, one per line. Best practice is to list packages in alphabetical order, which makes it easier to find a specific package.
 
-**Example:** Adding Node.js (nodejs) and npm:
+**Example:** Adding Node.js (nodejs) and npm to `apt.txt`:
 
 ```shell
 build-essential
@@ -122,7 +124,7 @@ npm     <-- NEW
 
 Conda manages Python (and non-Python) packages within isolated environments. Edit `environment.yml` to add packages by name under the appropriate section (the sections are comments, not important for conda). Always use the `conda-forge` channel for the broadest package availability unless otherwise specified in the package’s installation instructions.
 
-**Example:** Adding SimPEG (`simpeg`) to the Geophysics section:
+**Example:** Adding SimPEG (`simpeg`) to the Geophysics section of `environment.yml`:
 
 ```yaml
 ...
