@@ -1,0 +1,11 @@
+# requirements.txt — pip packages for the geolab image
+# Installed into the base conda env after the conda-packages step.
+
+# --- EarthScope ---
+earthscope-sdk==1.4.1
+earthscope-cli==1.2.0
+earthscopestraintools
+
+
+# --- Jupyter add-ons ---
+jupyterlab_jupyterbook_navigation

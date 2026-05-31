@@ -1,0 +1,6 @@
+#!/bin/sh
+# /srv/start — entrypoint for geolab-base
+# Pangeo's ENTRYPOINT is /srv/start. We just exec whatever was passed
+# as CMD (defaulted to jupyter lab; JupyterHub spawning overrides with
+# jupyterhub-singleuser).
+exec "$@"

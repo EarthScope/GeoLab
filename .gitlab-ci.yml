@@ -1,0 +1,28 @@
+include:
+  - project: earthscope/infrastructure/gitlab-ci
+    ref: "$GITLAB_CI_LIB_VERSION"
+    file:
+      - project-template-image-matrix.yml
+    rules:
+      - exists:
+          - gitlab-ci
+        when: never
+      - when: always
+  - local: gitlab-ci/project-template-image-matrix.yml
+    rules:
+      - exists:
+          - gitlab-ci
+        when: always
+      - when: never
+
+.images_matrix:
+  - DOCKERFILE_RELPATH: "geolab-base"
+    DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12"
+  #- DOCKERFILE_RELPATH: "geolab-gpu"
+
+
+variables:
+  CONTAINER_REGISTRY_PLATFORM: "AWS-PUB"
+  DOCKERFILE_RELPATH_IS_IMAGE_NAME: "true"
+  GITLAB_HOSTED_RUNNER_SIZE: "saas-linux-medium-amd64"
+  USE_TIMESTAMP_VERSION: "true"

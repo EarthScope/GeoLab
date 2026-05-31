@@ -1,0 +1,74 @@
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  # ── Jupyter server + extensions ---
+  - jupyterhub
+  - jupyter_server
+  - jupyterlab
+  - ipykernel
+  - jupyter-resource-usage
+  - jupyter-ruff
+  - jupyter-server-proxy
+  - jupyterlab-git
+  - jupyterlab-myst
+  - jupyterlab_code_formatter
+  - jupyterlab_pygments
+  - nbdime
+  # --- Cloud & storage ---
+  - awscli
+  - awswrangler
+  - boto3
+  - obstore
+  # --- Array / data ---
+  - bottleneck
+  - cvxpy
+  - flox
+  - numpy
+  - scipy
+  - pandas
+  - geopandas
+  - matplotlib
+  - netcdf4
+  - h5py
+  - pyarrow
+  - polars
+  - xarray
+  - xarrayutils
+  # --- Parallel computing ---
+  - dask
+  - dask-gateway
+  - distributed
+  # --- Visualization ---
+  - altair
+  - plotly
+  - vegafusion
+  - vl-convert-python>=1.9.0
+  - ipympl
+  - panel
+  - ghostscript
+  - ffmpeg
+  # --- Geospatial ---
+  - cartopy
+  - contextily
+  - fiona
+  - folium
+  - gdal
+  - pyproj
+  - shapely
+  # --- Geophysics ---
+  - dascore
+  - obspy
+  - obsplus
+  - gmt
+  - pygmt
+  # --- Dev tools and utilities ---
+  - gh
+  - gh-scoped-creds
+  - pip
+  - pytest
+  - pyyaml
+  - requests
+  - ruff
+  - tqdm
