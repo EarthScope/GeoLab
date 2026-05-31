@@ -35,7 +35,6 @@ dependencies:
   - pyarrow
   - polars
   - xarray
-  - xarrayutils
   # --- Parallel computing ---
   - dask
   - dask-gateway

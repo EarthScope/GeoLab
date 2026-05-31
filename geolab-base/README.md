@@ -168,17 +168,14 @@ A postBuild script runs automatically after all packages are installed. Use it f
 
 ```shell
 #!/bin/bash
-echo "--- Running post-build triggers ---"
+set -euo pipefail  # fail fast: on command error, unset variable, or any pipeline stage failing
+
+echo "--- Running post-build commands ---"
 
 # Record when this image was built
-date > /etc/build_timestamp
+date > ${CONDA_DIR}/etc/build_timestamp
+
 echo "Build stage completed successfully."
-```
-
-Make sure the script is executable before building. In a terminal, update the file permissions for postBuild:
-
-```shell
-chmod +x postBuild
 ```
 
 ---
@@ -190,7 +187,7 @@ Building and testing the image locally is the fastest way to iterate on changes 
 ### Building the local testing image
 
 ```shell
-docker build --no-cache -f Dockerfile --tag my-geolab-image:0.1.0 .
+docker build -f Dockerfile --tag my-geolab-image:0.1.0 .
 ```
 
 You may omit the `:0.1.0` part of the tag if you wish.
@@ -250,7 +247,7 @@ docker build --no-cache -f Dockerfile \
 
 Replace `username` with your Docker Hub username (or your registry path), `my-geolab-image` with your image name, and `0.1.0` with your version tag.  The `--build-arg` values for `IMAGE_TITLE` and `IMAGE_AUTHORS` are optional but recommended for image metadata.
 
-What does `--no-cache` do? It forces Docker to rerun every build step from scratch, ensuring your latest `apt.txt`, `environment.yml`, and `requirements.txt` changes are picked up rather than reused from a previous build.
+What does `--no-cache` do? It forces Docker to rerun build steps from scratch, ensuring a clean build when publishing.
 
 ### Publishing the platform image
 

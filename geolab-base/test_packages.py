@@ -209,10 +209,6 @@ def test_flox():
     assert flox.__version__
 
 
-def test_xarrayutils():
-    import xarrayutils  # noqa: F401
-
-
 # ─── Parallel computing ───────────────────────────────────────
 
 
