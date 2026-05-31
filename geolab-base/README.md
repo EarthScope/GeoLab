@@ -214,15 +214,17 @@ What is the docker run command doing?  The `--rm` flag will delete the container
 
 The image includes two test options that ensure installed packages import and run. Both are copied into the container at build time, so they are available in the running container. Use them after a build to confirm nothing is broken (a missing system library or version conflict often installs cleanly but fails at import).  Adjust as needed for the packages that you added or removed from the build.
 
+In the Jupyter interface at `http://127.0.0.1:8888/lab...`:
+
 **Option 1 — `test_packages.py` (pytest, fastest).**  This runs a minimal API call for each package and prints a pass/fail line per package.
 
-Alternatively, run the tests from a Terminal inside a running JupyterLab session (File → New → Terminal):
+Create a new Terminal inside a running JupyterLab session (File → New → Terminal):
 
 ```shell
 pytest test_packages.py -v
 ```
 
-**Option 2 — `test_notebook.ipynb` (interactive).**  Start the container as shown above, open `http://127.0.0.1:8888/lab`, open `test_notebook.ipynb`, and run all cells (Run → Run All Cells). The notebook performs the same import-and-exercise checks and ends with a summary table listing the status (and version) of each package, with failures highlighted in red.
+**Option 2 — `test_notebook.ipynb` (interactive).**  Open `test_notebook.ipynb`, and run all cells (Run → Run All Cells). The notebook performs the same import-and-exercise checks and ends with a summary table listing the status (and version) of each package, with failures highlighted in red.
 
 > [!TIP]
 > A failure here points at the package, not your notebook code — usually a missing system dependency (add it to `apt.txt`) or a version conflict between conda and pip packages. If you add or remove a package in `environment.yml` or `requirements.txt`, update the tests to match.
