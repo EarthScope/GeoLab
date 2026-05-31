@@ -14,6 +14,7 @@ NOT just missing imports, which a smoke check would also catch.
 """
 
 import math
+import re
 import shutil
 import subprocess
 
@@ -167,6 +168,7 @@ def test_xarray():
     assert da.sum().item() == 6
 
 
+@pytest.mark.filterwarnings("ignore:numpy.ndarray size changed:RuntimeWarning")
 def test_netcdf4(tmp_path):
     import netCDF4
 
@@ -239,7 +241,7 @@ def test_dascore():
 
 def test_gmt_cli():
     out = _cli_version("gmt")
-    assert "gmt" in out.lower()
+    assert re.match(r"\d+\.\d+", out.strip())  # gmt --version prints bare "6.6.0"
 
 
 def test_obspy():
