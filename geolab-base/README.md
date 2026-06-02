@@ -42,7 +42,7 @@ After starting Docker Desktop, log into Docker, creating an account if needed. T
 
 ## Installing git
 
-Git is needed to make a copy of the GeoLab repository containing the template for the base image for building custom images. The git program is often already installed, or easily installed on macOS and Linux systems.  Follow the [instructions](https://github.com/git-guides/install-git) to check for and install git if needed. If you are unfamiliar with git, you can work through a [tutorial](https://github.com/EarthScope/GeoLab-learning-hub/blob/main/tutorials/fundamentals/1_git_intro.ipynb).
+Git is needed to make a copy of the GeoLab repository containing the template for the base image for building custom images. The git program is often already installed, or easily installed on macOS and Linux systems.  Follow the [instructions](https://github.com/git-guides/install-git) to check for and install git if needed.
 
 ---
 
