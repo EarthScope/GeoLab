@@ -555,6 +555,7 @@ def test_anywidget():
     assert anywidget.__version__
 
 
+@pytest.mark.filterwarnings("ignore:metadata .* was set from the constructor:DeprecationWarning")
 def test_bqplot():
     import bqplot  # noqa: F401
 
