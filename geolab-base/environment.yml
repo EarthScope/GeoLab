@@ -37,6 +37,7 @@ dependencies:
   - pyarrow
   - cvxpy
   - zarr
+  - virtualizarr
   - numba
   - pooch
   # --- Parallel computing ---
