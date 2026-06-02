@@ -3,7 +3,7 @@ channels:
   - nodefaults
 dependencies:
   - python=3.12
-  # ── Jupyter server + extensions ---
+  # --- Jupyter server + extensions ---
   - jupyterhub
   - jupyter_server
   - jupyterlab
@@ -20,40 +20,56 @@ dependencies:
   - awscli
   - awswrangler
   - boto3
+  - fsspec
   - obstore
+  - s3fs
   # --- Array / data ---
-  - bottleneck
-  - cvxpy
-  - flox
   - numpy
   - scipy
   - pandas
-  - geopandas
-  - matplotlib-base
-  - netcdf4
-  - h5py
-  - pyarrow
   - polars
   - xarray
+  - bottleneck
+  - flox
+  - h5py
+  - netcdf4
+  - h5netcdf
+  - pyarrow
+  - cvxpy
+  - zarr
+  - numba
+  - pooch
   # --- Parallel computing ---
   - dask
   - dask-gateway
   - distributed
   # --- Visualization ---
+  - matplotlib-base
   - altair
-  - plotly
+  - hvplot
+  - holoviews
   - vegafusion
   - vl-convert-python>=1.9.0
+  - plotly
   - ipympl
   - panel
-  - ghostscript
-  - ffmpeg
+  # --- Interactive widgets ---
+  - ipywidgets
+  - anywidget
+  - bqplot
+  - ipytree
+  - itables
+  - ipydatagrid
+  - sidecar
   # --- Geospatial ---
   - cartopy
   - contextily
   - fiona
   - folium
   - gdal
+  - geopandas
+  - ipyleaflet
+  - lonboard
   - pyproj
   - shapely
   # --- Geophysics ---
@@ -62,6 +78,9 @@ dependencies:
   - obsplus
   - gmt
   - pygmt
+  # --- System / binary tools ---
+  - ffmpeg
+  - ghostscript  # runtime dep for GMT/pygmt
   # --- Dev tools and utilities ---
   - gh
   - gh-scoped-creds
