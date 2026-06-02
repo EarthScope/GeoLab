@@ -61,6 +61,19 @@ def test_obstore():
     import obstore  # noqa: F401
 
 
+def test_fsspec():
+    import fsspec
+
+    fs = fsspec.filesystem("memory")
+    assert fs.protocol == "memory"
+
+
+def test_s3fs():
+    import s3fs
+
+    assert s3fs.S3FileSystem is not None
+
+
 # ─── Geospatial ───────────────────────────────────────────────
 
 
@@ -114,6 +127,19 @@ def test_shapely():
     assert p.buffer(1).area == pytest.approx(math.pi, abs=0.1)
 
 
+def test_ipyleaflet():
+    import ipyleaflet
+
+    m = ipyleaflet.Map()
+    assert m is not None
+
+
+def test_lonboard():
+    import lonboard
+
+    assert lonboard.__version__
+
+
 # ─── Core scientific stack ────────────────────────────────────
 
 
@@ -121,6 +147,16 @@ def test_numpy():
     import numpy as np
 
     assert int(np.array([1, 2, 3]).sum()) == 6
+
+
+def test_numba():
+    from numba import njit
+
+    @njit
+    def add_one(x):
+        return x + 1
+
+    assert add_one(1) == 2
 
 
 def test_scipy():
@@ -190,6 +226,39 @@ def test_h5py(tmp_path):
         f["arr"] = np.arange(3)
     with h5py.File(path, "r") as f:
         assert f["arr"][:].sum() == 3
+
+
+def test_h5netcdf(tmp_path):
+    import h5netcdf.legacyapi as netCDF4
+    import numpy as np
+
+    path = tmp_path / "smoke_h5netcdf.nc"
+    with netCDF4.Dataset(path, "w") as ds:
+        ds.createDimension("x", 3)
+        v = ds.createVariable("v", "f4", ("x",))
+        v[:] = np.array([1.0, 2.0, 3.0])
+    with netCDF4.Dataset(path, "r") as ds:
+        assert ds["v"][:].sum() == pytest.approx(6.0)
+
+
+def test_zarr():
+    import zarr
+
+    arr = zarr.zeros((3,), chunks=3, dtype="f4")
+    arr[:] = [1.0, 2.0, 3.0]
+    assert arr[:].sum() == pytest.approx(6.0)
+
+
+def test_virtualizarr():
+    import virtualizarr  # noqa: F401
+
+    assert virtualizarr.__version__
+
+
+def test_pooch():
+    import pooch
+
+    assert pooch.__version__
 
 
 def test_pyarrow():
@@ -280,6 +349,19 @@ def test_cvxpy():
 
 def test_ipympl():
     import ipympl  # noqa: F401
+
+
+def test_hvplot():
+    import hvplot  # noqa: F401
+
+    assert hvplot.__version__
+
+
+def test_holoviews():
+    import holoviews as hv
+
+    curve = hv.Curve([1, 2, 3])
+    assert curve is not None
 
 
 def test_panel():
@@ -455,3 +537,48 @@ def test_polars():
 
 def test_vegafusion():
     import vegafusion  # noqa: F401
+
+
+# ─── Interactive widgets ───────────────────────────────────────
+
+
+def test_ipywidgets():
+    import ipywidgets
+
+    slider = ipywidgets.IntSlider(value=5, min=0, max=10)
+    assert slider.value == 5
+
+
+def test_anywidget():
+    import anywidget  # noqa: F401
+
+    assert anywidget.__version__
+
+
+def test_bqplot():
+    import bqplot  # noqa: F401
+
+    assert bqplot.__version__
+
+
+def test_ipytree():
+    from ipytree import Node
+
+    root = Node(name="root")
+    assert root.name == "root"
+
+
+def test_itables():
+    import itables  # noqa: F401
+
+    assert itables.__version__
+
+
+def test_ipydatagrid():
+    import ipydatagrid  # noqa: F401
+
+    assert ipydatagrid.__version__
+
+
+def test_sidecar():
+    from sidecar import Sidecar  # noqa: F401
