@@ -43,6 +43,8 @@ dependencies:
   # --- Parallel computing ---
   - dask
   - dask-gateway
+  - dask-labextension
+  - dask-ml
   - distributed
   # --- Visualization ---
   - matplotlib-base
