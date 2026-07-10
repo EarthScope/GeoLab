@@ -1,0 +1,212 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/geolab-base
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        image:
+          - geolab-base
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine semantic version and changelog entry
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          VERSION_FILE="VERSION"
+          CHANGELOG_FILE="CHANGELOG.md"
+          CURRENT_VERSION="0.1.0"
+
+          if [[ -f "$VERSION_FILE" ]]; then
+            CURRENT_VERSION="$(tr -d '\r\n' < "$VERSION_FILE")"
+          fi
+
+          if [[ "$CURRENT_VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            MAJOR="${BASH_REMATCH[1]}"
+            MINOR="${BASH_REMATCH[2]}"
+            PATCH="${BASH_REMATCH[3]}"
+          else
+            MAJOR="0"
+            MINOR="1"
+            PATCH="0"
+            CURRENT_VERSION="0.1.0"
+          fi
+
+          BASE_REF="${{ github.event.before }}"
+          HEAD_REF="${{ github.sha }}"
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git fetch origin "${{ github.base_ref }}" --depth=1
+            BASE_REF="origin/${{ github.base_ref }}"
+            HEAD_REF="HEAD"
+          elif [[ -z "$BASE_REF" || "$BASE_REF" == "0000000000000000000000000000000000000000" ]]; then
+            BASE_REF="HEAD^"
+          fi
+
+          CHANGED_FILES="$(git diff --name-only "$BASE_REF" "$HEAD_REF" -- geolab-base/Dockerfile geolab-base/environment.yml geolab-base/requirements.txt geolab-base/apt.txt || true)"
+
+          BASE_IMAGE_CHANGED="0"
+          PACKAGE_CHANGE="0"
+          CHANGE_TYPE="patch"
+          CHANGE_SUMMARY="Security or functional patch to a package"
+          DETAILS=()
+
+          if echo "$CHANGED_FILES" | grep -q 'geolab-base/Dockerfile'; then
+            BASE_BEFORE="$(git show "$BASE_REF:geolab-base/Dockerfile" 2>/dev/null | sed -n 's/^FROM //p' | head -n 1 || true)"
+            BASE_AFTER="$(git show "$HEAD_REF:geolab-base/Dockerfile" 2>/dev/null | sed -n 's/^FROM //p' | head -n 1 || true)"
+            if [[ -n "$BASE_BEFORE" && -n "$BASE_AFTER" && "$BASE_BEFORE" != "$BASE_AFTER" ]]; then
+              BASE_IMAGE_CHANGED="1"
+              CHANGE_TYPE="major"
+              CHANGE_SUMMARY="Major version change of the base image"
+              DETAILS+=("- Base image changed from $BASE_BEFORE to $BASE_AFTER")
+            fi
+          fi
+
+          if echo "$CHANGED_FILES" | grep -E -q 'geolab-base/(environment.yml|requirements.txt|apt.txt)'; then
+            DIFF_OUTPUT="$(git diff --unified=0 "$BASE_REF" "$HEAD_REF" -- geolab-base/environment.yml geolab-base/requirements.txt geolab-base/apt.txt 2>/dev/null || true)"
+            if echo "$DIFF_OUTPUT" | grep -Eq '^[+-][[:space:]]*[A-Za-z0-9_.-]+'; then
+              PACKAGE_CHANGE="1"
+              DETAILS+=("- Package definitions changed in geolab-base environment files")
+            fi
+          fi
+
+          if [[ "$BASE_IMAGE_CHANGED" == "1" ]]; then
+            NEW_VERSION="$((MAJOR + 1)).0.0"
+            CHANGE_TYPE="major"
+          elif [[ "$PACKAGE_CHANGE" == "1" ]]; then
+            NEW_VERSION="$MAJOR.$((MINOR + 1)).0"
+            CHANGE_TYPE="minor"
+            CHANGE_SUMMARY="Addition or removal of a package"
+          else
+            NEW_VERSION="$MAJOR.$MINOR.$((PATCH + 1))"
+            CHANGE_TYPE="patch"
+            CHANGE_SUMMARY="Security or functional patch to a package"
+          fi
+
+          echo "$NEW_VERSION" > "$VERSION_FILE"
+
+          DATE_STAMP="$(date -u +%Y-%m-%d)"
+          if [[ ! -f "$CHANGELOG_FILE" ]]; then
+            printf '# Changelog\n\n## %s - %s\n- %s\n' "$NEW_VERSION" "$DATE_STAMP" "$CHANGE_SUMMARY" > "$CHANGELOG_FILE"
+          else
+            TEMP_FILE="$(mktemp)"
+            {
+              printf '# Changelog\n\n'
+              printf '## %s - %s\n' "$NEW_VERSION" "$DATE_STAMP"
+              printf '- %s\n\n' "$CHANGE_SUMMARY"
+              sed '/^# Changelog$/d' "$CHANGELOG_FILE"
+            } > "$TEMP_FILE"
+            mv "$TEMP_FILE" "$CHANGELOG_FILE"
+          fi
+
+          echo "version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+          echo "change_type=$CHANGE_TYPE" >> "$GITHUB_OUTPUT"
+          echo "change_summary=$CHANGE_SUMMARY" >> "$GITHUB_OUTPUT"
+          echo "Resolved version: $NEW_VERSION"
+          echo "## Versioning summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Change type: $CHANGE_TYPE" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Change summary: $CHANGE_SUMMARY" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Next version: $NEW_VERSION" >> "$GITHUB_STEP_SUMMARY"
+          if (( ${#DETAILS[@]} > 0 )); then
+            echo "- Details:" >> "$GITHUB_STEP_SUMMARY"
+            for item in "${DETAILS[@]}"; do
+              echo "  $item" >> "$GITHUB_STEP_SUMMARY"
+            done
+          fi
+
+      - name: Commit version and changelog updates
+        if: github.event_name != 'pull_request' && github.actor != 'github-actions[bot]'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add VERSION CHANGELOG.md
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: bump image version to ${{ steps.version.outputs.version }}"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set package visibility to public
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          OWNER="${{ github.repository_owner }}"
+          PACKAGE_NAME="${{ matrix.image }}"
+          echo "Setting package visibility to public for ${PACKAGE_NAME}"
+          if gh api "/orgs/${OWNER}/packages/container/${PACKAGE_NAME}" >/dev/null 2>&1; then
+            gh api --method PATCH "/orgs/${OWNER}/packages/container/${PACKAGE_NAME}" -f visibility=public
+          else
+            gh api --method PATCH "/users/${OWNER}/packages/container/${PACKAGE_NAME}" -f visibility=public
+          fi
+          exit 0
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=dev-${{ steps.version.outputs.version }}
+            type=raw,value=dev-${{ steps.version.outputs.version }}-${{ github.sha }}
+            type=ref,event=branch
+            type=ref,event=pr
+            type=ref,event=tag
+            type=sha,format=short
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./${{ matrix.image }}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            IMAGE_TITLE=${{ matrix.image }}
+            IMAGE_AUTHORS=EarthScope
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64
