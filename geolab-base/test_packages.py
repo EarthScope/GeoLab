@@ -303,33 +303,75 @@ def test_distributed():
 
 
 def test_dascore():
-    import dascore
-
-    assert hasattr(dascore, "__version__")
+    import dascore as dc
+    
+    patch = dc.get_example_patch("random_das")   # synthetic DAS data, no download
+    
+    assert "time" in patch.dims
+    assert "distance" in patch.dims
+    sizes = dict(zip(patch.dims, patch.data.shape))
+    assert sizes["time"] > 0 and sizes["distance"] > 0
+    
+    decimated = patch.decimate(time=8) 
+    dec_sizes = dict(zip(decimated.dims, decimated.data.shape))
+    assert dec_sizes["time"] < sizes["time"]            # fewer time samples
+    assert dec_sizes["distance"] == sizes["distance"]   # distance unchanged
 
 
 def test_gmt_cli():
-    out = _cli_version("gmt")
+    #engine and map data are tested through test_pygmt
+    out = _cli_version("gmt") 
     assert re.match(r"\d+\.\d+", out.strip())  # gmt --version prints bare "6.6.0"
 
 
 def test_obspy():
-    from obspy import UTCDateTime
+    import obspy
+    
+    st = obspy.read()   # bundled 3-trace example seismogram that comes with obspy
+    
+    assert len(st) == 3 #checks the stream contains exactly three traces
+    tr = st[0] 
+    assert tr.stats.sampling_rate > 0 
+    assert tr.stats.npts == len(tr.data)   
+    # Run a real signal-processing step: a bandpass filter (1–10 Hz).
+    n_before = tr.stats.npts
+    st.filter("bandpass", freqmin=1.0, freqmax=10.0)
+    assert st[0].stats.npts == n_before          # filtering preserves sample count
+    assert st[0].data.shape == (n_before,)       # still a populated 1-D waveform
 
-    t = UTCDateTime("2020-01-01T12:30:45")
-    assert t.year == 2020
-    assert t.month == 1
-    assert t.hour == 12
 
-
-def test_pygmt():
+def test_pygmt(tmp_path):
     import pygmt
+    
+    fig = pygmt.Figure()
+    fig.coast(
+      region=[-10, 10, -10, 10],
+      projection="M6c",
+      land="gray",
+      water="lightblue",
+      shorelines="1/0.5p",   
+      borders="1/0.5p",      
+    )
+    out = tmp_path / "coast.png"
+    fig.savefig(out)
+    assert out.exists()
+    assert out.stat().st_size > 0
 
-    assert pygmt.__version__
 
-
-def test_obsplus():
-    import obsplus  # noqa: F401
+def test_obsplus(tmp_path):
+    import obspy
+    import obsplus
+    
+    # Write the bundled obspy example stream into a temp dir in MSEED format.
+    stream=obspy.read()
+    stream.write(str(tmp_path / "example.mseed"), format="MSEED")
+    
+    bank = obsplus.WaveBank(str(tmp_path)) #creates wavebank representing the tmp path.
+    bank.update_index()
+    
+    assert len(bank.read_index()) > 0                        # index has entries
+    got = bank.get_waveforms()
+    assert {tr.id for tr in got} == {tr.id for tr in stream} #checks the channels that come back match the channels that went in
 
 
 # ─── Optimization ─────────────────────────────────────────────
