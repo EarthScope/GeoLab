@@ -2,7 +2,7 @@
 # Installed into the base conda env after the conda-packages step.
 
 # --- EarthScope ---
-earthscope-sdk==1.4.1
+earthscope-sdk==1.6.1
 earthscope-cli==1.2.0
 earthscopestraintools
 
