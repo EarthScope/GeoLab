@@ -494,6 +494,12 @@ def test_nbdime():
     assert nbdime.__version__
 
 
+def test_nbgitpuller():
+    import nbgitpuller
+
+    assert nbgitpuller.__version__
+
+
 # ─── pip packages ─────────────────────────────────────────────
 
 
@@ -555,7 +561,9 @@ def test_anywidget():
     assert anywidget.__version__
 
 
-@pytest.mark.filterwarnings("ignore:metadata .* was set from the constructor:DeprecationWarning")
+@pytest.mark.filterwarnings(
+    "ignore:metadata .* was set from the constructor:DeprecationWarning"
+)
 def test_bqplot():
     import bqplot  # noqa: F401
 
