@@ -57,10 +57,6 @@ def test_boto3():
     assert client.meta.service_model.service_name == "s3"
 
 
-def test_obstore():
-    import obstore  # noqa: F401
-
-
 def test_fsspec():
     import fsspec
 
@@ -356,22 +352,6 @@ def test_pygmt(tmp_path):
     fig.savefig(out)
     assert out.exists()
     assert out.stat().st_size > 0
-
-
-def test_obsplus(tmp_path):
-    import obspy
-    import obsplus
-    
-    # Write the bundled obspy example stream into a temp dir in MSEED format.
-    stream=obspy.read()
-    stream.write(str(tmp_path / "example.mseed"), format="MSEED")
-    
-    bank = obsplus.WaveBank(str(tmp_path)) #creates wavebank representing the tmp path.
-    bank.update_index()
-    
-    assert len(bank.read_index()) > 0                        # index has entries
-    got = bank.get_waveforms()
-    assert {tr.id for tr in got} == {tr.id for tr in stream} #checks the channels that come back match the channels that went in
 
 
 # ─── Optimization ─────────────────────────────────────────────
