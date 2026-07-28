@@ -376,6 +376,17 @@ def test_vl_convert():
     assert vlc.__version__
 
 
+def test_graphviz(tmp_path):
+    import dask.array as da
+
+    target = tmp_path / "task_graph"
+    da.ones(10, chunks=5).sum().visualize(filename=str(target), format="png")
+    
+    out = target.with_suffix(".png")
+    assert out.exists()
+    assert out.stat().st_size > 0
+
+
 # ─── Media & system tools ─────────────────────────────────────
 
 
@@ -583,3 +594,11 @@ def test_ipydatagrid():
 
 def test_sidecar():
     from sidecar import Sidecar  # noqa: F401
+
+    
+def test_ipycytoscape():
+    import dask.array as da
+    from ipycytoscape import CytoscapeWidget
+
+    graph = da.ones(10, chunks=5).sum().visualize(engine="cytoscape", filename=None)
+    assert isinstance(graph, CytoscapeWidget)

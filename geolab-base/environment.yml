@@ -54,6 +54,7 @@ dependencies:
   - plotly
   - ipympl
   - panel
+  - python-graphviz
   # --- Interactive widgets ---
   - ipywidgets
   - anywidget
@@ -62,6 +63,7 @@ dependencies:
   - itables
   - ipydatagrid
   - sidecar
+  - ipycytoscape
   # --- Geospatial ---
   - cartopy
   - contextily
