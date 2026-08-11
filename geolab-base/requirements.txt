@@ -6,6 +6,8 @@ earthscope-sdk==1.6.1
 earthscope-cli==1.2.0
 earthscopestraintools
 
-
 # --- Jupyter add-ons ---
 jupyterlab_jupyterbook_navigation
+
+# --- Geophysics ---
+seisbench==0.12.3

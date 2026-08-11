@@ -47,6 +47,8 @@ dependencies:
   - distributed
   # --- Visualization ---
   - matplotlib-base
+  - graphviz
+  - pygraphviz
   - altair
   - hvplot
   - holoviews
