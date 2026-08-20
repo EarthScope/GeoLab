@@ -49,6 +49,7 @@ dependencies:
   - matplotlib-base
   - graphviz
   - pygraphviz
+  - ipycytoscape
   - altair
   - hvplot
   - holoviews
