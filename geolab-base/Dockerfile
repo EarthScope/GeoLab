@@ -20,7 +20,7 @@ FROM pangeo/base-image:04bb14b
 
 ARG IMAGE_TITLE="custom-geolab-image"   # default if user passes nothing
 ARG IMAGE_AUTHORS="NoSpecifiedAuthors"  # default if user passes nothing
-ARG GEOLAB_VERSION="0.9.4"              # default if user passes nothing
+ARG GEOLAB_VERSION="1.0.1"              # default if user passes nothing
 
 LABEL org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="${IMAGE_AUTHORS}" \
