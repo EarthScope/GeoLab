@@ -1,0 +1,117 @@
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  # --- Jupyter server + extensions ---
+  - jupyterhub
+  - jupyter_server
+  - jupyterlab
+  - ipykernel
+  - jupyter-resource-usage
+  - jupyter-ruff
+  - jupyter-server-proxy
+  - jupyterlab-git
+  - jupyterlab-myst
+  - jupyterlab_code_formatter
+  - jupyterlab_pygments
+  - nbdime
+  - nbgitpuller
+  # --- Cloud & storage ---
+  - awscli
+  - awswrangler
+  - boto3
+  - fsspec
+  - obstore
+  - s3fs
+  # --- Array / data ---
+  - numpy
+  - scipy
+  - pandas
+  - polars
+  - xarray
+  - bottleneck
+  - flox
+  - h5py
+  - netcdf4
+  - h5netcdf
+  - pyarrow
+  - cvxpy
+  - zarr
+  - virtualizarr
+  - numba
+  - pooch
+  # --- Parallel computing ---
+  - dask
+  - dask-gateway
+  - distributed
+  # --- Visualization ---
+  - matplotlib-base
+  - graphviz
+  - pygraphviz
+  - ipycytoscape
+  - altair
+  - hvplot
+  - holoviews
+  - vegafusion
+  - vl-convert-python>=1.9.0
+  - plotly
+  - ipympl
+  - panel
+  # --- Interactive widgets ---
+  - ipywidgets
+  - anywidget
+  - bqplot
+  - ipytree
+  - itables
+  - ipydatagrid
+  - sidecar
+  # --- Geospatial ---
+  - cartopy
+  - contextily
+  - fiona
+  - folium
+  - gdal
+  - geopandas
+  - ipyleaflet
+  - lonboard
+  - pyproj
+  - shapely
+  # --- Geophysics ---
+  - dascore
+  - obspy
+  - obsplus
+  - gmt
+  - pygmt
+  # --- System / binary tools ---
+  - ffmpeg
+  - ghostscript  # runtime dep for GMT/pygmt
+  # --- Dev tools and utilities ---
+  - gh
+  - gh-scoped-creds
+  - pip
+  - pytest
+  - pyyaml
+  - requests
+  - ruff
+  - tqdm
+  # --- GPU / Machine learning ---
+  # GPU acceleration comes from these cuda12* conda-forge builds, not
+  # from apt -- the NVIDIA driver itself is mounted in from the host by
+  # the container runtime at /usr/local/nvidia (see Dockerfile-gpu).
+  - cuda-version>=12.6
+  - tensorflow>=2.17.0=cuda12*
+  - jax
+  - jaxlib>=0.4.31=cuda12*
+  - flax>=0.10.2
+  - keras-cv
+  - jupyterlab-nvdashboard
+  - scikit-learn
+  - scikit-image
+  - xgboost
+  - dask-ml
+  - seaborn
+  - line_profiler
+  - memory_profiler
+  - snakeviz
+  - watermark
