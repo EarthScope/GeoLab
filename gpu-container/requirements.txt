@@ -1,0 +1,23 @@
+# requirements.txt — pip packages for the geolab GPU container image
+# Installed into the base conda env after the conda-packages step.
+
+# --- EarthScope ---
+earthscope-sdk==1.6.1
+earthscope-cli==1.2.0
+earthscopestraintools
+
+# --- Jupyter add-ons ---
+jupyterlab_jupyterbook_navigation
+
+# --- Geophysics ---
+# Deep-learning seismic phase picking / ML models (PhaseNet, EQTransformer
+# among them). seisbench itself declares only `torch>=1.10.0`, so without
+# a pin pip installs the newest torch -- whose default Linux wheel now
+# targets CUDA 13 (needs driver >=580.65.06), which will NOT work with
+# this image's baked-in NVIDIA_DRIVER_VERSION=550 (see Dockerfile). Pin
+# torch to a CUDA 12.6 build instead: CUDA 12.6 only needs driver
+# >=525.60.13, comfortably under 550, and this is still the latest torch
+# release (2.13.0) -- just built against cu126 instead of the cu13 default.
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch==2.13.0+cu126
+seisbench==0.12.5
