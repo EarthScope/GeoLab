@@ -20,7 +20,7 @@ FROM pangeo/base-image:04bb14b
 
 ARG IMAGE_TITLE="custom-geolab-image"   # default if user passes nothing
 ARG IMAGE_AUTHORS="NoSpecifiedAuthors"  # default if user passes nothing
-ARG GEOLAB_VERSION="1.0.1"              # default if user passes nothing
+ARG GEOLAB_VERSION                      # no default; must be passed with --build-arg
 
 RUN test -n "$GEOLAB_VERSION" || (echo "GEOLAB_VERSION must not be empty" >&2 && exit 1)
 
