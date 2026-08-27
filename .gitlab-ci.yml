@@ -27,7 +27,7 @@ variables:
   GITLAB_HOSTED_RUNNER_SIZE: "saas-linux-medium-amd64"
   USE_TIMESTAMP_VERSION: "false"
   # Version baked into the geolab-base image (org.opencontainers.image.version
-  # label and GEOLAB_VERSION env var). Override on the "Run pipeline" page to
-  # set a different version without editing this file; should match the
-  # RELEASE_VERSION you enter for the release job.
-  GEOLAB_VERSION: "1.0.1"
+  # label and GEOLAB_VERSION env var). No default: must be set on the "Run
+  # pipeline" page for each build, matching the RELEASE_VERSION you enter for
+  # the release job. Left empty, the Dockerfile's guard fails the build.
+  GEOLAB_VERSION: ""
