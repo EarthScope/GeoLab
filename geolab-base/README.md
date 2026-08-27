@@ -17,6 +17,7 @@ Steps:
   - [Running the local testing image](#running-the-local-testing-image)
   - [Verifying the installed packages](#verifying-the-installed-packages)
 - [Building and publishing the image](#building-and-publishing-the-image)
+  - [Setting the version and updating the changelog](#setting-the-version-and-updating-the-changelog)
   - [Building the platform image](#building-the-platform-image)
   - [Publishing the platform image](#publishing-the-platform-image)
 - [Running your published image in GeoLab](#running-your-published-image-in-geolab)
@@ -235,6 +236,13 @@ pytest test_packages.py -v
 
 Once your configuration files are ready, you build the image locally *for the GeoLab platform* and push it to a container registry so GeoLab can access it.
 
+### Setting the version and updating the changelog
+
+Before building, decide on a version number for the image, following [semantic versioning](https://semver.org/) (e.g. `1.2.0`).
+
+- Update `CHANGELOG.md` with a new entry describing what changed in this version. This must be done by hand — it is not generated automatically from commits or the build.
+- Pass the same version to the build with the `GEOLAB_VERSION` build-arg (see below). The Dockerfile has no default for it, so the build fails immediately if it is omitted or empty.
+
 ### Building the platform image
 
 The `--platform linux/amd64` flag ensures the image runs on the same platform as GeoLab regardless of your own computer architecture.  Name the image using your repository username, a descriptive name and tag to track versions, such as `username/my-geolab-image:0.1.0`.
@@ -244,10 +252,11 @@ docker build --no-cache -f Dockerfile \
  --platform linux/amd64 \
  --build-arg IMAGE_TITLE=my-geolab-image \
  --build-arg IMAGE_AUTHORS=you@university.edu \
+ --build-arg GEOLAB_VERSION=0.1.0 \
  --tag username/my-geolab-image:0.1.0 .
 ```
 
-Replace `username` with your Docker Hub username (or your registry path), `my-geolab-image` with your image name, and `0.1.0` with your version tag.  The `--build-arg` values for `IMAGE_TITLE` and `IMAGE_AUTHORS` are optional but recommended for image metadata.
+Replace `username` with your Docker Hub username (or your registry path), `my-geolab-image` with your image name, and `0.1.0` with your version tag.  The `--build-arg` values for `IMAGE_TITLE` and `IMAGE_AUTHORS` are optional but recommended for image metadata; `GEOLAB_VERSION` is required and should match the version you added to `CHANGELOG.md` and the tag you build with. It is baked into the image as the `org.opencontainers.image.version` label and as the `GEOLAB_VERSION` environment variable inside the running container.
 
 What does `--no-cache` do? It forces Docker to rerun build steps from scratch, ensuring a clean build when publishing.
 
