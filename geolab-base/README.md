@@ -243,6 +243,9 @@ Before building, decide on a version number for the image, following [semantic v
 - Update `CHANGELOG.md` with a new entry describing what changed in this version. This must be done by hand — it is not generated automatically from commits or the build.
 - Pass the same version to the build with the `GEOLAB_VERSION` build-arg (see below). The Dockerfile has no default for it, so the build fails immediately if it is omitted or empty.
 
+> [!NOTE]
+> When the official `geolab-base` image is built through GitLab CI, `GEOLAB_VERSION` is a pipeline variable (also with no default) rather than a `--build-arg` you type by hand. Set it on the "Run pipeline" page for each run, matching the `RELEASE_VERSION` you enter for the release job — leaving it blank fails the build the same way an empty `--build-arg` does locally.
+
 ### Building the platform image
 
 The `--platform linux/amd64` flag ensures the image runs on the same platform as GeoLab regardless of your own computer architecture.  Name the image using your repository username, a descriptive name and tag to track versions, such as `username/my-geolab-image:0.1.0`.
