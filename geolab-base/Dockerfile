@@ -22,6 +22,8 @@ ARG IMAGE_TITLE="custom-geolab-image"   # default if user passes nothing
 ARG IMAGE_AUTHORS="NoSpecifiedAuthors"  # default if user passes nothing
 ARG GEOLAB_VERSION="1.0.1"              # default if user passes nothing
 
+RUN test -n "$GEOLAB_VERSION" || (echo "GEOLAB_VERSION must not be empty" >&2 && exit 1)
+
 LABEL org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="${IMAGE_AUTHORS}" \
       org.opencontainers.image.version="${GEOLAB_VERSION}"
