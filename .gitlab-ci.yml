@@ -17,7 +17,7 @@ include:
 
 .images_matrix:
   - DOCKERFILE_RELPATH: "geolab-base"
-    DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12 --build-arg GEOLAB_VERSION=1.0.1"
+    DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12 --build-arg GEOLAB_VERSION=${GEOLAB_VERSION}"
   #- DOCKERFILE_RELPATH: "geolab-gpu"
 
 
@@ -26,3 +26,8 @@ variables:
   DOCKERFILE_RELPATH_IS_IMAGE_NAME: "true"
   GITLAB_HOSTED_RUNNER_SIZE: "saas-linux-medium-amd64"
   USE_TIMESTAMP_VERSION: "false"
+  # Version baked into the geolab-base image (org.opencontainers.image.version
+  # label and GEOLAB_VERSION env var). Override on the "Run pipeline" page to
+  # set a different version without editing this file; should match the
+  # RELEASE_VERSION you enter for the release job.
+  GEOLAB_VERSION: "1.0.1"
