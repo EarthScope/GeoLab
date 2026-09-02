@@ -9,3 +9,4 @@ earthscopestraintools
 
 # --- Jupyter add-ons ---
 jupyterlab_jupyterbook_navigation
+jupyterlab-topbar-stop-server
