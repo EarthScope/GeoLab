@@ -9,7 +9,5 @@ earthscopestraintools
 
 # --- Jupyter add-ons ---
 jupyterlab_jupyterbook_navigation
-jupyterlab-topbar-stop-server==1.1.2
-jupyterlab-topbar-text
-jupyterlab-logout
+jupyterlab-topbar-stop-server==0.1.0
 jupyterlab-theme-toggler
