@@ -17,7 +17,9 @@ include:
 
 .images_matrix:
   - DOCKERFILE_RELPATH: "geolab-base"
-    DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12"
+    DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12 --build-arg GEOLAB_VERSION=${IMAGE_VERSION}"
+  - DOCKERFILE_RELPATH: "geolab-gmt"
+    DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12 --build-arg GEOLAB_VERSION=${IMAGE_VERSION}"
   #- DOCKERFILE_RELPATH: "geolab-gpu"
 
 
