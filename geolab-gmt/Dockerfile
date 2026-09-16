@@ -1,6 +1,7 @@
 # geolab-base Dockerfile for JupyterLab with Embedded VNC Desktop
-# pinned to geolab-base:main-20260819165000-7b821510 instead of latest to avoid breaking changes in the base image
-FROM public.ecr.aws/earthscope/geolab/geolab-base:main-20260819165000-7b821510 AS  stage
+# temporarily pinned to the spara/geolab-s3fs:0.0.0 test build (includes the
+# aiobotocore<3.0.0 fix) instead of the published geolab-base tag
+FROM spara/geolab-s3fs:0.0.0 AS  stage
 
 
 ENV NB_GID=100
@@ -10,6 +11,7 @@ USER root
 RUN apt-get update -qq --yes > /dev/null \
     && apt-get install gmt-dcw gmt-gshhg --yes \
     && apt-get install gedit --yes \
+    && apt-get install nano --yes \
     && apt-get install man-db --yes \
     && apt-get install openjdk-11-jre-headless --yes \
     && apt-get install xdg-utils --yes \
@@ -43,8 +45,12 @@ RUN gdalinfo --formats | grep -q JP2OpenJPEG || (echo "JP2OpenJPEG driver missin
 WORKDIR /opt
 RUN wget -P /opt/ https://zenodo.org/records/16884103/files/TauP-3.1.0.zip \
     && unzip /opt/TauP-3.1.0.zip \
-    &&  echo 'export PATH=$PATH:/opt/TauP-3.1.0/bin'  >> /etc/profile \
+    && chmod +x /opt/TauP-3.1.0/bin/taup \
     && rm /opt/TauP-3.1.0.zip
+
+# JupyterLab's CMD is not a login shell, so /etc/profile is never sourced for it
+# (see GDAL_DRIVER_PATH above) -- PATH must be set as a real Docker ENV instead.
+ENV PATH="${PATH}:/opt/TauP-3.1.0/bin"
 
 # Dockerfile for JupyterLab with Embedded VNC Desktop
 # ====================================================
