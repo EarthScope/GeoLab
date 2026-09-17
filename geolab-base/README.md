@@ -75,8 +75,8 @@ Your `my-geolab-image` directory should have the following files:
 ├── environment.yml
 ├── requirements.txt
 ├── start
+├── test_helpers.py
 ├── test_notebook.ipynb
-├── test_packages.py
 └── ...
 ```
 
@@ -152,14 +152,14 @@ Some packages are only available on PyPI (Python's package index) and can be ins
 
 ```shell
 # --- EarthScope ---
-earthscope-sdk==1.4.1
+earthscope-sdk==1.6.1
 earthscope-cli==1.2.0
 earthscopestraintools
 gnss-lib-py  <-- NEW
 ```
 
 > [!TIP]
-> Pin versions for packages critical to your workflow (e.g., `earthscope-sdk==1.4.1`). This prevents silent breakage when upstream packages release updates if you rebuild the image.
+> Pin versions for packages critical to your workflow (e.g., `earthscope-sdk==1.6.1`). This prevents silent breakage when upstream packages release updates if you rebuild the image.
 
 ### Creating a postBuild script
 
@@ -213,38 +213,44 @@ What is the docker run command doing?  The `--rm` flag will delete the container
 
 ### Verifying the installed packages
 
-The image includes two test options that ensure installed packages import and run. Both are copied into the container at build time, so they are available in the running container. Use them after a build to confirm nothing is broken (a missing system library or version conflict often installs cleanly but fails at import).  Adjust as needed for the packages that you added or removed from the build.
+The image includes `test_notebook.ipynb`, which ensures installed packages import and run. It is copied into the container at build time, so it is available in the running container. Use it after a build to confirm nothing is broken (a missing system library or version conflict often installs cleanly but fails at import). Adjust as needed for the packages that you added or removed from the build.
 
-In the Jupyter interface at `http://127.0.0.1:8888/lab...`:
+The notebook's checks are built on top of `test_helpers.py`, a small module of test helpers (also copied into the container) that the notebook imports rather than duplicating this logic in every cell:
 
-**Option 1 — `test_packages.py` (pytest, fastest).**  This runs a minimal API call for each package and prints a pass/fail line per package.
+| Function | Use for | What it does |
+| --- | --- | --- |
+| `py(modname, alias=None, smoke=None)` | Python packages | Imports `modname` and, if given, calls `smoke(mod)` as a minimal sanity check (e.g. constructing an object or calling a function). Records a pass with the package's `__version__`, or a fail with the exception. |
+| `cli(cmd, version_flag='--version')` | Command-line tools | Confirms `cmd` is on `$PATH` and responds to `version_flag`. Records a pass with the version string, or a fail if it's missing. |
 
-Create a new Terminal inside a running JupyterLab session (File → New → Terminal):
+Each call appends a `(name, status, version, error)` row to the shared `RESULTS` list, which the notebook's final cell renders as a summary table.
 
-```shell
-pytest test_packages.py -v
+In the Jupyter interface at `http://127.0.0.1:8888/lab...`, open `test_notebook.ipynb` and run all cells (Run → Run All Cells). The notebook is organized into one section per category in `environment.yml`/`requirements.txt` (Cloud & storage, Geospatial, Core scientific stack, etc.), each running `py()`/`cli()` checks for the packages in that category, and ends with a summary table listing the status (and version) of each package, with failures highlighted in red.
+
+**Adding a test for a new package.** If you add a package to `environment.yml` or `requirements.txt`, add a matching check to `test_notebook.ipynb` so it's covered by the summary table. Pick the section that matches where you added the package (or add a new section), and add a `py()` or `cli()` call.
+
+For example, adding `seisfetch` (a Python package) to the Geo / geoscience section:
+
+```python
+py('dascore')
+cli('gmt', version_flag='--version')
+py('obspy',
+   smoke=lambda m: m.UTCDateTime('2020-01-01').timestamp)
+py('obsplus')
+py('pygmt')
+py('seisfetch',
+   smoke=lambda m: m.Client())  # replace with a minimal, side-effect-free call
 ```
 
-**Option 2 — `test_notebook.ipynb` (interactive).**  Open `test_notebook.ipynb`, and run all cells (Run → Run All Cells). The notebook performs the same import-and-exercise checks and ends with a summary table listing the status (and version) of each package, with failures highlighted in red.
+The `smoke` argument is optional but recommended — a bare import can succeed even when the package is broken in ways that only show up on first use (e.g. a missing compiled extension). Pick a call that exercises the package without hitting the network or requiring credentials, since the notebook may run without EarthScope services available locally.
 
 > [!TIP]
-> A failure here points at the package, not your notebook code — usually a missing system dependency (add it to `apt.txt`) or a version conflict between conda and pip packages. If you add or remove a package in `environment.yml` or `requirements.txt`, update the tests to match.
+> A failure here points at the package, not your notebook code — usually a missing system dependency (add it to `apt.txt`) or a version conflict between conda and pip packages. If you add or remove a package in `environment.yml` or `requirements.txt`, update the notebook to match.
 
 ---
 
 ## Building and publishing the image
 
 Once your configuration files are ready, you build the image locally *for the GeoLab platform* and push it to a container registry so GeoLab can access it.
-
-### Setting the version and updating the changelog
-
-Before building, decide on a version number for the image, following [semantic versioning](https://semver.org/) (e.g. `1.2.0`).
-
-- Update `CHANGELOG.md` with a new entry describing what changed in this version. This must be done by hand — it is not generated automatically from commits or the build.
-- Pass the same version to the build with the `GEOLAB_VERSION` build-arg (see below). The Dockerfile has no default for it, so the build fails immediately if it is omitted or empty.
-
-> [!NOTE]
-> When the official `geolab-base` image is built through GitLab CI, `GEOLAB_VERSION` is a pipeline variable (also with no default) rather than a `--build-arg` you type by hand. Set it on the "Run pipeline" page for each run, matching the `RELEASE_VERSION` you enter for the release job — leaving it blank fails the build the same way an empty `--build-arg` does locally.
 
 ### Building the platform image
 
@@ -255,13 +261,15 @@ docker build --no-cache -f Dockerfile \
  --platform linux/amd64 \
  --build-arg IMAGE_TITLE=my-geolab-image \
  --build-arg IMAGE_AUTHORS=you@university.edu \
- --build-arg GEOLAB_VERSION=0.1.0 \
  --tag username/my-geolab-image:0.1.0 .
 ```
 
-Replace `username` with your Docker Hub username (or your registry path), `my-geolab-image` with your image name, and `0.1.0` with your version tag.  The `--build-arg` values for `IMAGE_TITLE` and `IMAGE_AUTHORS` are optional but recommended for image metadata; `GEOLAB_VERSION` is required and should match the version you added to `CHANGELOG.md` and the tag you build with. It is baked into the image as the `org.opencontainers.image.version` label and as the `GEOLAB_VERSION` environment variable inside the running container.
+> [TIP]
+> When building an image, setting a version in the image tag is a best practice. Versioning can track image changes to allow reproducibility. If a version tag, e.g. 0.1.0, Docker will automatically tag the image as `latest`.
 
-What does `--no-cache` do? It forces Docker to rerun build steps from scratch, ensuring a clean build when publishing.
+Replace `username` with your Docker Hub username (or your registry path), `my-geolab-image` with your image name, and `0.1.0` with your version tag. The `--build-arg` values for `IMAGE_TITLE` and `IMAGE_AUTHORS` are optional but recommended for image metadata; image tag versions should be added to a `CHANGELOG.md` file which list the changes associated to that version.
+
+`--no-cache` forces Docker to rerun build steps from scratch, ensuring a clean build when publishing.
 
 > [!NOTE]
 > Images will be cached by different systems, including the image repository and GeoLab.  If you are using a version (e.g. `0.1.0`) you should increment it for each build to avoid inadvertently using cached copies.
@@ -279,7 +287,7 @@ Replace the details to match the --tag value in the build command.
 > [!TIP]
 > If the push results in an error, make sure you are logged into Docker Hub using `docker login` if needed.
 
-Many other image repositories exist.  If you use AWS ECR, follow these [instructions](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html).
+Many other image repositories exist. If you use AWS ECR, follow these [instructions](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html).
 
 ---
 
