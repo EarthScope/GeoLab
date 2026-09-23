@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file.
 - add graphviz package
 - add pygraphviz package
 - add ipycytoscape
+- add nano package
+- add nbgitpuller package
+- add jupyterlab-topbar-stop-server package
 - added tests for new packages
 - add build_process.png for README
 

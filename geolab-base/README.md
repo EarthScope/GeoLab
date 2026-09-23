@@ -270,8 +270,6 @@ Replace the details to match the `--tag` value in the build command. By default,
 > [!TIP]
 > If the push results in an error, make sure you are logged into Docker Hub using `docker login`.
 
-Many other image repositories exist. If you use AWS ECR, follow these [instructions](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html).
-
 ### Publishing to GitHub or AWS Image Repositories
 
 Alternatives to Docker Hub include GitHub Container Registry (ghcr) or AWS Elastic Container Registry (ECR). Choosing an image repository depends on your requirements. GitHub features tight integration with CI (Continuous Integration) through GitHub Actions that can trigger an image build and push to ghcr, automating the process through a `pull request`. AWS ECR offers cloud-scale uploads and downloads to support multiple instances of GeoLab requested by hundreds of users or more.
