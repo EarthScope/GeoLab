@@ -4,3 +4,4 @@ git
 gmt-dcw
 gmt-gshhg
 make
+nano

@@ -17,7 +17,7 @@ include:
 
 .images_matrix:
   - DOCKERFILE_RELPATH: "geolab-base"
-    DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12"
+    DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12 --build-arg GEOLAB_VERSION=${IMAGE_VERSION}"
   #- DOCKERFILE_RELPATH: "geolab-gpu"
 
 
@@ -25,4 +25,4 @@ variables:
   CONTAINER_REGISTRY_PLATFORM: "AWS-PUB"
   DOCKERFILE_RELPATH_IS_IMAGE_NAME: "true"
   GITLAB_HOSTED_RUNNER_SIZE: "saas-linux-medium-amd64"
-
+  GEOLAB_VERSION: ""
