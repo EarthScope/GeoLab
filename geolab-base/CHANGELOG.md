@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.0]
+## [0.10.0]
 
 ### Added
 
@@ -23,3 +23,4 @@ All notable changes to this project will be documented in this file.
 - moved test_notebook functions to test_helpers.py module to make it easier for users to import when writing tests
 - updated test_notebook.ipynb to use test_helpers functions
 - updated README to match Building Custom Images in docs
+- update earthscope-sdk to 1.9.3
