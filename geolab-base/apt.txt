@@ -5,3 +5,4 @@ gmt-dcw
 gmt-gshhg
 make
 nano
+vim
