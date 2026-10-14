@@ -1,0 +1,66 @@
+# requirements.txt — pip packages for the geolab GPU image
+# Installed into the base conda env after the conda-packages step.
+
+# --- EarthScope ---
+earthscope-sdk==1.6.1
+earthscope-cli==1.2.0
+earthscopestraintools
+
+# --- Jupyter add-ons ---
+jupyterlab_jupyterbook_navigation
+jupyterlab-topbar-stop-server
+
+# --- GPU / machine learning ---
+# seisbench declares only `torch>=1.10.0`, so without a pin pip
+# installs the newest release -- whose default Linux wheel now
+# targets a newer CUDA runtime than the NVIDIA_DRIVER_VERSION baked
+# into this image supports (see Dockerfile). Pin torch to a CUDA
+# 12.6 build instead: CUDA 12.6 needs driver >=560.28.03, which the
+# Dockerfile's NVIDIA_DRIVER_VERSION=580 default satisfies (580 is
+# the closest branch Ubuntu's apt archive actually ships above that
+# minimum -- see the Dockerfile). If you change one, change the
+# other to match.
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch==2.14.0+cu126
+
+# Deep-learning seismic phase picking (PhaseNet, EQTransformer, and
+# others), built on the pinned torch above.
+seisbench==0.12.6
+
+# --- Graph / geometric deep learning ---
+# torchvision/torchaudio: matched exactly to the pinned torch build
+# above -- verified by asking pip to resolve `torchvision`/`torchaudio`
+# against torch==2.14.0+cu126 with no version given, then pinning what
+# it actually chose, not whatever happens to be newest later.
+torchvision==0.29.1+cu126
+torchaudio==2.11.0+cu126
+
+# PyTorch Geometric itself is pure Python with no per-torch-version
+# wheel, so it installs against any recent torch build directly.
+torch_geometric==2.8.0.post1
+
+# torch_scatter, torch_sparse, and torch_cluster (PyG's older C++/CUDA
+# extension packages, still expected by some PyG algorithms even
+# though torch_geometric itself no longer requires them for most
+# operations) are deliberately NOT listed here. They have no prebuilt
+# wheel for the pinned torch above (PyG's own wheel index only
+# publishes as far as torch 2.9.x at the time of writing) and must be
+# built --no-build-isolation against torch already installed, which a
+# single `pip install -r requirements.txt` doesn't guarantee the order
+# of. Built from source in the Dockerfile instead; see the RUN block
+# there.
+
+# --- Phase association ---
+# Group picks from seisbench (or any picker) across stations into
+# candidate events. Neither is on conda-forge.
+pyocto==0.2.0
+# GaMMA (Zhu et al.), a Gaussian-mixture-model associator. Its PyPI
+# distribution name is "GMMA"; it imports as `gamma`.
+gmma==1.2.17
+
+# --- Waveform / location toolkit ---
+# Pyrocko: waveform processing, synthetic seismograms, and its own
+# NonLinLoc/hypoDD file-format readers. Not on conda-forge (it has its
+# own conda channel, but that means adding a channel just for this one
+# package; a pip wheel is simpler here).
+pyrocko==2026.6.2
