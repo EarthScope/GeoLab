@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - jupyterlab-topbar-stop-server
 - tests for new packages
 - a build_process.png for README
+- conda-lock.yml
 
 ### Changed
 
