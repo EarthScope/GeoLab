@@ -61,7 +61,7 @@
 #   -t my-geolab-gpu-image .
 # ──────────────────────────────────────────────────────────────
 # Changing this tag is a major (breaking) change under semantic versioning.
-FROM pangeo/base-image:04bb14b
+FROM public.ecr.aws/earthscope/geolab/geolab-base:0.10.0
 
 
 ARG IMAGE_TITLE="custom-geolab-gpu-image"   # default if user passes nothing
@@ -120,7 +120,23 @@ RUN echo "Installing NVIDIA userspace driver ${NVIDIA_DRIVER_VERSION}..." \
 #                  flag only affects the *shell scripts* it generates).
 #   HypoDD      -- github.com/fwaldhauser/HypoDD, Felix Waldhauser's own
 #                  mirror (v2.1beta). Ships its own Dockerfile confirming
-#                  `make all` is all that's needed.
+#                  `make all` is all that's needed. Its event limits are
+#                  compile-time array sizes, and the defaults (hypoDD
+#                  MAXEVE=6500, ph2dt MEV=12000) are too small for a full
+#                  aftershock sequence (e.g. ~18,000 events for the 2017
+#                  Tehuantepec catalog), so both are raised to 20000 by
+#                  sed before building. The replacements keep each line's
+#                  width unchanged (fixed-form Fortran), and the grep
+#                  fails the build if upstream ever changes those lines
+#                  and the sed silently stops matching. At MAXEVE=20000
+#                  hypoDD's static arrays exceed 2 GB, which the default
+#                  x86-64 memory model can't address ("relocation
+#                  truncated to fit" at link time), hence -mcmodel=medium.
+#                  Memory cost: hypoDD touches those arrays on every run,
+#                  even a tiny one, so its peak RSS rises from ~2.0 GB
+#                  (default limits) to ~3.0 GB (measured on
+#                  test_notebook.ipynb's two-event test); give the
+#                  session at least 4 GB of RAM to run it.
 #   HypoInverse -- USGS's HYPOINVERSE-2000 v1.40. USGS itself only
 #                  distributes this via a request/FTP process, no git
 #                  repo; github.com/BORONG-SEIS/HypoInverse is an
@@ -160,7 +176,11 @@ RUN set -eux; \
     (cd NonLinLoc/src && mkdir -p bin && cmake . && make); \
     cp NonLinLoc/src/bin/NLLoc NonLinLoc/src/bin/Vel2Grid NonLinLoc/src/bin/Grid2Time /usr/local/bin/; \
     git clone --depth 1 https://github.com/fwaldhauser/HypoDD.git; \
-    (cd HypoDD/src && make all); \
+    sed -i 's/MAXEVE=   6500,/MAXEVE=  20000,/' HypoDD/include/hypoDD.inc; \
+    sed -i 's/MEV=    12000,/MEV=    20000,/' HypoDD/include/ph2dt.inc; \
+    grep -q 'MAXEVE=  20000,' HypoDD/include/hypoDD.inc; \
+    grep -q 'MEV=    20000,' HypoDD/include/ph2dt.inc; \
+    (cd HypoDD/src && make all FC="gfortran -mcmodel=medium" CC="gcc -mcmodel=medium"); \
     cp HypoDD/src/hypoDD/hypoDD HypoDD/src/ph2dt/ph2dt /usr/local/bin/; \
     git clone --depth 1 https://github.com/BORONG-SEIS/HypoInverse.git; \
     (cd HypoInverse/hyp1.40/source && make); \

@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - add line_profiler, memory_profiler, snakeviz, watermark packages
 - add pyocto, gmma (imports as `gamma`), pyrocko packages
 - build REAL, NonLinLoc, and HypoDD from source (no conda-forge/PyPI package exists); add cmake to apt.txt for NonLinLoc
+- raise HypoDD's compile-time event limits to 20000 (hypoDD MAXEVE from 6500, ph2dt MEV from 12000) for full aftershock-sequence catalogs; built with -mcmodel=medium, and hypoDD's peak memory rises from ~2.0 GB to ~3.0 GB per run
 - build HypoInverse (hyp1.40) from source; no conda-forge/PyPI package, and USGS only distributes it via a request/FTP process, not a git repo -- built from github.com/BORONG-SEIS/HypoInverse, an unofficial but clean, unauthenticated mirror of the same public-domain source
 - add torchvision, torchaudio pip packages, pinned to exactly match the existing torch==2.14.0+cu126 build
 - add torch_geometric pip package
