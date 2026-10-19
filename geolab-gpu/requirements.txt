@@ -35,6 +35,23 @@ seisbench==0.12.6
 torchvision==0.29.1+cu126
 torchaudio==2.11.0+cu126
 
+# --- GPU-accelerated compute (CUDA 12) ---
+# All CUDA 12 wheels, so they reuse the nvidia-*-cu12 libraries the
+# pinned torch above already installs (cuda-toolkit resolves to 12.6.x
+# to match torch's) rather than adding a second CUDA runtime. Verified
+# by resolving this whole file with pip on linux/amd64. Their CUDA 13
+# variants (plain `xgboost` on PyPI is now CUDA 13, cupy-cuda13x)
+# would each pull in a separate CUDA 13 stack instead.
+#   xgboost-cu12 -- GPU training/inference (`device="cuda"`); imports
+#                   as `xgboost`. Replaces conda-forge's CPU-only build.
+#   cupy-cuda12x -- NumPy/SciPy-compatible arrays on the GPU.
+#   numba-cuda   -- Numba's CUDA target (`numba.cuda`), now a separate
+#                   package from numba itself. The [cu12] extra adds
+#                   NVRTC/nvJitLink, which it needs to compile kernels.
+xgboost-cu12==3.4.1
+cupy-cuda12x==14.2.0
+numba-cuda[cu12]==0.30.4
+
 # PyTorch Geometric itself is pure Python with no per-torch-version
 # wheel, so it installs against any recent torch build directly.
 torch_geometric==2.8.0.post1

@@ -25,7 +25,11 @@ dependencies:
   - obstore
   - s3fs
   # --- Array / data ---
-  - numpy
+  # <2.5: numba-cuda (requirements.txt) calls np.row_stack, which numpy
+  # 2.5 removed, so compiling any CUDA kernel fails with "module 'numpy'
+  # has no attribute 'row_stack'" (still unfixed in numba-cuda 0.30.4
+  # and its main branch). Lift this once numba-cuda drops row_stack.
+  - numpy>=2.0,<2.5
   - scipy
   - pandas
   - polars
@@ -100,11 +104,15 @@ dependencies:
   # cu126 pip wheel in requirements.txt to match the NVIDIA driver
   # version baked into this image (see Dockerfile). Installing it via
   # conda too would pull in a second, differently-versioned build.
+  # The same goes for the other GPU-accelerated packages (xgboost,
+  # cupy, numba-cuda): they're CUDA 12 pip wheels in requirements.txt,
+  # sharing torch's CUDA libraries. conda-forge's CUDA builds can't be
+  # used here: they require a GPU at solve time, and `docker build` has
+  # none, so the solver would silently fall back to CPU-only builds.
   - jupyterlab-nvdashboard
   - nvidia-ml-py  # pynvml: GPU utilization/temperature queries, used by test_gpu.py's stress test
   - scikit-learn
   - scikit-image
-  - xgboost
   - dask-ml
   - seaborn
   - line_profiler

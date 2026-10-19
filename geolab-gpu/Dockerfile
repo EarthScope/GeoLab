@@ -8,8 +8,9 @@
 # into the image at build time (see the note below), a geometric
 # deep learning stack (torchvision, torchaudio, torch_geometric
 # from requirements.txt; torch_scatter/torch_sparse/torch_cluster
-# built from source below -- no prebuilt wheel matches the pinned
-# torch build), and a seismic phase-association/location toolkit
+# built from source below with CUDA kernels, using a CUDA 12.6
+# compiler toolkit also installed below -- no prebuilt wheel matches
+# the pinned torch build), and a seismic phase-association/location toolkit
 # (PyOcto, GaMMA, Pyrocko from requirements.txt; REAL, NonLinLoc,
 # HypoDD, and HypoInverse built from source below -- none of the
 # four have a packaged installer).
@@ -58,10 +59,15 @@
 #   --build-arg IMAGE_AUTHORS=you@university.edu \
 #   --build-arg GEOLAB_VERSION=1.0.0 \
 #   --build-arg NVIDIA_DRIVER_VERSION=580 \
+#   --build-arg TORCH_CUDA_ARCH_LIST="7.5" \
 #   -t my-geolab-gpu-image .
+# (TORCH_CUDA_ARCH_LIST is optional and defaults to 7.5, the Tesla
+# T4 the GeoLab GPU host has. Set it to your GPU's compute
+# capability if that differs, see the note above the torch_scatter
+# build below.)
 # ──────────────────────────────────────────────────────────────
 # Changing this tag is a major (breaking) change under semantic versioning.
-FROM public.ecr.aws/earthscope/geolab/geolab-base:0.10.0
+FROM pangeo/base-image:04bb14b
 
 
 ARG IMAGE_TITLE="custom-geolab-gpu-image"   # default if user passes nothing
@@ -270,20 +276,88 @@ EOF
 # isolated build env otherwise wouldn't have -- this only works because
 # this RUN executes after the parent image's ONBUILD step has already
 # installed requirements.txt (including torch) into the env.
-# This image has no CUDA toolkit/nvcc (see the NVIDIA driver note at
-# the top of this file -- only userspace runtime libs are baked in),
-# so these three compile CPU-only extensions: plain `torch` ops,
-# seisbench, and most of torch_geometric still use torch's own
-# prebuilt CUDA kernels and run on GPU normally; only ops from these
-# three packages specifically (scatter/segment reductions, sparse
-# tensor ops, radius/knn/farthest-point graph construction) run on CPU
-# regardless of GPU availability. Each takes several minutes to
-# compile from a cold cache (torch_sparse the longest, ~7-8 minutes on
-# an emulated/non-native build host) -- normal, not a hang.
-RUN pip install --no-build-isolation \
+#
+# They're compiled with CUDA kernels, using the CUDA toolkit installed
+# below, so their ops (scatter/segment reductions, sparse tensor ops,
+# radius/knn/farthest-point graph construction) run on the GPU.
+#   - CUDA_TOOLKIT_VERSION must match torch's own CUDA version (12.6
+#     for torch==2.14.0+cu126): torch's extension builder refuses a
+#     mismatched nvcc major version, and a different minor version
+#     risks ABI trouble. Change it together with the torch pin.
+#   - Only the pieces needed to compile against torch are installed,
+#     not the multi-GB cuda-toolkit-* meta-package: nvcc, the CUDA
+#     runtime/driver API headers, CCCL (Thrust/CUB), and the
+#     cuBLAS/cuSPARSE/cuSOLVER/cuRAND dev packages (torch's CUDA
+#     headers include all four). Their versions are the same ones
+#     torch's nvidia-*-cu12 pip wheels already ship. They come from
+#     NVIDIA's apt repo for Ubuntu 24.04, the base image's OS; no
+#     driver packages are installed from it, the driver stays the
+#     Ubuntu one installed above.
+#   - The toolkit stays in the image (CUDA_HOME and nvcc on PATH), so
+#     users can compile their own CUDA extensions or kernels too. It
+#     adds ~2.9 GB (measured), mostly the cuBLAS/cuSPARSE dev packages.
+#   - No GPU is needed to compile: FORCE_CUDA=1 makes PyG's setup.py
+#     build the CUDA kernels anyway (it otherwise checks
+#     torch.cuda.is_available(), which is False in `docker build`),
+#     and TORCH_CUDA_ARCH_LIST says which GPU architectures to emit
+#     code for. The default is 7.5 only: the Tesla T4 the GeoLab GPU
+#     host has. The kernels then run on a T4 and nothing else -- on
+#     any other GPU these three packages' CUDA ops fail with "no
+#     kernel image is available for execution on the device" (plain
+#     torch is unaffected; its own wheel covers many GPUs). For a
+#     different GPU, pass its compute capability (A100 is 8.0, A10 is
+#     8.6, L4 is 8.9, H100 is 9.0), or a semicolon-separated list for
+#     several, e.g. --build-arg TORCH_CUDA_ARCH_LIST="7.5;8.0".
+#   - Compiling is slow and scales with the number of architectures:
+#     ~30 minutes for a single one under emulation (measured, with
+#     torch_sparse taking most of it) -- normal, not a hang.
+ARG CUDA_TOOLKIT_VERSION=12.6
+ARG TORCH_CUDA_ARCH_LIST="7.5"
+RUN set -eux; \
+    v=$(echo "${CUDA_TOOLKIT_VERSION}" | tr . -); \
+    wget -q -O /tmp/cuda-keyring.deb \
+        https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb; \
+    dpkg -i /tmp/cuda-keyring.deb; \
+    rm /tmp/cuda-keyring.deb; \
+    apt-get update > /dev/null; \
+    apt-get install -y --no-install-recommends \
+        "cuda-nvcc-${v}" \
+        "cuda-cudart-dev-${v}" \
+        "cuda-driver-dev-${v}" \
+        "cuda-cccl-${v}" \
+        "cuda-profiler-api-${v}" \
+        "cuda-nvtx-${v}" \
+        "libcublas-dev-${v}" \
+        "libcusparse-dev-${v}" \
+        "libcusolver-dev-${v}" \
+        "libcurand-dev-${v}"; \
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/*
+
+# TORCH_CUDA_ARCH_LIST is kept in the image too, so CUDA extensions
+# users build later target the same GPU by default, and so
+# test_notebook.ipynb can check the GPU it runs on is one these
+# kernels were compiled for.
+ENV CUDA_HOME=/usr/local/cuda-${CUDA_TOOLKIT_VERSION} \
+    PATH=${PATH}:/usr/local/cuda-${CUDA_TOOLKIT_VERSION}/bin \
+    TORCH_CUDA_ARCH_LIST=${TORCH_CUDA_ARCH_LIST}
+
+RUN FORCE_CUDA=1 TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST}" \
+    pip install --no-build-isolation --no-cache-dir \
     torch_scatter==2.1.2 \
     torch_sparse==0.6.18 \
-    torch_cluster==1.6.3
+    torch_cluster==1.6.3 \
+    && python -c "import torch, torch_scatter, torch_sparse, torch_cluster; \
+assert all(getattr(torch.ops, p).cuda_version() > 0 for p in ('torch_scatter', 'torch_sparse', 'torch_cluster')), \
+'torch_scatter/torch_sparse/torch_cluster were built without CUDA'"
+
+# The root steps above run with HOME=/home/${NB_USER}, so anything they
+# cache under ~/.cache (pip, or Docker Desktop's Rosetta emulator when
+# building on Apple Silicon) is left root-owned, and the notebook user
+# then can't create its own cache dirs there (dascore and matplotlib
+# fail with PermissionError). Hand it back before switching users.
+RUN mkdir -p "/home/${NB_USER}/.cache" \
+    && chown -R "${NB_USER}:${NB_USER}" "/home/${NB_USER}/.cache"
 
 USER ${NB_USER}
 
