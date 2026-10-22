@@ -173,3 +173,9 @@ cython_debug/
 #DS_Store
 .DS_Store
 docs/.DS_Store
+
+# Claude Code local settings
+.claude/
+
+# Trivy vulnerability scan output
+trivy*

@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10.1]
+
+### Security
+
+- run `apt-get upgrade` during the build to pick up Ubuntu security fixes released since the pinned pangeo base image (OpenSSL CVE-2026-45447/CVE-2026-84782, wget, gnutls, util-linux/mount, tar, gzip, and others)
+- pin certifi>=2026.10.19 (removes the compromised emSign ECC Root CA - G3, GHSA-6q48-6c7w-9gw2) and urllib3>=2.8.0 (CVE-2026-97687, CVE-2026-97689, CVE-2026-44431, CVE-2026-44432, CVE-2026-97688) in environment.yml
+- update the base conda install's build tooling to fixed versions (certifi, urllib3, cryptography, msgpack-python, h2, hpack, pip, setuptools)
+- remove conda-lock, GitPython, dulwich, and virtualenv from the base conda install after the environment is built (GitPython CVE-2026-78676 and others); conda-lock is only needed during the build, and its pinned dulwich can't be updated to a fixed version
+- regenerate conda-lock.yml
+- add a `## Security updates` section to test_notebook.ipynb that fails if any of these fixes is missing from the image: certifi >= 2026.10.19 without the emSign ECC Root CA - G3, urllib3 >= 2.8.0, Ubuntu OpenSSL >= 3.0.13-0ubuntu3.16, and conda-lock/GitPython/dulwich/virtualenv absent from the base conda install with fixed certifi/urllib3/cryptography there
+
+### Changed
+
+- default GEOLAB_VERSION build arg is now 0.10.1
+
 ## [0.10.0]
 
 ### Added
