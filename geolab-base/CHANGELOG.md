@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- default GEOLAB_VERSION build arg is now 0.10.1
+- GEOLAB_VERSION build arg no longer has a default value; it must be passed with `--build-arg GEOLAB_VERSION=...` or the build fails
 
 ## [0.10.0]
 
