@@ -22,20 +22,22 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - pin base image to pangeo-base:04bb14b
-- add geolab-base version as ENV GEOLAB_VERSION (set during CI build)
-- add graphviz package
-- add pygraphviz package
-- add ipycytoscape
-- add nano package
-- add nbgitpuller package
-- add jupyterlab-topbar-stop-server package
-- added tests for new packages
-- add build_process.png for README
+- geolab-base version is set as ENV GEOLAB_VERSION
+- graphviz
+- pygraphviz
+- ipycytoscape
+- nano
+- vim
+- nbgitpuller
+- jupyterlab-topbar-stop-server
+- tests for new packages
+- a build_process.png for README
+- conda-lock.yml
 
 ### Changed
 
 - removed test_packages.py
-- moved test_notebook functions to test_helpers.py module to make it easier for users to import when writing tests
+- moved test_notebook functions to test_helpers.py module to facilitate writing tests by importing functions
 - updated test_notebook.ipynb to use test_helpers functions
 - updated README to match Building Custom Images in docs
-- update earthscope-sdk to 1.9.3
+- updated earthscope-sdk to 1.9.3
