@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+### Changed
+
+- pin s3fs>=2026.9.0 in environment.yml (conda-lock.yml previously resolved s3fs to 0.4.2); the lock now also includes aiobotocore 3.10.0 and aioitertools, and boto3/botocore moved from 1.43.114 to 1.43.117
+- test_notebook.ipynb fails if the installed s3fs is older than 2026.9.0
+
 ## [0.10.1]
 
 ### Security
