@@ -23,7 +23,7 @@ dependencies:
   - boto3
   - fsspec
   - obstore
-  - s3fs
+  - s3fs>=2026.9.0
   # --- Array / data ---
   - numpy
   - scipy
