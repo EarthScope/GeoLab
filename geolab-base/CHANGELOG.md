@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.10.1]
+## [0.10.1] - 2026-10-23
 
 ### Security
 
@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 - regenerate conda-lock.yml
 - add a `## Security updates` section to test_notebook.ipynb that fails if any of these fixes is missing from the image: certifi >= 2026.10.19 without the emSign ECC Root CA - G3, urllib3 >= 2.8.0, Ubuntu OpenSSL >= 3.0.13-0ubuntu3.16, and conda-lock/GitPython/dulwich/virtualenv absent from the base conda install with fixed certifi/urllib3/cryptography there
 
-### Changed
+### Changed - 2026-10-16
 
 - GEOLAB_VERSION build arg no longer has a default value; it must be passed with `--build-arg GEOLAB_VERSION=...` or the build fails
 
