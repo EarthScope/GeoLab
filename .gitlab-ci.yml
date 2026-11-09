@@ -16,10 +16,11 @@ include:
       - when: never
 
 .images_matrix:
-  - DOCKERFILE_RELPATH: "geolab-base"
-    DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12 --build-arg GEOLAB_VERSION=0.10.2"
-  # - DOCKERFILE_RELPATH: "geolab-gpu"
-  #   DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12 --build-arg GEOLAB_VERSION=${IMAGE_VERSION} --build-arg NVIDIA_DRIVER_VERSION=580"
+  # - DOCKERFILE_RELPATH: "geolab-base"
+  #   DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12 --build-arg GEOLAB_VERSION=${IMAGE_VERSION}"
+  - DOCKERFILE_RELPATH: "geolab-gpu"
+    DOCKER_EXTRA_OPTIONS: "--build-arg IMAGE_AUTHORS=geolab@earthscope.org --build-arg PYTHON_VERSION=3.12 --build-arg GEOLAB_VERSION=0.1.0"
+
 
 variables:
   CONTAINER_REGISTRY_PLATFORM: "AWS-PUB"
