@@ -23,7 +23,7 @@ dependencies:
   - boto3
   - fsspec
   - obstore
-  - s3fs
+  - s3fs>=2026.9.0
   # --- Array / data ---
   # <2.5: numba-cuda (requirements.txt) calls np.row_stack, which numpy
   # 2.5 removed, so compiling any CUDA kernel fails with "module 'numpy'
@@ -115,7 +115,13 @@ dependencies:
   # none, so the solver would silently fall back to CPU-only builds.
   - jupyterlab-nvdashboard
   - nvidia-ml-py  # pynvml: GPU utilization/temperature queries, used by test_gpu.py's stress test
-  - scikit-learn
+  # =1.7.0: gmma (GaMMA, requirements.txt) pins scikit-learn==1.7 exactly
+  # in every release from 1.2.17 (the version requirements.txt uses) up to
+  # the current 1.15.0, so without this pin conda installs a
+  # newer scikit-learn and pip then replaces it with 1.7.0 during the
+  # requirements.txt step, mixing conda and pip installs. Lift this once
+  # a gmma release allows newer scikit-learn.
+  - scikit-learn=1.7.0
   - scikit-image
   - dask-ml
   - seaborn

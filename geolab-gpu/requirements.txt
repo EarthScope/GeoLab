@@ -10,6 +10,8 @@ earthscopestraintools
 jupyterlab_jupyterbook_navigation
 jupyterlab-topbar-stop-server
 
+# --- Geophysics ---
+
 # --- GPU / machine learning ---
 # seisbench declares only `torch>=1.10.0`, so without a pin pip
 # installs the newest release -- whose default Linux wheel now

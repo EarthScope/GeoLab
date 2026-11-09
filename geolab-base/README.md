@@ -122,17 +122,27 @@ dependencies:
 
 Conda packages are preferred, because conda checks that everything works together before installing and reduces the possibility of dependency conflicts among packages.
 
+#### BEST PRACTICE: Generate a conda-lock.yml file
+
+Conda checks the list of packages you want to install or update, reads their metadata (repodata.json) from channel sources, and calculates a compatible combination of package versions. In some cases, this can cause a deadlock or run in an infinite loop for hours. To avoid this situation, use Conda lock, which is a tool that resolves all the package dependencies in environment.yml and saves them into a fully reproducible lock file for conda environments. To generate a conda-lock file run the following:
+
+```bash
+conda-lock lock -f environment.yml -p linux-64 --lockfile conda-lock.yml
+```
+
+The image build process will use the conda-lock.yml file to reduce the time to install the packages and reduce build time.
+
 ### requirements.txt: Packages Only on PyPI
 
 Some packages aren't available through conda-forge and must be installed from PyPI. Add them here, one per line. You can pin a specific version with `==` to ensure reproducibility:
 
 ```
-earthscope-sdk==1.4.1
+earthscope-sdk==1.9.3
 seisbench
 ```
 
 > [!TIP]
-> Pin versions for packages critical to your workflow (e.g., `earthscope-sdk==1.4.1`). This prevents silent breakage from upstream releases if you rebuild the image later.
+> Pin versions for packages critical to your workflow (e.g., `earthscope-sdk==1.9.3`). This prevents silent breakage from upstream releases if you rebuild the image later.
 
 ### apt.txt: System Software (Rarely Needed)
 

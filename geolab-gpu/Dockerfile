@@ -32,19 +32,31 @@
 #   - torch is pinned in requirements.txt to a cu126 build (CUDA
 #     12.6), which needs driver >=560.28.03. Ubuntu's own apt
 #     archive (used here, no separate NVIDIA repo is added) only
-#     ships specific driver branches -- at the time of writing that's
-#     470, 550, 570, 575, 580, 590, 610 -- so the NVIDIA_DRIVER_VERSION=580
-#     default below is the closest available branch above that
-#     minimum, not 560 itself. If you change one, change the other
-#     to match; see the comment above the torch pin in
-#     requirements.txt, and check `apt-cache search nvidia-utils`
-#     inside the base image for what branches are currently offered.
+#     ships the newest release of specific driver branches. At the
+#     time of writing, the branches that really install their own
+#     driver are 470, 580, 595 and 615 (each also as -server, e.g.
+#     NVIDIA_DRIVER_VERSION=580-server); 470 is too old for cu126.
+#     The other numbers (535, 550, 570, 575, 590, 610) are
+#     transitional packages that silently install one of those
+#     instead (570 installs 580, for example), so the driver step
+#     below fails the build if you pick one. 560 itself isn't
+#     offered, hence the 580 default. For a branch below 560.28.03,
+#     change the torch pin too; see the comment above it in
+#     requirements.txt and "Building for other NVIDIA drivers" in
+#     README.md for how to check what a branch really installs.
 #   - At `docker run`, the GPU device nodes still need to be handed
 #     to the container: `docker run --gpus all ...` (needs
 #     nvidia-container-toolkit on the host) or explicit `--device
 #     /dev/nvidia0 --device /dev/nvidiactl --device /dev/nvidia-uvm`.
 #   - Rebuild this image with an updated NVIDIA_DRIVER_VERSION (and
 #     a matching torch cuXXX pin) any time the host driver changes.
+#   - Or build with NVIDIA_DRIVER_VERSION=none to leave the driver out
+#     entirely: the image then runs on any host driver new enough for
+#     the torch pin, but only with nvidia-container-toolkit, which
+#     mounts the host's own driver into the container at runtime
+#     (`docker run --gpus all`, or the toolkit as a Kubernetes node's
+#     container runtime). See "Building for other NVIDIA drivers" in
+#     README.md.
 #
 # Files picked up automatically by the parent's ONBUILD machinery:
 #   environment.yml  → conda env "notebook" installed from this
@@ -57,7 +69,7 @@
 #   docker build --platform linux/amd64 \
 #   --build-arg IMAGE_TITLE=my-geolab-gpu-image \
 #   --build-arg IMAGE_AUTHORS=you@university.edu \
-#   --build-arg GEOLAB_VERSION=1.0.0 \
+#   --build-arg GEOLAB_VERSION=0.1.0 \
 #   --build-arg NVIDIA_DRIVER_VERSION=580 \
 #   --build-arg TORCH_CUDA_ARCH_LIST="7.5" \
 #   -t my-geolab-gpu-image .
@@ -70,9 +82,11 @@
 FROM pangeo/base-image:04bb14b
 
 
-ARG IMAGE_TITLE="custom-geolab-gpu-image"   # default if user passes nothing
+ARG IMAGE_TITLE="geolab-gpu-image"   # default if user passes nothing
 ARG IMAGE_AUTHORS="NoSpecifiedAuthors"     # default if user passes nothing
-ARG GEOLAB_VERSION                         # may be empty (no default)
+ARG GEOLAB_VERSION                      # no default; must be passed with --build-arg
+
+RUN test -n "$GEOLAB_VERSION" || (echo "GEOLAB_VERSION must not be empty" >&2 && exit 1)
 
 LABEL org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="${IMAGE_AUTHORS}" \
@@ -113,7 +127,8 @@ RUN mamba remove -n base -y conda-lock gitpython dulwich virtualenv \
 
 # Must exactly match the driver already loaded on the target GPU
 # host -- see the note at the top of this file. Override at build
-# time with --build-arg NVIDIA_DRIVER_VERSION=<version> if it differs.
+# time with --build-arg NVIDIA_DRIVER_VERSION=<version> if it differs,
+# or with NVIDIA_DRIVER_VERSION=none to use the host's driver instead.
 ARG NVIDIA_DRIVER_VERSION=580
 
 USER root
@@ -121,15 +136,30 @@ USER root
 # Userspace-only NVIDIA driver install: nvidia-utils-* provides
 # nvidia-smi and the CUDA driver API shim; libnvidia-compute-*
 # provides libcuda.so.1. Neither pulls in nvidia-driver-*/DKMS,
-# which would try (and fail) to build a kernel module here.
-RUN echo "Installing NVIDIA userspace driver ${NVIDIA_DRIVER_VERSION}..." \
-    && apt-get update --fix-missing > /dev/null \
-    && apt-get install -y --no-install-recommends \
-        "nvidia-utils-${NVIDIA_DRIVER_VERSION}" \
-        "libnvidia-compute-${NVIDIA_DRIVER_VERSION}" \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && ldconfig
+# which would try (and fail) to build a kernel module here. Skipped
+# with NVIDIA_DRIVER_VERSION=none. A transitional branch's
+# libnvidia-compute-* ships no libcuda (it only depends on another
+# branch's package), so its absence fails the build instead of
+# silently baking in a different driver than the one asked for.
+RUN if [ "${NVIDIA_DRIVER_VERSION}" = "none" ]; then \
+        echo "NVIDIA_DRIVER_VERSION=none: no driver installed, the host's is mounted at runtime"; \
+    else \
+        echo "Installing NVIDIA userspace driver ${NVIDIA_DRIVER_VERSION}..." \
+        && apt-get update --fix-missing > /dev/null \
+        && apt-get install -y --no-install-recommends \
+            "nvidia-utils-${NVIDIA_DRIVER_VERSION}" \
+            "libnvidia-compute-${NVIDIA_DRIVER_VERSION}" \
+        && if ! dpkg -L "libnvidia-compute-${NVIDIA_DRIVER_VERSION}" | grep -q '/libcuda\.so\.'; then \
+               echo "NVIDIA_DRIVER_VERSION=${NVIDIA_DRIVER_VERSION} is a transitional package; it installed:" >&2; \
+               dpkg-query -W -f='  ${Package} ${Version}\n' 'libnvidia-compute-*' >&2; \
+               echo "Pick a branch that installs its own driver, see \"Building for other NVIDIA drivers\" in README.md" >&2; \
+               exit 1; \
+           fi \
+        && echo "Installed NVIDIA userspace driver $(dpkg-query -W -f='${Version}' "libnvidia-compute-${NVIDIA_DRIVER_VERSION}")" \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/* \
+        && ldconfig; \
+    fi
 
 # REAL, NonLinLoc, HypoDD, and HypoInverse are legacy Fortran/C research
 # codes with no conda-forge or PyPI package, install always means building

@@ -1,8 +1,9 @@
 build-essential
-cmake
 gfortran
 git
 gmt-dcw
 gmt-gshhg
 make
 nano
+vim
+cmake

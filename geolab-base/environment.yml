@@ -23,7 +23,7 @@ dependencies:
   - boto3
   - fsspec
   - obstore
-  - s3fs
+  - s3fs>=2026.9.0
   # --- Array / data ---
   - numpy
   - scipy
@@ -93,5 +93,9 @@ dependencies:
   - pytest
   - pyyaml
   - requests
+  # Security minimums (see CHANGELOG): certifi drops the compromised
+  # emSign root CA; urllib3 2.8.0 fixes proxy TLS and DoS issues.
+  - certifi>=2026.10.19
+  - urllib3>=2.8.0
   - ruff
   - tqdm
