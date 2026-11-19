@@ -1,0 +1,9 @@
+build-essential
+gfortran
+git
+gmt-dcw
+gmt-gshhg
+make
+nano
+vim
+cmake
